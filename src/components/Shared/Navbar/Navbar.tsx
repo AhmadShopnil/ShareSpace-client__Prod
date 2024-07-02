@@ -1,5 +1,5 @@
 "use client";
-// components/Navbar.tsx
+
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -8,28 +8,31 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-white shadow-lg">
+    <nav className="bg-white ">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
-          <div className="text-2xl font-bold text-blue-600">Flat Finder</div>
+          <div className="text-2xl font-bold">
+            Share
+            <span className=" text-teal-500">Space</span>
+          </div>
           <div className="hidden md:flex space-x-4 justify-center w-full">
-            <a href="#" className="text-gray-600 hover:text-blue-600">
+            <a href="#" className="text-gray-600 hover:text-teal-600">
               Home
             </a>
-            <a href="#" className="text-gray-600 hover:text-blue-600">
+            <a href="#" className="text-gray-600 hover:text-teal-600">
               About Us
             </a>
-            <a href="#" className="text-gray-600 hover:text-blue-600">
+            <a href="#" className="text-gray-600 hover:text-teal-600">
               Blog
             </a>
-            <a href="#" className="text-gray-600 hover:text-blue-600">
+            <a href="#" className="text-gray-600 hover:text-teal-600">
               Contact Us
             </a>
           </div>
           <div className="hidden md:block">
             <a
               href="#"
-              className="border border-blue-500 text-blue-500 px-4 py-2 rounded hover:bg-blue-500 hover:text-white"
+              className="border border-teal-500 text-teal-500 px-4 py-2 rounded hover:bg-blue-500 hover:text-white whitespace-nowrap"
             >
               Sign In
             </a>
@@ -47,31 +50,31 @@ const Navbar: React.FC = () => {
           <div className="md:hidden text-center">
             <a
               href="#"
-              className="block text-gray-600 hover:text-blue-600 py-2"
+              className="block text-gray-600 hover:text-teal-600 py-2"
             >
               Home
             </a>
             <a
               href="#"
-              className="block text-gray-600 hover:text-blue-600 py-2"
+              className="block text-gray-600 hover:text-teal-600 py-2"
             >
               About Us
             </a>
             <a
               href="#"
-              className="block text-gray-600 hover:text-blue-600 py-2"
+              className="block text-gray-600 hover:text-teal-600 py-2"
             >
               Blog
             </a>
             <a
               href="#"
-              className="block text-gray-600 hover:text-blue-600 py-2"
+              className="block text-gray-600 hover:text-teal-600 py-2"
             >
               Contact Us
             </a>
             <a
               href="#"
-              className="block border border-blue-500 text-blue-500 px-4 py-2 rounded mt-4 hover:bg-blue-500 hover:text-white"
+              className="block border border-teal-500 text-teal-500 px-4 py-2 rounded mt-4 hover:bg-blue-500 hover:text-white"
             >
               Sign In
             </a>

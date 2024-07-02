@@ -1,16 +1,22 @@
 import React from "react";
+export type TFlat = {
+  _id?: string;
+  title: string;
+  totalBedrooms: number;
+  location: string;
+  description: string;
+  rent: number;
+  advanceAmount: number;
+};
 
-const FlatCard = ({ title, date, location }) => {
-  //   const title = "title";
-  //   const date = "date";
-  //   const location = "location";
-
+const FlatCard = ({ flat }: { flat: any }) => {
+  const { title, location, rent } = flat;
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg m-4">
-      <div className="bg-gray-200 h-48"></div>
+    <div className="max-w-sm rounded-lg  p-4 overflow-hidden shadow-lg border border-teal-100  ">
+      <div className="bg-gray-200 h-48 rounded-lg "></div>
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{title}</div>
-        <p className="text-gray-700 text-base">
+        <p className="text-gray-700 text-base ">
           There are many variations of passages of available, but the majority
           have suffered alteration.
         </p>
@@ -31,7 +37,7 @@ const FlatCard = ({ title, date, location }) => {
               d="M8 7V3m8 4V3m-6 14h6M5 13h14M7 10h10m-6 7v6m-6-6h6m0 0v-6"
             />
           </svg>
-          <span className="text-gray-600 text-sm">{date}</span>
+          <span className="text-gray-600 text-sm">{rent}</span>
         </div>
         <div className="flex items-center mt-2">
           <svg
