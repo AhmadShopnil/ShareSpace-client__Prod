@@ -2,6 +2,7 @@ import React from "react";
 import FindHomeSvg from "../../../../assets/findHome-1.svg"; // Adjust the path based on your project structure
 import Image from "next/image";
 import findHome from "../../../../../public/findHome-1.svg";
+import Link from "next/link";
 
 // #3B82F6
 
@@ -18,9 +19,12 @@ const Hero = () => {
             others and create the living arrangement you’ve always wanted.
           </p>
           <div>
-            <button className="bg-teal-500 text-white px-6 py-2 rounded mr-4">
+            <Link
+              href={`/postFlat`}
+              className="bg-teal-500 text-white px-6 py-2 rounded mr-4"
+            >
               Post a Home
-            </button>
+            </Link>
             <button className="bg-teal-100 text-teal-500 px-6 py-2 rounded">
               Find a Home
             </button>

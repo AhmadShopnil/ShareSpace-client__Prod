@@ -72,7 +72,7 @@ const SingleFlat = async ({ params }: { params: any }) => {
       </section>
 
       {/* Static Content Section */}
-      <section className="mb-8 p-6 bg-teal-50 rounded-lg border border-gray-300">
+      <section className=" p-6 bg-teal-50 rounded-lg border border-gray-300">
         <h2 className="text-2xl font-bold mb-4">Why Choose This Flat?</h2>
         <ul className="list-disc list-inside text-gray-700">
           <li>Modern amenities and spacious design.</li>
