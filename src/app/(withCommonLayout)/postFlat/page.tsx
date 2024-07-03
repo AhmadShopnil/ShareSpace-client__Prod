@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import axios from "axios";
 import { TFlatData, TUserData } from "@/interfaces";
+import { saveUserInfo } from "@/services/authServices";
 
 const PostFlat = () => {
   const [flatData, setFlatData] = useState<TFlatData>({
@@ -46,7 +47,16 @@ const PostFlat = () => {
         flatData,
         userData,
       });
-      console.log(response.data); // Handle successful response
+
+      const accessToken = response?.data?.data?.accessToken;
+
+      if (accessToken) {
+        // log in user by set user token in local storage
+        saveUserInfo({ accessToken });
+        // router.push("/");
+      }
+
+      // Handle successful response
     } catch (error) {
       console.error("Error posting flat:", error);
     }
