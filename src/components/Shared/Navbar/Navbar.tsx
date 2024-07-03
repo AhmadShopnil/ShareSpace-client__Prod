@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,13 +13,15 @@ const Navbar: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           <div className="text-2xl font-bold">
-            Share
-            <span className=" text-teal-500">Space</span>
+            <Link href="/">
+              Share
+              <span className=" text-teal-500">Space</span>
+            </Link>
           </div>
           <div className="hidden md:flex space-x-4 justify-center w-full">
-            <a href="#" className="text-gray-600 hover:text-teal-600">
+            <Link href="/" className="text-gray-600 hover:text-teal-600">
               Home
-            </a>
+            </Link>
             <a href="#" className="text-gray-600 hover:text-teal-600">
               About Us
             </a>
