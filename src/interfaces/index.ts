@@ -13,3 +13,7 @@ export interface TUserData {
   phone: string;
   password: string;
 }
+export interface TTokenData {
+  name: string;
+  phone: string;
+}

@@ -11,7 +11,7 @@ export type TFlat = {
 };
 
 const FlatCard = ({ flat }: { flat: any }) => {
-  const { title, location, rent, _id } = flat;
+  const { title, location, rent, _id, description } = flat;
 
   return (
     <Link href={`/flatDetails/${_id}`}>
@@ -22,10 +22,7 @@ const FlatCard = ({ flat }: { flat: any }) => {
         {/* content section  start*/}
         <div className=" py-4">
           <div className="font-bold text-xl mb-2">{title}</div>
-          <p className="text-gray-700 text-sm  ">
-            There are many variations of passages of available, but the majority
-            have suffered alteration.
-          </p>
+          <p className="text-gray-700 text-sm  ">{description.slice(0, 40)}</p>
         </div>
         <div className=" pt-4 pb-2 font-light ">
           <div className="flex items-center">
