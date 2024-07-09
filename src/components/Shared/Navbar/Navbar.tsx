@@ -4,10 +4,11 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import { getUserInfo } from "@/services/authServices";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const loggedInUserData = getUserInfo() as TTokenData;
   return (
     <nav className="bg-white ">
       <div className="container mx-auto px-4">
@@ -30,9 +31,14 @@ const Navbar: React.FC = () => {
             >
               Listed Home
             </Link>
-            <Link href="/myList" className="text-gray-600 hover:text-teal-600">
-              My Posted Home
-            </Link>
+            {loggedInUserData?.phone && (
+              <Link
+                href="/myList"
+                className="text-gray-600 hover:text-teal-600"
+              >
+                My Posted Home
+              </Link>
+            )}
 
             <a href="#" className="text-gray-600 hover:text-teal-600">
               Contact Us
