@@ -37,7 +37,7 @@ const FlatList = async () => {
   //   },
   // ];
 
-  const res = await fetch("http://localhost:5000/api/flats");
+  const res = await fetch("https://server-flate-share.vercel.app/api/flats");
   const { data }: { data: TFlat[] } = await res.json();
 
   return (

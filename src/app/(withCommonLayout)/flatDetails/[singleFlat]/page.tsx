@@ -5,7 +5,9 @@ import PrimaryButton from "@/components/Buttons/PrimaryButton";
 
 const SingleFlat = async ({ params }: { params: any }) => {
   const flatId = params.singleFlat;
-  const res = await fetch(`http://localhost:5000/api/flats/${flatId}`);
+  const res = await fetch(
+    `https://server-flate-share.vercel.app/api/flats/${flatId}`
+  );
   const { data } = await res.json();
   const {
     title,
@@ -15,6 +17,7 @@ const SingleFlat = async ({ params }: { params: any }) => {
     description,
     rent,
     advanceAmount,
+    images,
   } = data;
 
   return (
@@ -22,13 +25,17 @@ const SingleFlat = async ({ params }: { params: any }) => {
       {/* Image Section */}
       <section className="mb-8">
         <div className="w-full h-64 bg-gray-300 flex items-center justify-center rounded-lg overflow-hidden">
-          <Image
-            src="/default-flat.jpg"
-            alt="Flat Image"
-            width={800}
-            height={400}
-            className="object-cover"
-          />
+          {images.map((image: string, index: number) => (
+            <div key={index}>
+              <Image
+                src={image}
+                alt="Flat Image"
+                width={800}
+                height={700}
+                className="object-cover"
+              />
+            </div>
+          ))}
         </div>
       </section>
 

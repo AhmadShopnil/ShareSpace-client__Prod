@@ -12,22 +12,28 @@ const Navbar: React.FC = () => {
     <nav className="bg-white ">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
+          {/* logo section */}
           <div className="text-2xl font-bold">
             <Link href="/">
               Share
               <span className=" text-teal-500">Space</span>
             </Link>
           </div>
+          {/* menuItem section */}
           <div className="hidden md:flex space-x-4 justify-center w-full">
             <Link href="/" className="text-gray-600 hover:text-teal-600">
               Home
             </Link>
-            <a href="#" className="text-gray-600 hover:text-teal-600">
-              About Us
-            </a>
-            <a href="#" className="text-gray-600 hover:text-teal-600">
-              Blog
-            </a>
+            <Link
+              href="/allFlatList"
+              className="text-gray-600 hover:text-teal-600"
+            >
+              Listed Home
+            </Link>
+            <Link href="/myList" className="text-gray-600 hover:text-teal-600">
+              My Posted Home
+            </Link>
+
             <a href="#" className="text-gray-600 hover:text-teal-600">
               Contact Us
             </a>

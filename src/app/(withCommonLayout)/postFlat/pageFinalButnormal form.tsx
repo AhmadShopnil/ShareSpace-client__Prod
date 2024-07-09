@@ -4,39 +4,69 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { TFlatData, TUserData, TTokenData } from "@/interfaces";
 import { getUserInfo, saveUserInfo } from "@/services/authServices";
+import { getFromLocalStorage } from "@/utils/localStorage";
 import UserCard from "@/components/Ui/UserCard/UserCard";
+import { modifyPostFlatData } from "@/utils/modifyAddFlatData";
 import { uploadImageToCLoudinary } from "@/utils/uploadImage";
 import { useRouter } from "next/navigation";
-import { useForm, SubmitHandler } from "react-hook-form";
-import SkeletonPostFlat from "@/components/Loading/SkeletonPostFlat";
 
 const PostFlat = () => {
   const router = useRouter();
+  const [flatData, setFlatData] = useState<TFlatData>({
+    title: "",
+    totalBedrooms: 0,
+    location: "",
+    description: "",
+    rent: 0,
+    advanceAmount: 0,
+  });
+  const [userData, setUserData] = useState<TUserData>({
+    name: "",
+    phone: "",
+    password: "",
+  });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const [images, setImages] = useState<File[]>([]);
   const [urls, setUrls] = useState<string[]>([]);
-  const [isLodaing, setIsloading] = useState(false);
+
+  // handle logged in state to show user login form or user details card
 
   const loggedInUserData = getUserInfo() as TTokenData;
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    watch,
-    formState: { errors },
-  } = useForm<TFlatData & TUserData>();
-
   useEffect(() => {
-    if (loggedInUserData?.phone) {
+    if (!!loggedInUserData?.phone) {
       setIsLoggedIn(true);
-      setValue("name", loggedInUserData.name);
-      setValue("phone", loggedInUserData.phone);
-      setValue("password", "");
     } else {
       setIsLoggedIn(false);
     }
-  }, [loggedInUserData, setValue]);
+
+    // if (isLoggedIn) {
+    //   setUserData({
+    //     name: loggedInUserData?.name,
+    //     phone: loggedInUserData?.phone,
+    //     password: "",
+    //   });
+    // }
+  }, [loggedInUserData]);
+
+  const handleFlatDataChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFlatData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleUserDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -45,37 +75,25 @@ const PostFlat = () => {
     }
   };
 
-  const onSubmit: SubmitHandler<TFlatData & TUserData> = async (data) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     try {
-      setIsloading(true);
       const uploadImageUrls = await uploadImageToCLoudinary({
         images,
         setUrls,
       });
 
-      const flatData: TFlatData = {
-        title: data?.title,
-        totalBedrooms: data?.totalBedrooms,
-        location: data.location,
-        description: data.description,
-        rent: data?.rent,
-        advanceAmount: data.advanceAmount,
-        images: uploadImageUrls,
-      };
-      const userData: TUserData = {
-        name: data?.name,
-        phone: data?.phone,
-        password: data?.password,
-      };
-
-      const response = await axios.post(
-        "https://server-flate-share.vercel.app/api/flats/add",
-        {
-          flatData,
-          userData,
-        }
-      );
-      setIsloading(false);
+      // Logging formData entries to check if everything is appended correctly
+      //   formData.forEach((value, key) => {
+      //     console.log(key, value);
+      //   });
+      flatData.images = uploadImageUrls;
+      console.log(userData);
+      const response = await axios.post("http://localhost:5000/api/flats/add", {
+        flatData,
+        userData,
+      });
       const accessToken = response?.data?.data?.accessToken;
       if (accessToken) {
         saveUserInfo({ accessToken });
@@ -108,13 +126,12 @@ const PostFlat = () => {
             <input
               type="text"
               id="name"
-              {...register("name", { required: true })}
+              name="name"
+              value={userData.name}
+              onChange={handleUserDataChange}
               placeholder="Name"
               className="w-full p-2 border rounded"
             />
-            {errors.name && (
-              <span className="text-red-600">This field is required</span>
-            )}
           </div>
           <div className="flex flex-col">
             <label htmlFor="phone" className="text-sm text-gray-600 mb-1">
@@ -123,13 +140,12 @@ const PostFlat = () => {
             <input
               type="text"
               id="phone"
-              {...register("phone", { required: true })}
+              name="phone"
+              value={userData.phone}
+              onChange={handleUserDataChange}
               placeholder="Phone"
               className="w-full p-2 border rounded"
             />
-            {errors.phone && (
-              <span className="text-red-600">This field is required</span>
-            )}
           </div>
           <div className="flex flex-col">
             <label htmlFor="password" className="text-sm text-gray-600 mb-1">
@@ -138,32 +154,30 @@ const PostFlat = () => {
             <input
               type="password"
               id="password"
-              {...register("password", { required: true })}
+              name="password"
+              value={userData.password}
+              onChange={handleUserDataChange}
               placeholder="Password"
               className="w-full p-2 border rounded"
             />
-            {errors.password && (
-              <span className="text-red-600">This field is required</span>
-            )}
           </div>
         </div>
       </div>
     );
   }
 
-  if (isLodaing) {
-    return <SkeletonPostFlat></SkeletonPostFlat>;
-  }
-
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-semibold mb-4">Post Your Flat</h1>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Owner Data Section */}
         {userSection}
 
+        {/* Flat Details Section */}
         <div className="border p-4 rounded-lg">
           <h2 className="text-xl font-semibold mb-2">Flat Details</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Flat field start */}
             <div className="flex flex-col">
               <label htmlFor="title" className="text-sm text-gray-600 mb-1">
                 Title
@@ -171,13 +185,12 @@ const PostFlat = () => {
               <input
                 type="text"
                 id="title"
-                {...register("title", { required: true })}
+                name="title"
+                value={flatData.title}
+                onChange={handleFlatDataChange}
                 placeholder="Title"
                 className="w-full p-2 border rounded"
               />
-              {errors.title && (
-                <span className="text-red-600">This field is required</span>
-              )}
             </div>
             <div className="flex flex-col">
               <label
@@ -189,13 +202,12 @@ const PostFlat = () => {
               <input
                 type="number"
                 id="totalBedrooms"
-                {...register("totalBedrooms", { required: true })}
+                name="totalBedrooms"
+                value={flatData.totalBedrooms}
+                onChange={handleFlatDataChange}
                 placeholder="Total Bedrooms"
                 className="w-full p-2 border rounded"
               />
-              {errors.totalBedrooms && (
-                <span className="text-red-600">This field is required</span>
-              )}
             </div>
             <div className="flex flex-col">
               <label htmlFor="location" className="text-sm text-gray-600 mb-1">
@@ -204,13 +216,12 @@ const PostFlat = () => {
               <input
                 type="text"
                 id="location"
-                {...register("location", { required: true })}
+                name="location"
+                value={flatData.location}
+                onChange={handleFlatDataChange}
                 placeholder="Location"
                 className="w-full p-2 border rounded"
               />
-              {errors.location && (
-                <span className="text-red-600">This field is required</span>
-              )}
             </div>
             <div className="flex flex-col">
               <label htmlFor="rent" className="text-sm text-gray-600 mb-1">
@@ -219,13 +230,12 @@ const PostFlat = () => {
               <input
                 type="number"
                 id="rent"
-                {...register("rent", { required: true })}
+                name="rent"
+                value={flatData.rent}
+                onChange={handleFlatDataChange}
                 placeholder="Rent"
                 className="w-full p-2 border rounded"
               />
-              {errors.rent && (
-                <span className="text-red-600">This field is required</span>
-              )}
             </div>
             <div className="flex flex-col">
               <label
@@ -237,15 +247,14 @@ const PostFlat = () => {
               <input
                 type="number"
                 id="advanceAmount"
-                {...register("advanceAmount", { required: true })}
+                name="advanceAmount"
+                value={flatData.advanceAmount}
+                onChange={handleFlatDataChange}
                 placeholder="Advance Amount"
                 className="w-full p-2 border rounded"
               />
-              {errors.advanceAmount && (
-                <span className="text-red-600">This field is required</span>
-              )}
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col ">
               <label
                 htmlFor="description"
                 className="text-sm text-gray-600 mb-1"
@@ -254,14 +263,14 @@ const PostFlat = () => {
               </label>
               <textarea
                 id="description"
-                {...register("description", { required: true })}
+                name="description"
+                value={flatData.description}
+                onChange={handleFlatDataChange}
                 placeholder="Description"
                 className="w-full p-2 border rounded"
               />
-              {errors.description && (
-                <span className="text-red-600">This field is required</span>
-              )}
             </div>
+            {/* Flat field end */}
           </div>
           <div className="flex flex-col mt-4">
             <label htmlFor="image" className="text-sm text-gray-600 mb-1">
@@ -270,6 +279,7 @@ const PostFlat = () => {
             <input
               type="file"
               id="image"
+              name="image"
               onChange={handleImageChange}
               className="w-full p-2 border rounded"
               multiple
@@ -277,6 +287,7 @@ const PostFlat = () => {
           </div>
         </div>
 
+        {/* Submit Button */}
         <button
           type="submit"
           className="bg-teal-600 text-white py-2 px-4 rounded hover:bg-teal-700"

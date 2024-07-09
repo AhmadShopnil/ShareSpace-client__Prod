@@ -1,13 +1,12 @@
 "use client";
 // pages/postFlat.tsx
 import { useEffect, useState } from "react";
-
 import axios from "axios";
-import { TFlatData, TUserData } from "@/interfaces";
+import { TFlatData, TUserData, TTokenData } from "@/interfaces";
 import { getUserInfo, saveUserInfo } from "@/services/authServices";
-import { decodedToken } from "@/utils/jwt";
 import { getFromLocalStorage } from "@/utils/localStorage";
 import UserCard from "@/components/Ui/UserCard/UserCard";
+import { modifyPostFlatData } from "@/utils/modifyAddFlatData";
 
 const PostFlat = () => {
   const [flatData, setFlatData] = useState<TFlatData>({
@@ -18,29 +17,24 @@ const PostFlat = () => {
     rent: 0,
     advanceAmount: 0,
   });
-
   const [userData, setUserData] = useState<TUserData>({
     name: "",
     phone: "",
     password: "",
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const loggedInUserData = getUserInfo();
+  const [image, setImage] = useState<File[] | null>(null);
 
-  const token = getFromLocalStorage("accessToken");
+  // handle logged in state to show user login form or user details card
+
+  const loggedInUserData = getUserInfo() as TTokenData;
 
   useEffect(() => {
     if (!!loggedInUserData?.phone) {
       setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
     }
-
-    // const loggedInUserData = getUserInfo();
-    // const user = {
-    //   name: loggedInUserData?.name,
-    //   phone: loggedInUserData?.phone,
-    //   password: "",
-    // };
-    // setUserData(user);
   }, [loggedInUserData]);
 
   const handleFlatDataChange = (
@@ -61,23 +55,47 @@ const PostFlat = () => {
     }));
   };
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      //   console.log(e.target.files);
+      //   const images: any = [];
+      const images = Array.from(e.target.files);
+
+      //   for (let i = 0; i < e.target.files.length; i++) {
+      //     images.append = e.target.files[i];
+      //   }
+
+      setImage(images);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/flats/add", {
-        flatData,
-        userData,
-      });
+      const formData = modifyPostFlatData({ flatData, userData, image });
+
+      //   console.log(formData);
+
+      // Logging formData entries to check if everything is appended correctly
+      //   formData.forEach((value, key) => {
+      //     console.log(key, value);
+      //   });
+
+      const response = await axios.post(
+        "http://localhost:5000/api/flats/add",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       const accessToken = response?.data?.data?.accessToken;
 
       if (accessToken) {
-        // log in user by set user token in local storage
         saveUserInfo({ accessToken });
-        // router.push("/");
       }
-
-      // Handle successful response
     } catch (error) {
       console.error("Error posting flat:", error);
     }
@@ -144,6 +162,7 @@ const PostFlat = () => {
       </div>
     );
   }
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-semibold mb-4">Post Your Flat</h1>
@@ -155,7 +174,7 @@ const PostFlat = () => {
         <div className="border p-4 rounded-lg">
           <h2 className="text-xl font-semibold mb-2">Flat Details</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* flat field  start */}
+            {/* Flat field start */}
             <div className="flex flex-col">
               <label htmlFor="title" className="text-sm text-gray-600 mb-1">
                 Title
@@ -248,58 +267,22 @@ const PostFlat = () => {
                 className="w-full p-2 border rounded"
               />
             </div>
-            {/* flat field end */}
+            {/* Flat field end */}
+          </div>
+          <div className="flex flex-col mt-4">
+            <label htmlFor="image" className="text-sm text-gray-600 mb-1">
+              Flat Image
+            </label>
+            <input
+              type="file"
+              id="image"
+              name="image"
+              onChange={handleImageChange}
+              className="w-full p-2 border rounded"
+              multiple
+            />
           </div>
         </div>
-
-        {/* Owner Data Section */}
-        {/* <div className="border p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-2">Owner Data</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="flex flex-col">
-              <label htmlFor="name" className="text-sm text-gray-600 mb-1">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={userData.name}
-                onChange={handleUserDataChange}
-                placeholder="Name"
-                className="w-full p-2 border rounded"
-              />
-            </div>
-            <div className="flex flex-col">
-              <label htmlFor="phone" className="text-sm text-gray-600 mb-1">
-                Phone
-              </label>
-              <input
-                type="text"
-                id="phone"
-                name="phone"
-                value={userData.phone}
-                onChange={handleUserDataChange}
-                placeholder="Phone"
-                className="w-full p-2 border rounded"
-              />
-            </div>
-            <div className="flex flex-col">
-              <label htmlFor="password" className="text-sm text-gray-600 mb-1">
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={userData.password}
-                onChange={handleUserDataChange}
-                placeholder="Password"
-                className="w-full p-2 border rounded"
-              />
-            </div>
-          </div>
-        </div> */}
 
         {/* Submit Button */}
         <button

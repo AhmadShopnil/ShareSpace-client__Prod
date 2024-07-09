@@ -6,6 +6,7 @@ export interface TFlatData {
   description: string;
   rent: number;
   advanceAmount: number;
+  images?: string[];
 }
 
 export interface TUserData {

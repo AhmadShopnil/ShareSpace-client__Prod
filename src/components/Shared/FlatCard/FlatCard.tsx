@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 export type TFlat = {
@@ -11,13 +12,30 @@ export type TFlat = {
 };
 
 const FlatCard = ({ flat }: { flat: any }) => {
-  const { title, location, rent, _id, description } = flat;
+  const { title, location, rent, _id, description, images } = flat;
 
   return (
-    <Link href={`/flatDetails/${_id}`}>
-      <div className="max-w-sm rounded-lg  p-4 overflow-hidden shadow-lg border border-teal-100 hover:border-teal-300  ">
-        {/* image section start*/}
-        <div className="bg-gray-200 h-48 rounded-lg "></div>
+    <Link
+      className=" rounded-lg  p-4 overflow-hidden shadow-lg border border-teal-100 hover:border-teal-300  "
+      href={`/flatDetails/${_id}`}
+    >
+      <div className="max-w-sm h-80  ">
+        {/* image section start */}
+        <div className="bg-gray-200 h-36 rounded-lg overflow-hidden relative">
+          {images && images.length > 0 ? (
+            <Image
+              src={images[0]}
+              alt={title}
+              fill
+              objectFit="cover"
+              className="rounded-lg"
+            />
+          ) : (
+            <div className="h-full flex items-center justify-center text-gray-500">
+              No Image Available
+            </div>
+          )}
+        </div>
         {/* end image section */}
         {/* content section  start*/}
         <div className=" py-4">
@@ -60,13 +78,10 @@ const FlatCard = ({ flat }: { flat: any }) => {
             <span className="text-gray-600 text-sm">{location}</span>
           </div>
         </div>
-        <Link
-          href={`/flatDetails/${_id}`}
-          className="text-sm mt-4 text-teal-400"
-        >
-          Details
-        </Link>
       </div>
+      <Link href={`/flatDetails/${_id}`} className="text-sm mt-1 text-teal-400">
+        Details
+      </Link>
     </Link>
   );
 };

@@ -18,7 +18,11 @@ export const modifyPostFlatData = ({
   formData.append("flatData", dataOFFlat);
   formData.append("userData", dataOFUser);
   if (image) {
-    formData.append("file", image);
+    // formData.append("file", image);
+
+    for (let i = 0; i < image.length; i++) {
+      formData.append(`files`, image[i]);
+    }
   }
   return formData;
 };
