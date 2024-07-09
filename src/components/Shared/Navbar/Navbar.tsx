@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { getUserInfo } from "@/services/authServices";
+import { TTokenData } from "@/interfaces";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
