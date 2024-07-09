@@ -41,17 +41,17 @@ const Navbar: React.FC = () => {
               </Link>
             )}
 
-            <a href="#" className="text-gray-600 hover:text-teal-600">
+            <Link href="#" className="text-gray-600 hover:text-teal-600">
               Contact Us
-            </a>
+            </Link>
           </div>
           <div className="hidden md:block">
-            <a
+            <Link
               href="#"
               className="border border-teal-500 text-teal-500 px-4 py-2 rounded hover:bg-blue-500 hover:text-white whitespace-nowrap"
             >
               Sign In
-            </a>
+            </Link>
           </div>
           <div className="md:hidden">
             <button onClick={() => setIsOpen(!isOpen)}>
@@ -64,36 +64,36 @@ const Navbar: React.FC = () => {
         </div>
         {isOpen && (
           <div className="md:hidden text-center">
-            <a
-              href="#"
+            <Link
+              href="/"
               className="block text-gray-600 hover:text-teal-600 py-2"
             >
               Home
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              href="/allFlatList"
               className="block text-gray-600 hover:text-teal-600 py-2"
             >
-              About Us
-            </a>
+              Listed Home
+            </Link>
             <a
-              href="#"
+              href="/myList"
               className="block text-gray-600 hover:text-teal-600 py-2"
             >
-              Blog
+              My Posted Home
             </a>
-            <a
+            <Link
               href="#"
               className="block text-gray-600 hover:text-teal-600 py-2"
             >
               Contact Us
-            </a>
-            <a
+            </Link>
+            <Link
               href="#"
               className="block border border-teal-500 text-teal-500 px-4 py-2 rounded mt-4 hover:bg-blue-500 hover:text-white"
             >
               Sign In
-            </a>
+            </Link>
           </div>
         )}
       </div>
