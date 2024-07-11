@@ -21,7 +21,7 @@ const SingleFlat = async ({ params }: { params: any }) => {
   } = data;
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto p-2 sm:p-6">
       {/* Image Section */}
       <section className="mb-8">
         <div className="w-full h-64 bg-gray-300 flex items-center justify-center rounded-lg overflow-hidden">
@@ -43,7 +43,7 @@ const SingleFlat = async ({ params }: { params: any }) => {
       <section className="mb-8">
         <h1 className="text-4xl font-bold mb-4 text-center">{title}</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="p-6 bg-white rounded-lg border border-gray-300">
+          <div className=" p-4 sm:p-6 bg-white rounded-lg border border-gray-300">
             <h2 className="text-2xl font-semibold mb-4">Details</h2>
             <p className="text-gray-700 mb-2">
               <strong>Location:</strong> {location}
