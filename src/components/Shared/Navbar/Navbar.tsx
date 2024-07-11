@@ -76,12 +76,14 @@ const Navbar: React.FC = () => {
             >
               Listed Home
             </Link>
-            <a
-              href="/myList"
-              className="block text-gray-600 hover:text-teal-600 py-2"
-            >
-              My Posted Home
-            </a>
+            {loggedInUserData && (
+              <Link
+                href="/myList"
+                className="block text-gray-600 hover:text-teal-600 py-2"
+              >
+                My Posted Home
+              </Link>
+            )}
             <Link
               href="#"
               className="block text-gray-600 hover:text-teal-600 py-2"

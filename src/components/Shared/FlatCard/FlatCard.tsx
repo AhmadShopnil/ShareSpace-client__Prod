@@ -27,7 +27,7 @@ const FlatCard = ({ flat }: { flat: any }) => {
               src={images[0]}
               alt={title}
               fill
-              objectFit="cover"
+              layout="fill"
               className="rounded-lg"
             />
           ) : (

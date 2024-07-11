@@ -1,11 +1,12 @@
 "use client";
 
-import FlatCard from "@/components/Shared/FlatCard/FlatCard";
+import MyPostedList from "@/components/MyPostedTable/MyPostedLIst";
+import { TFlatData } from "@/interfaces";
 import axiosInstance from "@/utils/axiosInstance";
 import { useEffect, useState } from "react";
 
 const MyList = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<TFlatData[]>([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -28,12 +29,14 @@ const MyList = () => {
   }
 
   return (
-    <div className="">
-      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-around">
-        {data.map((flat, index) => (
-          <FlatCard key={index} flat={flat} />
-        ))}
-      </div>
+    <div className=" w-full">
+      {data.length > 0 ? (
+        <MyPostedList data={data}></MyPostedList>
+      ) : (
+        <div className="mx-auto w-3/4 md:w-1/3 p-4  mt-14 bg-teal-50">
+          <h1 className="text-center">You Do not Post Any Flat/House </h1>
+        </div>
+      )}
     </div>
   );
 };
