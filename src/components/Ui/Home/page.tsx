@@ -7,8 +7,8 @@ const HomePage = () => {
   return (
     <>
       <Hero />
-      <FeaturedFlatList></FeaturedFlatList>
-      {/* <FlatList /> */}
+      {/* <FeaturedFlatList></FeaturedFlatList> */}
+      <FlatList />
     </>
   );
 };

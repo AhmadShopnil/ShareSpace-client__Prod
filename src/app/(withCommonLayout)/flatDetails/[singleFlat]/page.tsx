@@ -2,6 +2,7 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import PrimaryButton from "@/components/Buttons/PrimaryButton";
+import ImageSlider from "@/components/Ui/FlatDetails/Slider/ImageSlider";
 
 const SingleFlat = async ({ params }: { params: any }) => {
   const flatId = params.singleFlat;
@@ -23,9 +24,9 @@ const SingleFlat = async ({ params }: { params: any }) => {
   return (
     <div className="container mx-auto p-2 sm:p-6">
       {/* Image Section */}
-      <section className="mb-8">
-        <div className="w-full h-64 bg-gray-300 flex items-center justify-center rounded-lg overflow-hidden">
-          {images.map((image: string, index: number) => (
+      <section className="mb-8 w-full md:h-80  overflow-hidden">
+        <div className="w-full h-64 gap-2 bg-gray-50 flex items-center justify-center rounded-lg overflow-hidden">
+          {/* {images.map((image: string, index: number) => (
             <div key={index}>
               <Image
                 src={image}
@@ -35,7 +36,9 @@ const SingleFlat = async ({ params }: { params: any }) => {
                 className="object-cover"
               />
             </div>
-          ))}
+          ))} */}
+
+          <ImageSlider images={images}></ImageSlider>
         </div>
       </section>
 

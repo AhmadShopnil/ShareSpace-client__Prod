@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const loggedInUserData = getUserInfo() as TTokenData;
   return (
-    <nav className="bg-white ">
+    <nav className="bg-white mb-4 ">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           {/* logo section */}

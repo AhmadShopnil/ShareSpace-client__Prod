@@ -9,7 +9,7 @@ const MyPostedList = ({ data }: { data: TFlatData[] }) => {
       {/* Table for larger screens */}
       <div className="hidden sm:block overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-200">
-          <thead className="bg-gray-100">
+          <thead className="bg-teal-50">
             <tr>
               <th className="w-1/4 px-4 py-2 text-left text-gray-600">Title</th>
               <th className="w-1/4 px-4 py-2 text-left text-gray-600">Rent</th>

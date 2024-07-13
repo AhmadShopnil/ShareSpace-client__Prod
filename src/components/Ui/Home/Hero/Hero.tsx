@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <div className="bg-white =">
+    <div className="bg-white ">
       <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between">
         <div className="w-full lg:w-1/2">
           <h1 className="text-3xl md:text-4xl font-bold mb-4">

@@ -1,6 +1,8 @@
 "use client";
 
+import SkeletonTable from "@/components/Loading/SkeletonTable";
 import MyPostedList from "@/components/MyPostedTable/MyPostedLIst";
+
 import { TFlatData } from "@/interfaces";
 import axiosInstance from "@/utils/axiosInstance";
 import { useEffect, useState } from "react";
@@ -8,13 +10,16 @@ import { useEffect, useState } from "react";
 const MyList = () => {
   const [data, setData] = useState<TFlatData[]>([]);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       try {
         const response = await axiosInstance.get("/flats/myPostedHouse");
         // Log response data
         setData(response?.data?.data);
+        setIsLoading(false);
       } catch (error: any) {
         console.error("Error fetching data:", error);
         setError(error.message); // Set error state
@@ -26,6 +31,9 @@ const MyList = () => {
 
   if (error) {
     return <div>Error: {error}</div>; // Render error message if there's an error
+  }
+  if (isLoading) {
+    return <SkeletonTable></SkeletonTable>;
   }
 
   return (
