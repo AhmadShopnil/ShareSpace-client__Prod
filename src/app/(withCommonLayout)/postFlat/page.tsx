@@ -48,6 +48,7 @@ const PostFlat = () => {
   const onSubmit: SubmitHandler<TFlatData & TUserData> = async (data) => {
     try {
       setIsloading(true);
+
       const uploadImageUrls = await uploadImageToCLoudinary({
         images,
         setUrls,
@@ -61,6 +62,8 @@ const PostFlat = () => {
         rent: data?.rent,
         advanceAmount: data.advanceAmount,
         images: uploadImageUrls,
+        totalBathrooms: 2,
+        category: "Flat",
       };
       const userData: TUserData = {
         name: data?.name,
@@ -70,11 +73,13 @@ const PostFlat = () => {
 
       const response = await axios.post(
         "https://server-flate-share.vercel.app/api/flats/add",
+        // "http://localhost:5000/api/flats/add",
         {
           flatData,
           userData,
         }
       );
+
       setIsloading(false);
       const accessToken = response?.data?.data?.accessToken;
       if (accessToken) {
@@ -82,6 +87,7 @@ const PostFlat = () => {
         router.push("/myList");
       }
     } catch (error) {
+      setIsloading(false);
       // eslint-disable-next-line no-console
       console.error("Error posting flat:", error);
     }

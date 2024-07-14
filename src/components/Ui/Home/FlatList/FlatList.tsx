@@ -1,46 +1,47 @@
+"use client";
+
+import SkeletonTable from "@/components/Loading/SkeletonTable";
 import FlatCard, { TFlat } from "@/components/Shared/FlatCard/FlatCard";
-import React from "react";
+import { TFlatData, TMeta } from "@/interfaces";
+import axiosInstance from "@/utils/axiosInstance";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
-const FlatList = async () => {
-  // const flats: TFlat[] = [
-  //   {
-  //     title: "5 Bedroom Apartment",
-  //     totalBedrooms: 5,
-  //     location: "Downtown City",
-  //     description: "A spacious 5 bedroom apartment with modern amenities.",
-  //     rent: 5500,
-  //     advanceAmount: 500,
-  //   },
-  //   {
-  //     title: "3 Bedroom Condo",
-  //     totalBedrooms: 3,
-  //     location: "Suburban Area",
-  //     description: "A cozy 3 bedroom condo with scenic views.",
-  //     rent: 3800,
-  //     advanceAmount: 400,
-  //   },
-  //   {
-  //     title: "Studio Apartment",
-  //     totalBedrooms: 1,
-  //     location: "City Center",
-  //     description: "A stylish studio apartment perfect for singles or couples.",
-  //     rent: 2500,
-  //     advanceAmount: 300,
-  //   },
-  //   {
-  //     title: "Studio Apartment",
-  //     totalBedrooms: 1,
-  //     location: "City Center",
-  //     description: "A stylish studio apartment perfect for singles or couples.",
-  //     rent: 2500,
-  //     advanceAmount: 300,
-  //   },
-  // ];
+const FlatList = () => {
+  const [flats, setFlats] = useState<TFlat[]>([]);
+  const [meta, setMeta] = useState<TMeta>();
+  const [error, setError] = useState();
+  const [isLoading, setIsLading] = useState(false);
 
-  const res = await fetch("https://server-flate-share.vercel.app/api/flats");
+  useEffect(() => {
+    // const url = `http://localhost:5000/api/flats?${queryString}`;
+    const url = `https://server-flate-share.vercel.app/api/flats?`;
 
-  const { data } = await res.json();
-  const flats: TFlat[] = data.flats;
+    const fetchFlats = async () => {
+      setIsLading(true);
+      try {
+        const response = await axios.get(url);
+
+        setFlats(response.data.data.flats);
+        setMeta(response.data.data.meta);
+        setIsLading(false);
+      } catch (error: any) {
+        setIsLading(false);
+        setMeta(error);
+        // eslint-disable-next-line no-console
+        console.error("Error fetching flats:", error);
+      }
+    };
+
+    fetchFlats();
+  }, []);
+
+  if (error) {
+    return <div>Error: {error}</div>; // Render error message if there's an error
+  }
+  if (isLoading) {
+    return <SkeletonTable></SkeletonTable>;
+  }
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-around">

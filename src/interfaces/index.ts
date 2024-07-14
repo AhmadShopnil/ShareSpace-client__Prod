@@ -7,6 +7,8 @@ export interface TFlatData {
   rent: number;
   advanceAmount: number;
   images?: string[];
+  totalBathrooms: number;
+  category: string;
 }
 
 export interface TUserData {
