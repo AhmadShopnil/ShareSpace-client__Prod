@@ -21,6 +21,7 @@ const MyList = () => {
         setData(response?.data?.data);
         setIsLoading(false);
       } catch (error: any) {
+        // eslint-disable-next-line no-console
         console.error("Error fetching data:", error);
         setError(error.message); // Set error state
       }

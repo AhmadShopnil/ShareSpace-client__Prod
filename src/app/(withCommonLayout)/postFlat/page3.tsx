@@ -97,6 +97,7 @@ const PostFlat = () => {
         saveUserInfo({ accessToken });
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error("Error posting flat:", error);
     }
   };

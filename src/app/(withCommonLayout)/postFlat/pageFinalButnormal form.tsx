@@ -89,7 +89,7 @@ const PostFlat = () => {
       //     console.log(key, value);
       //   });
       flatData.images = uploadImageUrls;
-      console.log(userData);
+
       const response = await axios.post("http://localhost:5000/api/flats/add", {
         flatData,
         userData,
@@ -100,6 +100,7 @@ const PostFlat = () => {
         router.push("/myList");
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error("Error posting flat:", error);
     }
   };

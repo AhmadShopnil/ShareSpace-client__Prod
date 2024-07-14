@@ -82,6 +82,7 @@ const PostFlat = () => {
         router.push("/myList");
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error("Error posting flat:", error);
     }
   };

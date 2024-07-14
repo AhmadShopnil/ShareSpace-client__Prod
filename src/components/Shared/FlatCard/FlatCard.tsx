@@ -29,13 +29,7 @@ const FlatCard = ({ flat }: { flat: any }) => {
         {/* image section start */}
         <div className="bg-gray-200 h-36 rounded-lg overflow-hidden relative">
           {images && images.length > 0 ? (
-            <Image
-              src={images[0]}
-              alt={title}
-              fill
-              layout="fill"
-              className="rounded-lg"
-            />
+            <Image src={images[0]} alt={title} fill className="rounded-lg" />
           ) : (
             <div className="h-full flex items-center justify-center text-gray-500">
               No Image Available
