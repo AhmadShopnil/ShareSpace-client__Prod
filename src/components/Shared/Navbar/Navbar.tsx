@@ -32,28 +32,28 @@ const Navbar: React.FC = () => {
             >
               Listed Home
             </Link>
-            {/* {loggedInUserData?.phone && (
+            {loggedInUserData?.phone && (
               <Link
                 href="/myList"
                 className="text-gray-600 hover:text-teal-600"
               >
                 My Posted Home
               </Link>
-            )} */}
+            )}
 
             <Link href="/" className="text-gray-600 hover:text-teal-600">
               Contact Us
             </Link>
           </div>
-          <div className="hidden md:block">
-            {loggedInUserData && (
+          <div className="hidden  md:block">
+            {/* {loggedInUserData && (
               <Link
                 href="/myList"
                 className="block text-gray-600 hover:text-teal-600 py-2"
               >
                 My Posted Home
               </Link>
-            )}
+            )} */}
             <Link
               href="#"
               className="border border-teal-500 text-teal-500 px-4 py-2 rounded hover:bg-blue-500 hover:text-white whitespace-nowrap"
