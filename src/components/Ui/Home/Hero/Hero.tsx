@@ -26,7 +26,7 @@ const Hero = () => {
               Post a Home
             </Link>
             <Link
-              href={`/postFlat`}
+              href={`/allFlatList`}
               className="text-xs sm:text-lg px-4 py-2 sm:px-6  bg-teal-100 text-teal-500  rounded"
             >
               Find a Home
