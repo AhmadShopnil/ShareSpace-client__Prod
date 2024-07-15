@@ -9,12 +9,12 @@ import { TTokenData } from "@/interfaces";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [loggedInUser, setLoggedInUser] = useState<TTokenData>();
-  const userData = getUserInfo() as TTokenData;
+  // const [loggedInUser, setLoggedInUser] = useState<TTokenData>();
+  const loggedInUser = getUserInfo() as TTokenData;
 
-  useEffect(() => {
-    setLoggedInUser(userData);
-  }, [userData]);
+  // useEffect(() => {
+  //   setLoggedInUser(userData);
+  // }, [userData]);
 
   return (
     <nav className="bg-white mb-4 ">
