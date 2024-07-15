@@ -1,14 +1,15 @@
 import React from "react";
 import Hero from "./Hero/Hero";
+import FlatList from "./FlatList/FlatList";
 
-import FlatListServer from "./FlatList/FlatList2";
+// import FlatListServer from "./FlatList/FlatList2";
 
 const HomePage = () => {
   return (
     <>
       <Hero />
-      <FlatListServer></FlatListServer>
-      {/* <FlatList /> */}
+      {/* <FlatListServer></FlatListServer> */}
+      <FlatList />
     </>
   );
 };

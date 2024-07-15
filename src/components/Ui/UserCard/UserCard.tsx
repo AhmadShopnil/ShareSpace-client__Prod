@@ -18,7 +18,7 @@ const UserCard: React.FC<UserCardProps> = ({ userData, setIsLoggedIn }) => {
   };
 
   return (
-    <div className="border p-4 rounded-lg flex justify-around items-center">
+    <div className="border p-4 rounded-lg flex flex-col sm:flex-row justify-around items-center">
       <div className="p-6">
         <h2 className="text-xl font-semibold text-gray-900">
           User Name: {name}
@@ -28,7 +28,7 @@ const UserCard: React.FC<UserCardProps> = ({ userData, setIsLoggedIn }) => {
       <div>
         <button
           onClick={handleRemoveUser}
-          className="bg-teal-500 text-white px-6 py-2 rounded mr-4"
+          className="bg-teal-500 text-white text-xs sm:text-sm px-4 py-2 rounded mr-4"
         >
           Post From Different User
         </button>

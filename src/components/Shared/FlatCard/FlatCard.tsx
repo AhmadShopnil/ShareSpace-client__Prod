@@ -22,7 +22,8 @@ const FlatCard = ({ flat }: { flat: any }) => {
 
   return (
     <Link
-      className=" rounded-lg  p-4 overflow-hidden shadow-lg border border-teal-100 hover:border-teal-300  "
+      className=" rounded-lg  p-4 overflow-hidden 
+      shadow-lg border border-teal-100 hover:border-teal-300  "
       href={`/flatDetails/${_id}`}
     >
       <div className="max-w-sm max-h-80  ">

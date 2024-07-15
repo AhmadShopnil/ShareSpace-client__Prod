@@ -4,17 +4,24 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import { getUserInfo } from "@/services/authServices";
+import { getUserInfo, removeUser } from "@/services/authServices";
 import { TTokenData } from "@/interfaces";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  // const [loggedInUser, setLoggedInUser] = useState<TTokenData>();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const loggedInUser = getUserInfo() as TTokenData;
 
-  // useEffect(() => {
-  //   setLoggedInUser(userData);
-  // }, [userData]);
+  useEffect(() => {
+    if (loggedInUser?.phone) {
+      setIsLoggedIn(true);
+    }
+  }, [loggedInUser]);
+
+  const handleLogOut = () => {
+    removeUser();
+    setIsLoggedIn(false);
+  };
 
   return (
     <nav className="bg-white mb-4 ">
@@ -74,6 +81,7 @@ const Navbar: React.FC = () => {
               </div>
             ) : (
               <button
+                onClick={handleLogOut}
                 className="border
                border-teal-500 text-teal-500 px-4 
                py-2 rounded hover:bg-teal-500
@@ -122,12 +130,33 @@ const Navbar: React.FC = () => {
             >
               Contact Us
             </Link>
-            <Link
-              href="#"
-              className="block border border-teal-500 text-teal-500 px-4 py-2 rounded mt-4 hover:bg-blue-500 hover:text-white"
-            >
-              Sign In
-            </Link>
+
+            {!loggedInUser?.phone ? (
+              <div className="flex gap-2">
+                <Link
+                  href="/login"
+                  className="block border border-teal-500 text-teal-500 px-4 py-2
+                    rounded mt-4 hover:bg-blue-500 hover:text-white"
+                >
+                  Login
+                </Link>
+                <Link
+                  href="#"
+                  className="block border border-teal-500 text-teal-500 px-4 py-2 
+                   rounded mt-4 hover:bg-blue-500 hover:text-white"
+                >
+                  Sign In
+                </Link>
+              </div>
+            ) : (
+              <button
+                onClick={handleLogOut}
+                className="block border border-teal-500 text-teal-500 px-4 py-2 
+                rounded mt-4 hover:bg-blue-500 hover:text-white"
+              >
+                Logout
+              </button>
+            )}
           </div>
         )}
       </div>
