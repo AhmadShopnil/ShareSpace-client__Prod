@@ -47,11 +47,14 @@ const FlatList = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-around">
-      {flats.slice(3, 11).map((flat, index) => (
-        // <FlatCard key={index} flat={flat} />
-        <FlatCardResponsive key={index} flat={flat} />
-      ))}
+    <div>
+      {/* <h3 className="text-sm sm:text-lg  md:text-xl mb-4">Best For You- </h3> */}
+      <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-around">
+        {flats.slice(3, 11).map((flat, index) => (
+          // <FlatCard key={index} flat={flat} />
+          <FlatCardResponsive key={index} flat={flat} />
+        ))}
+      </div>
     </div>
   );
 };

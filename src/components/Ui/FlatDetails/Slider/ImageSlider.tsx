@@ -26,7 +26,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
   return (
     <>
       <Swiper
-        slidesPerView={2}
+        slidesPerView={1}
         spaceBetween={30}
         freeMode={true}
         pagination={{

@@ -13,7 +13,7 @@ import {
 const MyListedCard = ({ flat }: { flat: TFlatData }) => {
   const { title, location, rent, images } = flat;
   return (
-    <div className="bg-teal-50 p-4 border border-teal-400 rounded-lg shadow-sm flex">
+    <div className="bg-white p-4 border border-teal-400 rounded-lg shadow-sm flex">
       {/* details section */}
 
       <div className="w-2/3 pr-4">
