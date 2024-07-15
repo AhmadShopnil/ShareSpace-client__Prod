@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
@@ -9,7 +9,13 @@ import { TTokenData } from "@/interfaces";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const loggedInUserData = getUserInfo() as TTokenData;
+  const [loggedInUser, setLoggedInUser] = useState<TTokenData>();
+  const userData = getUserInfo() as TTokenData;
+
+  useEffect(() => {
+    setLoggedInUser(userData);
+  }, [userData]);
+
   return (
     <nav className="bg-white mb-4 ">
       <div className="container mx-auto px-4">
@@ -32,7 +38,7 @@ const Navbar: React.FC = () => {
             >
               Listed Home
             </Link>
-            {loggedInUserData?.phone && (
+            {loggedInUser?.phone && (
               <Link
                 href="/myList"
                 className="text-gray-600 hover:text-teal-600"
@@ -45,21 +51,37 @@ const Navbar: React.FC = () => {
               Contact Us
             </Link>
           </div>
-          <div className="hidden  md:block">
-            {/* {loggedInUserData && (
-              <Link
-                href="/myList"
-                className="block text-gray-600 hover:text-teal-600 py-2"
+          <div className="hidden   md:block">
+            {!loggedInUser?.phone ? (
+              <div className="flex gap-2">
+                <Link
+                  href="/login"
+                  className="border border-teal-500
+                   text-teal-500 px-4 py-2 rounded hover:bg-teal-500
+                    hover:text-white whitespace-nowrap"
+                >
+                  Login
+                </Link>
+                <Link
+                  href="#"
+                  className="border border-teal-500
+                   text-teal-500 px-4 py-2 rounded
+                    hover:bg-teal-500
+                    hover:text-white whitespace-nowrap"
+                >
+                  Sign In
+                </Link>
+              </div>
+            ) : (
+              <button
+                className="border
+               border-teal-500 text-teal-500 px-4 
+               py-2 rounded hover:bg-teal-500
+                hover:text-white whitespace-nowrap"
               >
-                My Posted Home
-              </Link>
-            )} */}
-            <Link
-              href="#"
-              className="border border-teal-500 text-teal-500 px-4 py-2 rounded hover:bg-blue-500 hover:text-white whitespace-nowrap"
-            >
-              Sign In
-            </Link>
+                Logout
+              </button>
+            )}
           </div>
           <div className="md:hidden">
             <button onClick={() => setIsOpen(!isOpen)}>
@@ -70,6 +92,8 @@ const Navbar: React.FC = () => {
             </button>
           </div>
         </div>
+
+        {/* for mobile */}
         {isOpen && (
           <div className="md:hidden text-center">
             <Link
@@ -84,7 +108,7 @@ const Navbar: React.FC = () => {
             >
               Listed Home
             </Link>
-            {loggedInUserData && (
+            {loggedInUser && (
               <Link
                 href="/myList"
                 className="block text-gray-600 hover:text-teal-600 py-2"
