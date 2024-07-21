@@ -5,8 +5,8 @@ import dotenv from "dotenv";
 
 const axiosInstance = axios.create({
   // Base URL for your API
-  // baseURL: "http://localhost:5000/api",
-  baseURL: "https://server-flate-share.vercel.app/api",
+  baseURL: "http://localhost:5000/api",
+  // baseURL: "https://server-flate-share.vercel.app/api",
   // baseURL: variables.server_url,
 });
 

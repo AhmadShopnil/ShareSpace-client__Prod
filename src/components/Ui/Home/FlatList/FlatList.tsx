@@ -5,6 +5,8 @@ import SkeletonResFlatList from "@/components/Loading/SkeletonResFlatList";
 import SkeletonTable from "@/components/Loading/SkeletonTable";
 import FlatCard, { TFlat } from "@/components/Shared/FlatCard/FlatCard";
 import FlatCardResponsive from "@/components/Shared/FlatCard/FlatCardResponsive";
+import NotFoundData from "@/components/Shared/NotFoundData/NotFoundData";
+
 import { TFlatData, TMeta } from "@/interfaces";
 import axiosInstance from "@/utils/axiosInstance";
 import axios from "axios";
@@ -17,8 +19,8 @@ const FlatList = () => {
   const [isLoading, setIsLading] = useState(true);
 
   useEffect(() => {
-    // const url = `http://localhost:5000/api/flats?${queryString}`;
-    const url = `https://server-flate-share.vercel.app/api/flats?`;
+    const url = `http://localhost:5000/api/flats?`;
+    // const url = `https://server-flate-share.vercel.app/api/flats?`;
 
     const fetchFlats = async () => {
       setIsLading(true);
@@ -44,6 +46,9 @@ const FlatList = () => {
   }
   if (isLoading) {
     return <SkeletonResFlatList></SkeletonResFlatList>;
+  }
+  if (flats.length <= 0) {
+    return <NotFoundData text="No Flat/Home List Found"></NotFoundData>;
   }
 
   return (

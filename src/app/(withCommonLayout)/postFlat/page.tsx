@@ -9,6 +9,7 @@ import { uploadImageToCLoudinary } from "@/utils/uploadImage";
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 import SkeletonPostFlat from "@/components/Loading/SkeletonPostFlat";
+import ErrorComponent from "@/components/Shared/Error/ErrorComponent";
 
 const PostFlat = () => {
   const router = useRouter();
@@ -16,7 +17,9 @@ const PostFlat = () => {
   const [images, setImages] = useState<File[]>([]);
   const [urls, setUrls] = useState<string[]>([]);
   const [isLodaing, setIsloading] = useState(false);
+  const [error, setError] = useState();
 
+  // get user info from localStorage by accessToekn
   const loggedInUserData = getUserInfo() as TTokenData;
 
   const {
@@ -72,8 +75,8 @@ const PostFlat = () => {
       };
 
       const response = await axios.post(
-        "https://server-flate-share.vercel.app/api/flats/add",
-        // "http://localhost:5000/api/flats/add",
+        // "https://server-flate-share.vercel.app/api/flats/add",
+        "http://localhost:5000/api/flats/add",
         {
           flatData,
           userData,
@@ -86,10 +89,11 @@ const PostFlat = () => {
         saveUserInfo({ accessToken });
         router.push("/myList");
       }
-    } catch (error) {
+    } catch (error: any) {
+      setError(error?.message);
       setIsloading(false);
       // eslint-disable-next-line no-console
-      console.error("Error posting flat:", error);
+      // console.error("Error posting flat:", error);
     }
   };
 
@@ -160,6 +164,9 @@ const PostFlat = () => {
 
   if (isLodaing) {
     return <SkeletonPostFlat></SkeletonPostFlat>;
+  }
+  if (error) {
+    return <ErrorComponent error={error} setError={setError}></ErrorComponent>;
   }
 
   return (
