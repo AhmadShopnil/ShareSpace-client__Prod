@@ -1,14 +1,18 @@
 import Image from "next/image";
+import {
+  faBangladeshiTakaSign,
+  faLocationDot,
+  faPhone,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import PrimaryButton from "@/components/Buttons/PrimaryButton";
 import ImageSlider from "@/components/Ui/FlatDetails/Slider/ImageSlider";
 
 const SingleFlat = async ({ params }: { params: any }) => {
   const flatId = params.singleFlat;
-  const res = await fetch(
-    `https://server-flate-share.vercel.app/api/flats/${flatId}`
-  );
+  const url = `http://localhost:5000/api/flats/${flatId}`;
+  // const url= `https://server-flate-share.vercel.app/api/flats/${flatId}`
+  const res = await fetch(url);
   const { data } = await res.json();
   const {
     title,
@@ -19,6 +23,8 @@ const SingleFlat = async ({ params }: { params: any }) => {
     rent,
     advanceAmount,
     images,
+    totalBathrooms,
+    category,
   } = data;
 
   return (
@@ -49,19 +55,39 @@ const SingleFlat = async ({ params }: { params: any }) => {
           <div className=" p-4 sm:p-6 bg-white rounded-lg border border-gray-300">
             <h2 className="text-2xl font-semibold mb-4">Details</h2>
             <p className="text-gray-700 mb-2">
+              <strong>Category:</strong> {category}
+            </p>
+            <p className="text-gray-700 mb-2">
               <strong>Location:</strong> {location}
             </p>
             <p className="text-gray-700 mb-2">
               <strong>Bedrooms:</strong> {totalBedrooms}
             </p>
             <p className="text-gray-700 mb-2">
-              <strong>Rent:</strong> ${rent} / month
+              <strong>WashRooms:</strong> {totalBathrooms}
             </p>
             <p className="text-gray-700 mb-2">
-              <strong>Advance Amount:</strong> ${advanceAmount}
+              <strong>Rent:</strong>
+              <span className="text-gray-600 mx-1 ">
+                {" "}
+                <FontAwesomeIcon icon={faBangladeshiTakaSign} color="gray" />
+              </span>
+              {rent} / month
+            </p>
+            <p className="text-gray-700 mb-2">
+              <strong>Advance Amount:</strong>
+
+              <span className="text-gray-600 mx-1 ">
+                {" "}
+                <FontAwesomeIcon icon={faBangladeshiTakaSign} color="gray" />
+              </span>
+              <span className="text-gray-600 ">{advanceAmount}</span>
             </p>
             <p className="text-gray-700 mb-4">{description}</p>
-            <PrimaryButton title={"Apply For Rent"}></PrimaryButton>
+            {/* <PrimaryButton
+              action={() => {}}
+              title={"Apply For Rent"}
+            ></PrimaryButton> */}
           </div>
 
           {/* Owner Information Section */}

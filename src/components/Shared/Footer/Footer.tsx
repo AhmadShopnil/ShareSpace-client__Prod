@@ -4,6 +4,7 @@ import {
   faTwitter,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
+import Link from "next/link";
 
 const Footer: React.FC = () => {
   return (
@@ -25,24 +26,24 @@ const Footer: React.FC = () => {
             <h2 className="text-xl font-semibold mb-4">Quick Links</h2>
             <ul>
               <li className="mb-2">
-                <a href="#" className="hover:underline">
+                <Link href="#" className="hover:underline">
                   Home
-                </a>
+                </Link>
               </li>
               <li className="mb-2">
-                <a href="#" className="hover:underline">
+                <Link href="#" className="hover:underline">
                   About Us
-                </a>
+                </Link>
               </li>
               <li className="mb-2">
-                <a href="#" className="hover:underline">
+                <Link href="#" className="hover:underline">
                   Blog
-                </a>
+                </Link>
               </li>
               <li className="mb-2">
-                <a href="#" className="hover:underline">
+                <Link href="#" className="hover:underline">
                   Contact Us
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -54,15 +55,15 @@ const Footer: React.FC = () => {
             <p className="mb-2">Email: info@flatfinder.com</p>
             <p className="mb-2">Phone: (123) 456-7890</p>
             <div className="mt-4">
-              <a href="#" className="text-teal-300 hover:text-teal-100 mr-4">
+              <Link href="#" className="text-teal-300 hover:text-teal-100 mr-4">
                 <FontAwesomeIcon icon={faFacebook} size="2x" />
-              </a>
-              <a href="#" className="text-teal-300 hover:text-teal-100 mr-4">
+              </Link>
+              <Link href="#" className="text-teal-300 hover:text-teal-100 mr-4">
                 <FontAwesomeIcon icon={faTwitter} size="2x" />
-              </a>
-              <a href="#" className="text-teal-300 hover:text-teal-100 mr-4">
+              </Link>
+              <Link href="#" className="text-teal-300 hover:text-teal-100 mr-4">
                 <FontAwesomeIcon icon={faInstagram} size="2x" />
-              </a>
+              </Link>
             </div>
           </div>
         </div>

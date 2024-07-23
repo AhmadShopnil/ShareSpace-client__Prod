@@ -54,12 +54,12 @@ const Navbar: React.FC = () => {
               </Link>
             )}
 
-            <Link
+            {/* <Link
               href="/contactUs"
               className="text-gray-600 hover:text-teal-600"
             >
               Contact Us
-            </Link>
+            </Link> */}
           </div>
           <div className="hidden   md:block">
             {!loggedInUser?.phone ? (

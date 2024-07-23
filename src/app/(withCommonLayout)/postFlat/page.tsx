@@ -41,6 +41,7 @@ const PostFlat = () => {
     }
   }, [loggedInUserData, setValue]);
 
+  // set image to state form input
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const images = Array.from(e.target.files);
@@ -48,24 +49,28 @@ const PostFlat = () => {
     }
   };
 
+  // handle submit button
   const onSubmit: SubmitHandler<TFlatData & TUserData> = async (data) => {
     try {
       setIsloading(true);
+      let uploadImageUrls = null;
 
-      const uploadImageUrls = await uploadImageToCLoudinary({
-        images,
-        setUrls,
-      });
+      if (images) {
+        uploadImageUrls = await uploadImageToCLoudinary({
+          images,
+          setUrls,
+        });
+      }
 
       const flatData: TFlatData = {
         title: data?.title,
         totalBedrooms: data?.totalBedrooms,
-        location: data.location,
+        location: data?.location,
         description: data.description,
         rent: data?.rent,
-        advanceAmount: data.advanceAmount,
+        advanceAmount: data?.advanceAmount,
         images: uploadImageUrls,
-        totalBathrooms: 2,
+        totalBathrooms: data?.totalBathrooms,
         category: "Flat",
       };
       const userData: TUserData = {
@@ -193,6 +198,7 @@ const PostFlat = () => {
                 <span className="text-red-600">This field is required</span>
               )}
             </div>
+            {/* bedroom input */}
             <div className="flex flex-col">
               <label
                 htmlFor="totalBedrooms"
@@ -211,6 +217,26 @@ const PostFlat = () => {
                 <span className="text-red-600">This field is required</span>
               )}
             </div>
+            {/* bathroom input */}
+            <div className="flex flex-col">
+              <label
+                htmlFor="totalBathrooms"
+                className="text-sm text-gray-600 mb-1"
+              >
+                Total Bathrooms
+              </label>
+              <input
+                type="number"
+                id="totalBathrooms"
+                {...register("totalBathrooms", { required: true })}
+                placeholder="Total Bathrooms"
+                className="w-full p-2 border rounded"
+              />
+              {errors.totalBathrooms && (
+                <span className="text-red-600">This field is required</span>
+              )}
+            </div>
+            {/* location input */}
             <div className="flex flex-col">
               <label htmlFor="location" className="text-sm text-gray-600 mb-1">
                 Location
@@ -226,6 +252,7 @@ const PostFlat = () => {
                 <span className="text-red-600">This field is required</span>
               )}
             </div>
+            {/* rent input */}
             <div className="flex flex-col">
               <label htmlFor="rent" className="text-sm text-gray-600 mb-1">
                 Rent
@@ -241,6 +268,7 @@ const PostFlat = () => {
                 <span className="text-red-600">This field is required</span>
               )}
             </div>
+            {/* advance input */}
             <div className="flex flex-col">
               <label
                 htmlFor="advanceAmount"
@@ -259,6 +287,7 @@ const PostFlat = () => {
                 <span className="text-red-600">This field is required</span>
               )}
             </div>
+            {/* Description input */}
             <div className="flex flex-col">
               <label
                 htmlFor="description"
@@ -277,6 +306,7 @@ const PostFlat = () => {
               )}
             </div>
           </div>
+          {/* Image input */}
           <div className="flex flex-col mt-4">
             <label htmlFor="image" className="text-sm text-gray-600 mb-1">
               Flat Image

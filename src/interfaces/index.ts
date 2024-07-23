@@ -1,12 +1,13 @@
 // interfaces.ts
 export interface TFlatData {
+  _id?: string;
   title: string;
   totalBedrooms: number;
   location: string;
   description: string;
   rent: number;
   advanceAmount: number;
-  images?: string[];
+  images?: string[] | null;
   totalBathrooms: number;
   category: string;
 }
