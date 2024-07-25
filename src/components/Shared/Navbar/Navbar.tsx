@@ -67,15 +67,15 @@ const Navbar: React.FC = () => {
                 <Link
                   href="/login"
                   className="border border-teal-500
-                   text-teal-500 px-4 py-2 rounded hover:bg-teal-500
+                   text-teal-500 px-3 py-1 rounded hover:bg-teal-500
                     hover:text-white whitespace-nowrap"
                 >
                   Login
                 </Link>
                 <Link
-                  href="#"
+                  href="/signUp"
                   className="border border-teal-500
-                   text-teal-500 px-4 py-2 rounded
+                   text-teal-500 px-3 py-1 rounded
                     hover:bg-teal-500
                     hover:text-white whitespace-nowrap"
                 >
@@ -86,8 +86,8 @@ const Navbar: React.FC = () => {
               <button
                 onClick={handleLogOut}
                 className="border
-               border-teal-500 text-teal-500 px-4 
-               py-2 rounded hover:bg-teal-500
+               border-teal-500 text-teal-500 px-3 
+               py-1 rounded hover:bg-teal-500
                 hover:text-white whitespace-nowrap"
               >
                 Logout
@@ -109,27 +109,31 @@ const Navbar: React.FC = () => {
           <div className="md:hidden text-center">
             <Link
               href="/"
-              className="block text-gray-600 hover:text-teal-600 py-2"
+              className="block text-xs text-gray-600
+               hover:text-teal-600 py-1"
             >
               Home
             </Link>
             <Link
               href="/allFlatList"
-              className="block text-gray-600 hover:text-teal-600 py-2"
+              className="block text-xs text-gray-600
+               hover:text-teal-600 py-1"
             >
               Listed Home
             </Link>
             {loggedInUser && (
               <Link
                 href="/myList"
-                className="block text-gray-600 hover:text-teal-600 py-2"
+                className="block text-xs text-gray-600
+                 hover:text-teal-600 py-1"
               >
                 My Posted Home
               </Link>
             )}
             <Link
               href="/contactUs"
-              className="block text-gray-600 hover:text-teal-600 py-2"
+              className="block text-xs text-gray-600
+                hover:text-teal-600 py-1"
             >
               Contact Us
             </Link>
@@ -154,8 +158,10 @@ const Navbar: React.FC = () => {
             ) : (
               <button
                 onClick={handleLogOut}
-                className="block border border-teal-500 text-teal-500 px-4 py-2 
-                rounded mt-4 hover:bg-blue-500 hover:text-white"
+                className=" border  border-teal-500
+                 text-teal-500 text-xs px-2 py-1 
+                rounded mt-4 hover:bg-blue-500
+                 hover:text-white"
               >
                 Logout
               </button>
