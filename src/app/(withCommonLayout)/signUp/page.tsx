@@ -3,6 +3,7 @@ import SkeletonTable from "@/components/Loading/SkeletonTable";
 import SkeltonLoginForm from "@/components/Loading/SkeltonLoginForm";
 import { saveUserInfo } from "@/services/authServices";
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -140,6 +141,12 @@ const SignUp = () => {
               </button>
             </form>
             ;
+            <p className="text-sm">
+              Already have an account ? Please{" "}
+              <span className="text-teal-600">
+                <Link href="/login">Login</Link>
+              </span>
+            </p>
           </>
         )}
       </div>

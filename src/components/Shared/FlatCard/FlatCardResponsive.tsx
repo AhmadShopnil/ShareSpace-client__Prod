@@ -23,7 +23,7 @@ const FlatCardResponsive = ({ flat }: { flat: TFlat }) => {
 
   return (
     <Link
-      className="rounded-lg p-4 overflow-hidden shadow-lg border
+      className="rounded-lg p-3 md:p-4 overflow-hidden shadow-lg border
      border-teal-100 hover:border-teal-300
       flex flex-row sm:flex-col gap-6 "
       href={`/flatDetails/${_id}`}
@@ -47,15 +47,15 @@ const FlatCardResponsive = ({ flat }: { flat: TFlat }) => {
 
       {/* Content section start */}
       <div className="py-1 ">
-        <p className="font-bold text-xl mb-2">{title}</p>
-        <div className="pb-2 font-light">
+        <p className="font-bold text-lg md:text-xl mb-2">{title}</p>
+        <div className="pb-2 text-xs font-light">
           <div className="flex items-center ">
             <FontAwesomeIcon icon={faBangladeshiTakaSign} color="teal" />
-            <span className="text-gray-600 ml-2 text-sm">{rent} Per Month</span>
+            <span className="text-gray-600 ml-2 ">{rent} Per Month</span>
           </div>
           <div className="flex items-center mt-2">
             <FontAwesomeIcon icon={faLocationDot} color="teal" />
-            <span className="text-gray-600 ml-2 text-sm">{location}</span>
+            <span className="text-gray-600 ml-2 ">{location}</span>
           </div>
         </div>
       </div>

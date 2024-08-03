@@ -18,8 +18,10 @@ export interface TUserData {
   password: string;
 }
 export interface TTokenData {
-  name: string;
+  _id: string;
+  role: string;
   phone: string;
+  name: string;
 }
 
 export type TMeta = {

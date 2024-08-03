@@ -4,23 +4,19 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import { getUserInfo, removeUser } from "@/services/authServices";
-import { TTokenData } from "@/interfaces";
+import { isLoggedIn, removeUser } from "@/services/authServices";
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const loggedInUser = getUserInfo() as TTokenData;
-
+  const [isUserLogged, setIsUserLoggedIn] = useState(false);
+  // const loggedInUser = getUserInfo() as TTokenData;
   useEffect(() => {
-    if (loggedInUser?.phone) {
-      setIsLoggedIn(true);
-    }
-  }, [loggedInUser]);
+    setIsUserLoggedIn(isLoggedIn() as boolean);
+  }, []);
 
   const handleLogOut = () => {
     removeUser();
-    setIsLoggedIn(false);
+    setIsUserLoggedIn(false);
   };
 
   return (
@@ -45,7 +41,7 @@ const Navbar: React.FC = () => {
             >
               Listed Home
             </Link>
-            {loggedInUser?.phone && (
+            {isUserLogged && (
               <Link
                 href="/myList"
                 className="text-gray-600 hover:text-teal-600"
@@ -62,7 +58,7 @@ const Navbar: React.FC = () => {
             </Link> */}
           </div>
           <div className="hidden   md:block">
-            {!loggedInUser?.phone ? (
+            {!isUserLogged ? (
               <div className="flex gap-2">
                 <Link
                   href="/login"
@@ -121,7 +117,7 @@ const Navbar: React.FC = () => {
             >
               Listed Home
             </Link>
-            {loggedInUser && (
+            {isUserLogged && (
               <Link
                 href="/myList"
                 className="block text-xs text-gray-600
@@ -138,7 +134,7 @@ const Navbar: React.FC = () => {
               Contact Us
             </Link>
 
-            {!loggedInUser?.phone ? (
+            {!isUserLogged ? (
               <div className="flex gap-2">
                 <Link
                   href="/login"
@@ -148,7 +144,7 @@ const Navbar: React.FC = () => {
                   Login
                 </Link>
                 <Link
-                  href="#"
+                  href="/signUp"
                   className="block border border-teal-500 text-teal-500 px-4 py-2 
                    rounded mt-4 hover:bg-blue-500 hover:text-white"
                 >

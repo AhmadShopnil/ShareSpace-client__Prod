@@ -71,7 +71,7 @@ const PostFlat = () => {
         advanceAmount: data?.advanceAmount,
         images: uploadImageUrls,
         totalBathrooms: data?.totalBathrooms,
-        category: "Flat",
+        category: data?.category,
       };
       const userData: TUserData = {
         name: data?.name,
@@ -287,45 +287,59 @@ const PostFlat = () => {
                 <span className="text-red-600">This field is required</span>
               )}
             </div>
-            {/* Description input */}
+            {/* category input */}
             <div className="flex flex-col">
-              <label
-                htmlFor="description"
-                className="text-sm text-gray-600 mb-1"
-              >
-                Description
+              <label htmlFor="category" className="text-sm text-gray-600 mb-1">
+                Category
               </label>
-              <textarea
-                id="description"
-                {...register("description", { required: true })}
-                placeholder="Description"
+              <select
+                id="category"
+                {...register("category", { required: true })}
                 className="w-full p-2 border rounded"
-              />
-              {errors.description && (
+              >
+                <option value="Flat">Flat</option>
+                <option value="Tin-Shade">Tin-Shade</option>
+                <option value="Tiner-ghor">Tiner-ghor</option>
+              </select>
+              {errors.category && (
                 <span className="text-red-600">This field is required</span>
               )}
             </div>
           </div>
-          {/* Image input */}
+          {/* description input */}
           <div className="flex flex-col mt-4">
-            <label htmlFor="image" className="text-sm text-gray-600 mb-1">
-              Flat Image
+            <label htmlFor="description" className="text-sm text-gray-600 mb-1">
+              Description
+            </label>
+            <textarea
+              id="description"
+              {...register("description", { required: true })}
+              placeholder="Description"
+              className="w-full p-2 border rounded"
+            />
+            {errors.description && (
+              <span className="text-red-600">This field is required</span>
+            )}
+          </div>
+          {/* image upload input */}
+          <div className="flex flex-col mt-4">
+            <label htmlFor="images" className="text-sm text-gray-600 mb-1">
+              Images
             </label>
             <input
               type="file"
-              id="image"
+              id="images"
+              multiple
               onChange={handleImageChange}
               className="w-full p-2 border rounded"
-              multiple
             />
           </div>
         </div>
-
         <button
           type="submit"
-          className="bg-teal-600 text-white py-2 px-4 rounded hover:bg-teal-700"
+          className="w-full bg-teal-500 text-white p-2 rounded hover:bg-teal-600"
         >
-          Post Flat
+          Submit
         </button>
       </form>
     </div>

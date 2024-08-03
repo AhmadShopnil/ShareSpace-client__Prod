@@ -21,3 +21,10 @@ export const getUserInfo = () => {
 export const removeUser = () => {
   return removeFromLocalStorage("accessToken");
 };
+
+export const isLoggedIn = () => {
+  const authToken = getFromLocalStorage("accessToken");
+  if (authToken) {
+    return !!authToken;
+  }
+};

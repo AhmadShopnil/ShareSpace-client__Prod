@@ -1,8 +1,7 @@
 "use client";
-import SkeletonTable from "@/components/Loading/SkeletonTable";
-import SkeltonLoginForm from "@/components/Loading/SkeltonLoginForm";
 import { saveUserInfo } from "@/services/authServices";
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -117,6 +116,12 @@ const LoginPage = () => {
               </button>
             </form>
             ;
+            <p className="text-sm">
+              Do not have an account ? Please{" "}
+              <span className="text-teal-600">
+                <Link href="/signUp">SignUp</Link>
+              </span>
+            </p>
           </>
         )}
       </div>
