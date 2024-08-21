@@ -30,8 +30,8 @@ const SignUp = () => {
     // Handle form submission
     try {
       const response = await axios.post(
-        // "https://server-flate-share.vercel.app/api/user/register",
-        "http://localhost:5000/api/user/register",
+        "https://server-flate-share.vercel.app/api/user/register",
+        // "http://localhost:5000/api/user/register",
         data
       );
 

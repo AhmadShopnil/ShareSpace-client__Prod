@@ -19,8 +19,8 @@ const AllFlatList = ({ queryString }: { queryString: any }) => {
   // const meta: TMeta = data.meta;
 
   useEffect(() => {
-    const url = `http://localhost:5000/api/flats?${queryString}`;
-    // const url = `https://server-flate-share.vercel.app/api/flats?${queryString}`;
+    // const url = `http://localhost:5000/api/flats?${queryString}`;
+    const url = `https://server-flate-share.vercel.app/api/flats?${queryString}`;
 
     const fetchFlats = async () => {
       setIsLoading(true);

@@ -19,8 +19,8 @@ const FlatList = () => {
   const [isLoading, setIsLading] = useState(true);
 
   useEffect(() => {
-    const url = `http://localhost:5000/api/flats?`;
-    // const url = `https://server-flate-share.vercel.app/api/flats?`;
+    // const url = `http://localhost:5000/api/flats?`;
+    const url = `https://server-flate-share.vercel.app/api/flats?`;
 
     const fetchFlats = async () => {
       setIsLading(true);
