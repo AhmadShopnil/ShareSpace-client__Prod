@@ -5,8 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { isLoggedIn, removeUser } from "@/services/authServices";
-
+import { useRouter } from 'next/navigation';
 const Navbar = () => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isUserLogged, setIsUserLoggedIn] = useState(false);
   // const loggedInUser = getUserInfo() as TTokenData;
@@ -17,6 +18,8 @@ const Navbar = () => {
   const handleLogOut = () => {
     removeUser();
     setIsUserLoggedIn(false);
+    router.refresh();
+    
   };
 
   return (
