@@ -80,8 +80,8 @@ const PostFlat = () => {
       };
 
       const response = await axios.post(
-        "https://server-flate-share.vercel.app/api/flats/add",
-        // "http://localhost:5000/api/flats/add",
+        // "https://server-flate-share.vercel.app/api/flats/add",
+        "http://localhost:5000/api/flats/add",
         {
           flatData,
           userData,

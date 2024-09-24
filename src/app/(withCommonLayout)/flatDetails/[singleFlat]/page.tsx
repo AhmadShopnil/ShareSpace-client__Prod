@@ -10,8 +10,8 @@ import ImageSlider from "@/components/Ui/FlatDetails/Slider/ImageSlider";
 
 const SingleFlat = async ({ params }: { params: any }) => {
   const flatId = params.singleFlat;
-  const url = `http://localhost:5000/api/flats/${flatId}`;
-  // const url= `https://server-flate-share.vercel.app/api/flats/${flatId}`
+  // const url = `http://localhost:5000/api/flats/${flatId}`;
+  const url= `https://server-flate-share.vercel.app/api/flats/${flatId}`
   const res = await fetch(url);
   const { data } = await res.json();
   const {
