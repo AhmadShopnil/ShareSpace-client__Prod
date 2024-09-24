@@ -28,6 +28,7 @@ const FlatList = () => {
         const response = await axios.get(url);
 
         setFlats(response.data.data.flats);
+       
         setMeta(response.data.data.meta);
         setIsLading(false);
       } catch (error: any) {

@@ -13,11 +13,6 @@ const AllFlatList = ({ queryString }: { queryString: any }) => {
   const [meta, seMeta] = useState<TMeta>();
   const [isLoading, setIsLoading] = useState(true);
 
-  // const res = await fetch("https://server-flate-share.vercel.app/api/flats");
-  // const { data } = await res.json();
-  // const flats: TFlat[] = data.flats;
-  // const meta: TMeta = data.meta;
-
   useEffect(() => {
     // const url = `http://localhost:5000/api/flats?${queryString}`;
     const url = `https://server-flate-share.vercel.app/api/flats?${queryString}`;
@@ -28,6 +23,8 @@ const AllFlatList = ({ queryString }: { queryString: any }) => {
         const response = await axios.get(url);
 
         setFlats(response.data.data.flats);
+        // console.log('allfalt: ',response.data.data.flats);
+
         seMeta(response.data.data.meta);
         setIsLoading(false);
       } catch (error) {
