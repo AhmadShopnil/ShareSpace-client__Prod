@@ -23,7 +23,7 @@ const AllFlatList = ({ queryString }: { queryString: any }) => {
         const response = await axios.get(url);
 
         setFlats(response.data.data.flats);
-        // console.log('allfalt: ',response.data.data.flats);
+       
 
         seMeta(response.data.data.meta);
         setIsLoading(false);
