@@ -63,7 +63,7 @@ Visit the live application: [Share Space](https://share-space-tangail.vercel.app
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/share-space.git
+   git clone https://github.com/AhmadShopnil/ShareSpace-client__Prod.git
 
 
 
