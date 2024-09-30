@@ -1,4 +1,72 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+
+# Share Space
+
+A dynamic platform to share and manage real estate spaces efficiently. Whether you're listing flats, managing rentals, or browsing spaces, Share Space offers an intuitive interface with a focus on user experience.
+
+### Live Demo
+Visit the live application: [Share Space](https://share-space-tangail.vercel.app/)
+
+---
+
+## Table of Contents
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Setup Instructions](#setup-instructions)
+
+---
+
+## Features
+
+### User-Specific Features
+- **Authentication**: User login and signup functionality.
+- **Property Listings**: Users can view available properties with detailed information.
+- **Responsive Design**: The platform is mobile-friendly and responsive across all devices.
+- **Property Search and Filter**: Filter properties based on categories, address, and pricing.
+  
+### Admin-Specific Features
+- **Manage Listings**: Add, update, or delete property listings.
+- **User Management**: Control user access, including the ability to promote users to admin.
+
+### Additional Features
+- **Rental Management**: Manage property rentals efficiently.
+- **Advanced UI/UX**: Focused on providing a seamless user experience.
+
+
+---
+
+## Tech Stack
+
+**Frontend:**
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [DaisyUI](https://daisyui.com/)
+
+**Backend:**
+- [Express.js](https://expressjs.com/)
+- [MongoDB](https://www.mongodb.com/) with [Mongoose](https://mongoosejs.com/)
+- [Zod](https://zod.dev/) for validation
+
+**Hosting:**
+- [Vercel](https://vercel.com/) for frontend and backend hosting
+
+---
+
+## Setup Instructions
+
+### Prerequisites
+- Node.js (v14 or later)
+- MongoDB
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/share-space.git
+
+
+
 
 ## Getting Started
 
@@ -10,27 +78,4 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
