@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 import SkeletonPostFlat from "@/components/Loading/SkeletonPostFlat";
 import ErrorComponent from "@/components/Shared/Error/ErrorComponent";
+import { useCreateFlatMutation } from "@/redux/api/flatApi";
 
 const PostFlat = () => {
   const router = useRouter();
@@ -18,6 +19,12 @@ const PostFlat = () => {
   const [urls, setUrls] = useState<string[]>([]);
   const [isLodaing, setIsloading] = useState(false);
   const [error, setError] = useState();
+
+
+
+const [createFlat]=useCreateFlatMutation()
+
+
 
   // get user info from localStorage by accessToekn
   const loggedInUserData = getUserInfo() as TTokenData;
@@ -79,17 +86,22 @@ const PostFlat = () => {
         password: data?.password,
       };
 
-      const response = await axios.post(
-        // "https://server-flate-share.vercel.app/api/flats/add",
-        "http://localhost:5000/api/flats/add",
+
+
+      const response = await createFlat(
         {
           flatData,
           userData,
         }
       );
 
+    
+
       setIsloading(false);
-      const accessToken = response?.data?.data?.accessToken;
+      const accessToken = response?.data?.accessToken;
+
+
+
       if (accessToken) {
         saveUserInfo({ accessToken });
         router.push("/myList");

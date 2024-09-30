@@ -8,9 +8,9 @@ export const flatApi = baseApi.injectEndpoints({
    endpoints: (build) => ({
       createFlat: build.mutation({
          query: (data) => ({
-            url: '/user/create-flat',
+            url: '/flats/add',
             method: 'POST',
-            contentType: 'multipart/form-data',
+            // contentType: 'multipart/form-data',
             data,
          }),
          invalidatesTags: [tagTypes.flats],
@@ -19,6 +19,22 @@ export const flatApi = baseApi.injectEndpoints({
       getAllFlats: build.query({
          query: (arg) => ({
             url: `/flats?${arg}`,
+            method: 'GET',
+            // params: arg,
+         }),
+         transformResponse: (response:any, meta: IMeta) => {
+            return {
+               flats: response,
+               meta,
+            };
+         },
+         providesTags: [tagTypes.flats],
+      }),
+
+
+      getMyAllFlats: build.query({
+         query: (arg) => ({
+            url: `/flats/myPostedHouse`,
             method: 'GET',
             // params: arg,
          }),
@@ -66,5 +82,6 @@ export const {
    useDeleteFlatMutation,
    useGetSingleFlatQuery,
    useUpdateFlatMutation,
-   useGetAllFlatsQuery
+   useGetAllFlatsQuery,
+   useGetMyAllFlatsQuery
 } = flatApi;
