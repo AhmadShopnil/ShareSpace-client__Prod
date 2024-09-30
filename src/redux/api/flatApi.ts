@@ -48,8 +48,8 @@ export const flatApi = baseApi.injectEndpoints({
       }),
 
       deleteFlat: build.mutation({
-         query: (id) => ({
-            url: `/flat/soft/${id}`,
+         query: (flatId) => ({
+            url:`/flats/${flatId}`,
             method: 'DELETE',
          }),
          invalidatesTags: [tagTypes.flats],

@@ -1,17 +1,23 @@
 import { TFlatData } from "@/interfaces";
+import { useDeleteFlatMutation } from "@/redux/api/flatApi";
 import React from "react";
 
 const TableRow = ({
   flat,
-  deleteSingleFlat,
+
 }: {
   flat: TFlatData;
-  deleteSingleFlat: any;
+ 
 }) => {
   const { title, location, rent, description, images } = flat;
 
+const [deleteFlat]=useDeleteFlatMutation()
+
+
+
   const handleDeleteSingleFalt = () => {
-    deleteSingleFlat(flat?._id);
+ 
+    deleteFlat(flat?._id)
   };
 
   return (

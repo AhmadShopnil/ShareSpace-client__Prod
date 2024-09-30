@@ -4,34 +4,14 @@ import { TFlatData } from "@/interfaces";
 import React, { useState } from "react";
 import TableRow from "./TableRow";
 import MyListedCard from "./MyListedCard";
-import axios from "axios";
-import axiosInstance from "@/utils/axiosInstance";
+
 
 const MyPostedList = ({
   data,
-  setRefresh,
 }: {
   data: TFlatData[];
-  setRefresh: any;
 }) => {
-  // handle delete flat function
-  const deleteSingleFlat = async (flatId: string) => {
-    const DeleteConfirm = window.confirm("Are you sure want to delete ?");
-
-    if (DeleteConfirm) {
-      try {
-        const response = await axiosInstance.delete(`/flats/${flatId}`);
-
-        if (response.data.success) {
-          setRefresh(true);
-        }
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error(error);
-      }
-    }
-  };
-
+ 
   return (
     <div className="container mx-auto p-4">
       {/* Table for larger screens */}
@@ -54,7 +34,6 @@ const MyPostedList = ({
               <TableRow
                 key={index}
                 flat={flat}
-                deleteSingleFlat={deleteSingleFlat}
               ></TableRow>
             ))}
           </tbody>

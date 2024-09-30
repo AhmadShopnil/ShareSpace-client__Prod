@@ -9,33 +9,7 @@ import axiosInstance from "@/utils/axiosInstance";
 import { useEffect, useState } from "react";
 
 const MyList = () => {
-  // const [data, setData] = useState<TFlatData[]>([]);
-  // const [error, setError] = useState(null);
-  // const [isLoading, setIsLoading] = useState(false);
-  const [refresh, setRefresh] = useState(false);
-
   const {data,isLoading,error}=useGetMyAllFlatsQuery('')
-
-console.log(data?.flats)
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setIsLoading(true);
-  //     try {
-  //       const response = await axiosInstance.get("/flats/myPostedHouse");
-  //       // Log response data
-  //       setData(response?.data?.data);
-  //       setIsLoading(false);
-  //     } catch (error: any) {
-  //       setIsLoading(false);
-  //       // eslint-disable-next-line no-console
-  //       console.error("Error fetching data:", error);
-  //       setError(error.message); // Set error state
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [refresh]);
 
   if (error) {
     return <div>Error: <span>Something went wrong</span></div>; // Render error message if there's an error
@@ -47,7 +21,7 @@ console.log(data?.flats)
   return (
     <div className=" w-full">
       {data?.flats.length  > 0 ? (
-        <MyPostedList data={data?.flats  } setRefresh={setRefresh}></MyPostedList>
+        <MyPostedList data={data?.flats  }></MyPostedList>
       ) : (
         <div className="mx-auto w-3/4 md:w-1/3 p-4  mt-14 bg-teal-50">
           <h1 className="text-center">You Do not Post Any Flat/House </h1>
