@@ -51,7 +51,7 @@ const FilterFlat = ({
 
   return (
     <div className="p-4">
-      <PriceRange min={0} max={100000} onChange={handlePriceChange} />
+      <PriceRange min={0} max={40000} onChange={handlePriceChange} />
 
       <div className="my-8 md:my-12">
         <div className="mb-2 gap-3 grid sm:grid-cols-2 lg:grid-cols-3 justify-between">

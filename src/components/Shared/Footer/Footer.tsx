@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
               Find your ideal flat with ease. We provide the best listings to
               help you find the perfect home.
             </p>
-            <p>&copy; 2024 Flat Finder. All rights reserved.</p>
+            <p>&copy; 2024 Share Space. All rights reserved.</p>
           </div>
 
           {/* Quick Links Section */}
@@ -51,8 +51,8 @@ const Footer: React.FC = () => {
           {/* Contact Info Section */}
           <div>
             <h2 className="text-xl font-semibold mb-4">Contact Us</h2>
-            <p className="mb-2">123 Main Street, Downtown City</p>
-            <p className="mb-2">Email: info@flatfinder.com</p>
+            <p className="mb-2">Tangail, Dhaka, Bangladesh</p>
+            <p className="mb-2">Email: demo@gmail.com</p>
             <p className="mb-2">Phone: (123) 456-7890</p>
             <div className="mt-4">
               <Link href="#" className="text-teal-300 hover:text-teal-100 mr-4">
