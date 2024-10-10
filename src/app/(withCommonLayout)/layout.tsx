@@ -1,5 +1,6 @@
 "use client";
 import Footer from "@/components/Shared/Footer/Footer";
+import FooterMenuBar from "@/components/Shared/FooterMenuBar/FooterMenuBar";
 import Navbar from "@/components/Shared/Navbar/Navbar";
 import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
@@ -8,23 +9,23 @@ import { getFromLocalStorage } from "@/utils/localStorage";
 import React, { useEffect } from "react";
 
 const CommmonLayout = ({ children }: { children: React.ReactNode }) => {
-
-  const dispatch=useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const token = getFromLocalStorage("accessToken");
-  const user=getUserInfo()
+  const user = getUserInfo();
 
-  useEffect(()=>{
-    dispatch(setUser({user,token}))
-  })
-
-  
+  useEffect(() => {
+    dispatch(setUser({ user, token }));
+  });
 
   return (
-    <div className="px-2 md:px-6 lg:px-20 mx-auto max-w-screen-2xl flex flex-col min-h-screen">
+    <div className=" mx-auto max-w-screen-2xl flex flex-col min-h-screen  px-2 sm:px-6 md:px-10">
       <Navbar />
-      <div className="flex-grow">{children}</div>
+      <div className="flex-grow ">{children}</div>
       <Footer />
+      <div className="lg:hidden  ">
+        <FooterMenuBar></FooterMenuBar>
+      </div>
     </div>
   );
 };

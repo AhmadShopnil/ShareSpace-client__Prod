@@ -1,55 +1,64 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import { isLoggedIn, removeUser } from "@/services/authServices";
-import { useRouter } from 'next/navigation';
+import { removeUser } from "@/services/authServices";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logout, selectCurrentUser } from "@/redux/slices/authSlice";
+import { usePathname } from "next/navigation";
 const Navbar = () => {
-const dispatch=useAppDispatch()
+  const pathname = usePathname();
+  const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const user = useAppSelector(selectCurrentUser);
- 
+
   // const role = user?.role;
 
   const handleLogOut = () => {
     removeUser();
     dispatch(logout());
-   
   };
 
   return (
     <nav className="bg-white mb-4 sticky top-0 z-10 ">
-      <div className="container mx-auto px-4">
+      <div>
         <div className="flex justify-between items-center py-4">
           {/* logo section */}
-          <div className="text-2xl font-bold">
+          <div className="text-2xl sm:text-3xl font-bold">
             <Link href="/">
               Share
               <span className=" text-teal-500">Space</span>
             </Link>
           </div>
 
-    {/* for big screen */}
+          {/* for big screen */}
 
           {/* menuItem section */}
-          <div className="hidden md:flex space-x-4 justify-center w-full">
-            <Link href="/" className="text-gray-600 hover:text-teal-600">
+          <div className="hidden lg:flex space-x-6 lg:space-x-10 justify-center w-full text-md lg:text-lg">
+            <Link
+              href="/"
+              className={`text-gray-600 hover:text-teal-600 ${
+                pathname === "/" ? "text-teal-600" : "text-gray-500"
+              }`}
+            >
               Home
             </Link>
             <Link
               href="/allFlatList"
-              className="text-gray-600 hover:text-teal-600"
+              className={`text-gray-600 hover:text-teal-600 ${
+                pathname === "/allFlatList" ? "text-teal-600" : "text-gray-500"
+              }`}
             >
               Listed Home
             </Link>
             {user && (
               <Link
                 href="/myList"
-                className="text-gray-600 hover:text-teal-600"
+                className={`text-gray-600 hover:text-teal-600 ${
+                  pathname === "/myList" ? "text-teal-600" : "text-gray-500"
+                }`}
               >
                 My Posted Home
               </Link>
@@ -57,12 +66,14 @@ const dispatch=useAppDispatch()
 
             <Link
               href="/contactUs"
-              className="text-gray-600 hover:text-teal-600"
+              className={`text-gray-600 hover:text-teal-600 ${
+                pathname === "/contactUs" ? "text-teal-600" : "text-gray-500"
+              }`}
             >
               Contact Us
             </Link>
           </div>
-        
+
           <div className="hidden   md:block">
             {!user ? (
               <div className="flex gap-2">
@@ -97,7 +108,7 @@ const dispatch=useAppDispatch()
             )}
           </div>
 
-        {/* for mobile */}
+          {/* for mobile */}
           <div className="md:hidden">
             <button onClick={() => setIsOpen(!isOpen)}>
               <FontAwesomeIcon
@@ -167,7 +178,6 @@ const dispatch=useAppDispatch()
             </div>
           </div>
         )}
-
       </div>
     </nav>
   );

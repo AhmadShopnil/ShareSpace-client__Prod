@@ -42,6 +42,13 @@ const MyPostedList = ({
 
       {/* Cards for smaller screens */}
       <div className="sm:hidden space-y-4">
+
+{/* <div>
+<h1>All My Posted Home :</h1>
+
+</div> */}
+
+
         {data?.map((flat, index) => (
           <MyListedCard key={index} flat={flat}></MyListedCard>
         ))}
