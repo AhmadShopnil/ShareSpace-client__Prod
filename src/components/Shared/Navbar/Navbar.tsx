@@ -6,20 +6,19 @@ import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { isLoggedIn, removeUser } from "@/services/authServices";
 import { useRouter } from 'next/navigation';
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { logout, selectCurrentUser } from "@/redux/slices/authSlice";
 const Navbar = () => {
-  const router = useRouter();
+const dispatch=useAppDispatch()
   const [isOpen, setIsOpen] = useState(false);
-  const [isUserLogged, setIsUserLoggedIn] = useState(false);
-  // const loggedInUser = getUserInfo() as TTokenData;
-  useEffect(() => {
-    setIsUserLoggedIn(isLoggedIn() as boolean);
-  }, []);
+  const user = useAppSelector(selectCurrentUser);
+ 
+  // const role = user?.role;
 
   const handleLogOut = () => {
     removeUser();
-    setIsUserLoggedIn(false);
-    router.refresh();
-    
+    dispatch(logout());
+   
   };
 
   return (
@@ -33,6 +32,9 @@ const Navbar = () => {
               <span className=" text-teal-500">Space</span>
             </Link>
           </div>
+
+    {/* for big screen */}
+
           {/* menuItem section */}
           <div className="hidden md:flex space-x-4 justify-center w-full">
             <Link href="/" className="text-gray-600 hover:text-teal-600">
@@ -44,7 +46,7 @@ const Navbar = () => {
             >
               Listed Home
             </Link>
-            {isUserLogged && (
+            {user && (
               <Link
                 href="/myList"
                 className="text-gray-600 hover:text-teal-600"
@@ -60,9 +62,9 @@ const Navbar = () => {
               Contact Us
             </Link>
           </div>
-          {/* for big screen */}
+        
           <div className="hidden   md:block">
-            {!isUserLogged ? (
+            {!user ? (
               <div className="flex gap-2">
                 <Link
                   href="/login"
@@ -111,7 +113,7 @@ const Navbar = () => {
           <div className="md:hidden py-6 px-4 bg-teal-50 shadow-lg ">
             <div className="flex flex-col gap-4">
               {/* Auth Buttons */}
-              {!isUserLogged ? (
+              {!user ? (
                 <div className="flex gap-2 justify-between">
                   <Link
                     href="/login"
@@ -148,7 +150,7 @@ const Navbar = () => {
               >
                 Listed Home
               </Link>
-              {isUserLogged && (
+              {user && (
                 <Link
                   href="/myList"
                   className="block text-gray-600 text-base hover:text-teal-600 transition"

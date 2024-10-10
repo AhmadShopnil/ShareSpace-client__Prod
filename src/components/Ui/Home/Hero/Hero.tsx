@@ -1,5 +1,5 @@
 import React from "react";
-import FindHomeSvg from "../../../../assets/findHome-1.svg"; // Adjust the path based on your project structure
+
 import Image from "next/image";
 import findHome from "../../../../../public/findHome-1.svg";
 import Link from "next/link";
@@ -35,6 +35,7 @@ const Hero = () => {
         </div>
         <div className="w-full lg:w-1/2 mt-6 lg:mt-0 flex justify-center">
           <Image
+           priority
             src={findHome}
             alt="Flat sharing illustration"
             width={400} // Adjust width as needed

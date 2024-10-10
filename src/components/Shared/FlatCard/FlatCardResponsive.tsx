@@ -35,6 +35,7 @@ const FlatCardResponsive = ({ flat }: { flat: TFlat }) => {
             src={images[0]}
             alt={title}
             fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="rounded-lg object-cover"
           />
         ) : (

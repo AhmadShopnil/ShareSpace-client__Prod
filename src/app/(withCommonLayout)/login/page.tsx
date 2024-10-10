@@ -1,5 +1,8 @@
 "use client";
+import { useAppDispatch } from "@/redux/hooks";
+import { setUser } from "@/redux/slices/authSlice";
 import { saveUserInfo } from "@/services/authServices";
+import { decodedToken } from "@/utils/jwt";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -12,6 +15,7 @@ interface IFormInput {
 }
 
 const LoginPage = () => {
+  const dispatch=useAppDispatch()
   const router = useRouter();
   const [error, setError] = useState("");
   const [isError, setIsError] = useState(false);
@@ -36,7 +40,14 @@ const LoginPage = () => {
         saveUserInfo({ accessToken });
         setIsError(false);
         setIsLoading(false);
+        
+        const user = decodedToken(accessToken);
+
+        dispatch(setUser({user,token:accessToken}))
+
         router.push("/");
+        
+
       }
     } catch (error: any) {
       setError(error?.response?.data?.message);
