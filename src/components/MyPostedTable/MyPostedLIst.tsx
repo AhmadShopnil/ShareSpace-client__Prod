@@ -16,15 +16,15 @@ const MyPostedList = ({
     <div className="container mx-auto p-4">
       {/* Table for larger screens */}
       <div className="hidden sm:block overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-200">
+        <table className="m-auto bg-white border border-gray-200">
           <thead className="bg-teal-50">
             <tr>
-              <th className="w-1/4 px-4 py-2 text-left text-gray-600">Title</th>
-              <th className="w-1/4 px-4 py-2 text-left text-gray-600">Rent</th>
-              <th className="w-1/4 px-4 py-2 text-left text-gray-600">
+              <th className="w-1/4 px-5 py-2 text-left text-gray-600">Title</th>
+              <th className="w-1/4 px-5 py-2 text-left text-gray-600">Rent</th>
+              <th className="w-1/4 px-5 py-2 text-left text-gray-600">
                 Location
               </th>
-              <th className="w-1/4 px-4 py-2 text-left text-gray-600">
+              <th className="w-1/4 px-5 py-2  text-gray-600">
                 Action
               </th>
             </tr>
