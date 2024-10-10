@@ -11,20 +11,19 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import SkeletonPostFlat from "@/components/Loading/SkeletonPostFlat";
 import ErrorComponent from "@/components/Shared/Error/ErrorComponent";
 import { useCreateFlatMutation } from "@/redux/api/flatApi";
+import { decodedToken } from "@/utils/jwt";
+import { useAppDispatch } from "@/redux/hooks";
+import { setUser } from "@/redux/slices/authSlice";
 
 const PostFlat = () => {
+  const dispatch=useAppDispatch()
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [images, setImages] = useState<File[]>([]);
   const [urls, setUrls] = useState<string[]>([]);
   const [isLodaing, setIsloading] = useState(false);
   const [error, setError] = useState();
-
-
-
-const [createFlat]=useCreateFlatMutation()
-
-
+  const [createFlat]=useCreateFlatMutation()
 
   // get user info from localStorage by accessToekn
   const loggedInUserData = getUserInfo() as TTokenData;
@@ -86,24 +85,20 @@ const [createFlat]=useCreateFlatMutation()
         password: data?.password,
       };
 
-
-
       const response = await createFlat(
         {
           flatData,
           userData,
         }
       );
-
-    
-
       setIsloading(false);
       const accessToken = response?.data?.accessToken;
-
-
-
       if (accessToken) {
         saveUserInfo({ accessToken });
+        
+        const user = decodedToken(accessToken);
+
+        dispatch(setUser({user,token:accessToken}))
         router.push("/myList");
       }
     } catch (error: any) {

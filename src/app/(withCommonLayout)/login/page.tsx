@@ -39,12 +39,9 @@ const LoginPage = () => {
       if (accessToken) {
         saveUserInfo({ accessToken });
         setIsError(false);
-        setIsLoading(false);
-        
+        setIsLoading(false); 
         const user = decodedToken(accessToken);
-
         dispatch(setUser({user,token:accessToken}))
-
         router.push("/");
         
 

@@ -2,17 +2,17 @@ import {  configureStore } from "@reduxjs/toolkit";
 import { rootReducer } from "./rootReducer";
 import { baseApi } from "./api/baseApi";
 import { persistStore, persistReducer } from "redux-persist";
-// import storage from "redux-persist/lib/storage"; 
+import storage from "redux-persist/lib/storage"; 
 
 
 
-// Configuration for persisting the auth state in localStorage
+// // Configuration for persisting the auth state in localStorage
 // const persistConfig = {
 //   key: "auth",
 //   storage,
 //   whitelist: ["auth"], 
 // };
-// Wrap  rootReducer with persistReducer
+// // Wrap  rootReducer with persistReducer
 // const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 

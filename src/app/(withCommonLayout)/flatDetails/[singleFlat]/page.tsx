@@ -53,7 +53,7 @@ const SingleFlat = async ({ params }: { params: any }) => {
         <h1 className="text-4xl font-bold mb-4 text-center">{title}</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className=" p-4 sm:p-6 bg-white rounded-lg border border-gray-300">
-            <h2 className="text-2xl font-semibold mb-4">Details</h2>
+            <h2 className="text-2xl font-semibold mb-4">Flat Info</h2>
             <p className="text-gray-700 mb-2">
               <strong>Category:</strong> {category}
             </p>
@@ -83,7 +83,9 @@ const SingleFlat = async ({ params }: { params: any }) => {
               </span>
               <span className="text-gray-600 ">{advanceAmount}</span>
             </p>
-            <p className="text-gray-700 mb-4">{description}</p>
+            {/* <p className="text-gray-700 mb-4">{description}</p> */}
+
+     
             {/* <PrimaryButton
               action={() => {}}
               title={"Apply For Rent"}
@@ -106,6 +108,15 @@ const SingleFlat = async ({ params }: { params: any }) => {
           </div>
         </div>
       </section>
+
+  <div className=" p-4 sm:p-6 bg-white rounded-lg border border-gray-300 mb-4">
+    
+  <h2  className="text-2xl font-semibold mb-4">Description-</h2>
+   <pre className="whitespace-pre-wrap">
+  {description}
+  </pre>
+  </div>
+
 
       {/* Static Content Section */}
       <section className=" p-6 bg-teal-50 rounded-lg border border-gray-300">
