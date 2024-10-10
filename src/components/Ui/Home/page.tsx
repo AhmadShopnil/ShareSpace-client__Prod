@@ -1,7 +1,7 @@
 import React from "react";
 import Hero from "./Hero/Hero";
-import FlatList from "./FlatList/FlatList";
-import FlatListSSR from "./FlatList/FlatListSSR";
+import FlatList from "./FeaturedFlatList/FlatList";
+import FlatListSSR from "./FeaturedFlatList/FlatListSSR";
 
 const HomePage = () => {
   return (

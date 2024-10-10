@@ -30,7 +30,7 @@ const UserCard: React.FC<UserCardProps> = ({ userData, setIsLoggedIn }) => {
           onClick={handleRemoveUser}
           className="bg-teal-500 text-white text-xs sm:text-sm px-4 py-2 rounded mr-4"
         >
-          Post From Different User
+         Change Owner Info
         </button>
       </div>
     </div>

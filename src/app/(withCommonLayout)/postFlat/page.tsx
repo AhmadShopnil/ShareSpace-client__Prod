@@ -109,7 +109,10 @@ const PostFlat = () => {
     }
   };
 
+
+  // display userINfo Section conditionally
   let userSection;
+
   if (isLoggedIn) {
     const userData = {
       name: loggedInUserData?.name,
