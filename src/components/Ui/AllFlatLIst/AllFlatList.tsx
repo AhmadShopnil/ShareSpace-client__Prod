@@ -12,11 +12,7 @@ import { useGetAllFlatsQuery } from "@/redux/api/flatApi";
 const AllFlatList = ({ queryString }: { queryString: any }) => {
  
   const {data,isLoading,error}=useGetAllFlatsQuery(queryString)
-  //  const {flats,meta}=data?.flats
- 
-
-
-
+  
   if (isLoading) {
     return <SkeletonResFlatList></SkeletonResFlatList>;
   }

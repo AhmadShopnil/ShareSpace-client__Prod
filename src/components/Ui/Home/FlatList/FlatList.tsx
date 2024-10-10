@@ -1,26 +1,15 @@
 "use client";
-
-import SkeletonFlatList from "@/components/Loading/SkeletonFlaList";
 import SkeletonResFlatList from "@/components/Loading/SkeletonResFlatList";
-import SkeletonTable from "@/components/Loading/SkeletonTable";
-import FlatCard, { TFlat } from "@/components/Shared/FlatCard/FlatCard";
+
 import FlatCardResponsive from "@/components/Shared/FlatCard/FlatCardResponsive";
 import NotFoundData from "@/components/Shared/NotFoundData/NotFoundData";
-
-import { TFlatData, TMeta } from "@/interfaces";
+import { TFlat } from "@/interfaces/flat";
 import { useGetAllFlatsQuery } from "@/redux/api/flatApi";
-import axiosInstance from "@/utils/axiosInstance";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+
 
 const FlatList = () => {
- 
 
 const {data,isLoading,error}=useGetAllFlatsQuery('')
-
-
-
-
 
   if (error) {
  
