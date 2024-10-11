@@ -20,7 +20,7 @@ const WorkSpaceList = ({ queryString }: { queryString: any }) => {
 
   return (
     <div className="mt-2">
-      <h1 className="mb-2 text-md">
+      <h1 className="mb-2 text-lg">
         For Office, Total: {data?.workSpaces?.meta?.total}
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-around">
