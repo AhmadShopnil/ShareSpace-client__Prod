@@ -14,7 +14,7 @@ const FilterMainCategory = ({
       {/* Categories */}
       <div className="mb-3  ">
         <h2 className="text-xl mb-4 text-center">What You Need</h2>
-        <div className="flex gap-2 text-xm md:text-md space-x-2">
+        <div className="flex gap-2 text-xs md:text-md space-x-2">
           {categories.map((cat) => (
             <button
               key={cat}
