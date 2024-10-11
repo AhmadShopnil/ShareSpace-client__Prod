@@ -47,19 +47,27 @@ const FilterFlat = ({
     query.maxRent = maxRent;
 
     setQueries(query);
-  }, [beds, baths, category, debouncedSearchTerm, minRent, maxRent, setQueries]);
+  }, [
+    beds,
+    baths,
+    category,
+    debouncedSearchTerm,
+    minRent,
+    maxRent,
+    setQueries,
+  ]);
 
   return (
     <div className="p-4">
       <PriceRange min={0} max={40000} onChange={handlePriceChange} />
 
-      <div className="my-8 md:my-12">
+      <div className="my-8">
         <div className="mb-2 gap-3 grid sm:grid-cols-2 lg:grid-cols-3 justify-between">
           {/* Beds */}
           <div className="mb-3">
             <h3 className="text-lg mb-1">Beds</h3>
             <div className="flex text-xs md:text-sm space-x-2">
-              {["Any", "1", "2", "3", "4", "5", "6", "7", "8+"].map((item) => (
+              {["Any", "1", "2", "3", "4", "5", "6", "7", "8"].map((item) => (
                 <button
                   key={item}
                   onClick={() => setBeds(item)}
@@ -77,7 +85,7 @@ const FilterFlat = ({
           <div className="mb-3">
             <h3 className="text-lg mb-1">Bathrooms</h3>
             <div className="flex text-xs md:text-sm space-x-2">
-              {["Any", "1", "2", "3", "4", "5", "6", "7", "8+"].map((item) => (
+              {["Any", "1", "2", "3", "4", "5", "6", "7", "8"].map((item) => (
                 <button
                   key={item}
                   onClick={() => setBaths(item)}
@@ -93,7 +101,7 @@ const FilterFlat = ({
 
           {/* Categories */}
           <div className="mb-3">
-            <h2 className="text-lg mb-1">Categories</h2>
+            <h2 className="text-lg mb-1">Type</h2>
             <div className="flex text-xs md:text-sm space-x-2">
               {categories.map((cat) => (
                 <button

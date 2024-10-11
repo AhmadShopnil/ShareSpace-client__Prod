@@ -6,10 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PrimaryButton from "@/components/Buttons/PrimaryButton";
 import ImageSlider from "@/components/Ui/FlatDetails/Slider/ImageSlider";
 
-const SingleFlat = async ({ params }: { params: any }) => {
-  const flatId = params.singleFlat;
-  // const url = `http://localhost:5000/api/flats/${flatId}`;
-  const url = `https://server-flate-share.vercel.app/api/flats/${flatId}`;
+const SingleWorkSpace = async ({ params }: { params: any }) => {
+  const workSpaceId = params.singleWorkSpace;
+  // const url = `http://localhost:5000/api/workSpaces/${workSpaceId}`;
+  const url = `https://server-flate-share.vercel.app/api/workSpaces/${workSpaceId}`;
   const res = await fetch(url);
   const { data } = await res.json();
   const {
@@ -36,7 +36,7 @@ const SingleFlat = async ({ params }: { params: any }) => {
         ) : (
           <div
             className=" text-gray-500 h-[100px] md:h-64 gap-2
-           bg-gray-50 flex items-center justify-center  "
+             bg-gray-50 flex items-center justify-center  "
           >
             <p className="text-md sm:text-md md:text-xl text-center">
               {" "}
@@ -101,14 +101,14 @@ const SingleFlat = async ({ params }: { params: any }) => {
       </section>
 
       {/* <div className=" p-4 sm:p-6 bg-white rounded-lg border border-gray-300 mb-6">
-      <h2 className="text-2xl font-semibold mb-4">Description</h2>
-     
-      <pre className="whitespace-pre-wrap">
-    {description}
-     </pre>
+        <h2 className="text-2xl font-semibold mb-4">Description</h2>
+       
+        <pre className="whitespace-pre-wrap">
+      {description}
+       </pre>
 
-      <p className="whitespace-pre-line">{description}</p>
-    </div> */}
+        <p className="whitespace-pre-line">{description}</p>
+      </div> */}
 
       {/* Static Content Section */}
       <section className=" p-6 bg-teal-50 rounded-lg border border-gray-300">
@@ -119,4 +119,4 @@ const SingleFlat = async ({ params }: { params: any }) => {
   );
 };
 
-export default SingleFlat;
+export default SingleWorkSpace;

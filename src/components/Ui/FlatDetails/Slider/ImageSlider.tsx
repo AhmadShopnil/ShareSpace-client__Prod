@@ -21,7 +21,7 @@ interface ImageSliderProps {
 }
 
 const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
-  const [thumbsSwiper, setThumbsSwiper] = React.useState<any>(null);
+  // const [thumbsSwiper, setThumbsSwiper] = React.useState<any>(null);
 
   return (
     <>
@@ -41,8 +41,8 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
               src={image}
               alt={`Slide ${index + 1}`}
               width={800}
-              height={600}
-              className="w-full h-auto"
+              height={1000}
+              className="w-full h-full"
             />
           </SwiperSlide>
         ))}

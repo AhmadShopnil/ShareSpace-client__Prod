@@ -18,7 +18,7 @@ export type TFlat = {
   images?: string[];
 };
 
-const FlatCardResponsive = ({ flat }: { flat: TFlat }) => {
+const FlatCardResponsive = ({ flat, path }: { flat: TFlat; path: string }) => {
   const { title, location, rent, _id, images } = flat;
 
   return (
@@ -26,7 +26,7 @@ const FlatCardResponsive = ({ flat }: { flat: TFlat }) => {
       className="rounded-lg p-3 md:p-4 overflow-hidden shadow-lg border
      border-teal-100 hover:border-teal-300
       flex flex-row sm:flex-col gap-6 "
-      href={`/flatDetails/${_id}`}
+      href={`/${path}/${_id}`}
     >
       {/* Image section start */}
       <div className="bg-gray-200 h-24 sm:h-36 w-24 sm:w-full sm:mr-4 rounded-lg overflow-hidden relative flex-shrink-0">
@@ -35,7 +35,7 @@ const FlatCardResponsive = ({ flat }: { flat: TFlat }) => {
             src={images[0]}
             alt={title}
             fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="rounded-lg object-cover"
           />
         ) : (
