@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import TableRow from "./TableRow";
 import MyListedCard from "./MyListedCard";
 
-const MyPostedList = ({ data }: { data: TFlatData[] }) => {
+const MyPostedWorkSpace = ({ data }: { data: TFlatData[] }) => {
   return (
     <div className="container mx-auto p-4">
       {/* Table for larger screens */}
@@ -44,4 +44,4 @@ const MyPostedList = ({ data }: { data: TFlatData[] }) => {
   );
 };
 
-export default MyPostedList;
+export default MyPostedWorkSpace;

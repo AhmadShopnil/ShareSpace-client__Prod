@@ -1,5 +1,4 @@
 "use client";
-
 import FilterFlat from "@/components/Shared/FilterFlat/FilterFlat";
 import FilterMainCategory from "@/components/Shared/FilterMainCategory/FilterMainCategory";
 import AllFlatList from "@/components/Ui/AllFlatLIst/AllFlatList";
@@ -13,17 +12,6 @@ const AllFlatListPage = () => {
 
   let listContent;
 
-  if (listCategory === "Flat") {
-    listContent = (
-      <>
-        <AllFlatList queryString={queryString}></AllFlatList>;
-      </>
-    );
-  }
-  if (listCategory === "WorkSpace") {
-    listContent = <WorkSpaceList queryString={queryString}></WorkSpaceList>;
-    // listContent = <h1>Workspace list..</h1>;
-  }
   if (listCategory === "All") {
     listContent = (
       <div className="flex flex-col gap-10">
@@ -32,7 +20,20 @@ const AllFlatListPage = () => {
       </div>
     );
   }
+
+  if (listCategory === "Flat") {
+    listContent = (
+      <>
+        <AllFlatList queryString={queryString}></AllFlatList>;
+      </>
+    );
+  }
   if (listCategory === "OfficeSpace") {
+    listContent = <WorkSpaceList queryString={queryString}></WorkSpaceList>;
+    // listContent = <h1>Workspace list..</h1>;
+  }
+
+  if (listCategory === "ShopSpace") {
     listContent = (
       <div className="flex flex-col gap-10">
         <h1 className="text-center">Cooming Soon..</h1>
