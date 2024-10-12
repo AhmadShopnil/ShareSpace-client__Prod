@@ -18,7 +18,7 @@ const ShareSpaceButton = () => {
     <div className="">
       <button
         onClick={openModal}
-        className="text-xs sm:text-lg px-3 py-2 sm:px-4  bg-teal-500 text-white  rounded "
+        className="text-xs sm:text-base px-3 py-2 sm:px-4  bg-teal-500 text-white  rounded "
         // className="bg-teal-500 text-white py-2 px-4 rounded hover:bg-teal-600"
       >
         Post For Rent

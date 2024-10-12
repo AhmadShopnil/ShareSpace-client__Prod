@@ -36,7 +36,12 @@ const Navbar = () => {
           {/* for big screen */}
 
           {/* menuItem section */}
-          <div className="hidden lg:flex space-x-6 lg:space-x-10 justify-center w-full text-md lg:text-lg">
+          <div
+            className="hidden lg:flex
+           space-x-6 lg:space-x-10
+            justify-center
+            w-full text-md lg:text-base"
+          >
             <Link
               href="/"
               className={`text-gray-600 hover:text-teal-600 ${
