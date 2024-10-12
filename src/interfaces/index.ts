@@ -12,6 +12,18 @@ export interface TFlatData {
   category: string;
 }
 
+export type TWorkSpace = {
+  title: string;
+  location: string;
+  description: string;
+  rent: number;
+  advanceAmount: number;
+  isDeleted?: boolean;
+  postStatus?: "approved" | "rejected" | "pending";
+  category: string;
+  images?: string[] | null;
+};
+
 export interface TUserData {
   name: string;
   phone: string;

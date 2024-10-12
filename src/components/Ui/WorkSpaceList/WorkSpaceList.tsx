@@ -5,7 +5,7 @@ import FlatCardResponsive from "@/components/Shared/FlatCard/FlatCardResponsive"
 import SkeletonResFlatList from "@/components/Loading/SkeletonResFlatList";
 import NotFoundData from "@/components/Shared/NotFoundData/NotFoundData";
 
-import { useGetAllWorkSpacesQuery } from "@/redux/api/worlSpaceApi";
+import { useGetAllWorkSpacesQuery } from "@/redux/api/workSpaceApi";
 
 const WorkSpaceList = ({ queryString }: { queryString: any }) => {
   const { data, isLoading } = useGetAllWorkSpacesQuery(queryString);
