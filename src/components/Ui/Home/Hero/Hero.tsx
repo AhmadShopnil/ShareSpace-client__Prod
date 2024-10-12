@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import findHome from "../../../../../public/findHome-1.svg";
 import Link from "next/link";
+import ShareSpaceButton from "@/components/Modal/ShareSpaceModal/ShareSpaceButton";
 
 // #3B82F6
 
@@ -18,18 +19,14 @@ const Hero = () => {
             Find the perfect home or the ideal flat in your area. Connect with
             others and create the living arrangement you’ve always wanted.
           </p>
-          <div>
-            <Link
-              href={`/postFlat`}
-              className="text-xs sm:text-lg px-4 py-2 sm:px-6  bg-teal-500 text-white  rounded mr-4"
-            >
-              Post a Home
-            </Link>
+
+          <div className="flex gap-4 md:gap-8">
+            <ShareSpaceButton></ShareSpaceButton>
             <Link
               href={`/allFlatList`}
               className="text-xs sm:text-lg px-4 py-2 sm:px-6  bg-teal-100 text-teal-500  rounded"
             >
-              Find a Home
+              Find for Rent
             </Link>
           </div>
         </div>

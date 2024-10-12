@@ -22,7 +22,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white mb-4 sticky top-0 z-10 ">
+    <nav className="bg-white mb-4 lg:sticky top-0  lg:z-10  ">
       <div>
         <div className="flex justify-between items-center py-4">
           {/* logo section */}
@@ -51,7 +51,7 @@ const Navbar = () => {
                 pathname === "/allFlatList" ? "text-teal-600" : "text-gray-500"
               }`}
             >
-              Listed Home
+              Listed Sapces
             </Link>
             {user && (
               <Link

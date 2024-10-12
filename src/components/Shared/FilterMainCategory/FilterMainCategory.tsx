@@ -7,7 +7,7 @@ const FilterMainCategory = ({
   listCategory: string;
   setListCategory: Dispatch<SetStateAction<string>>;
 }) => {
-  const categories = ["All", "Flat", "WorkSpace", "OfficeSpace"];
+  const categories = ["All", "Flat", "Office/Work Space", "Shop Space"];
 
   return (
     <div className="flex justify-center">

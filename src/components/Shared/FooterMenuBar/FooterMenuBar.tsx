@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
@@ -12,8 +11,20 @@ import {
 import { usePathname } from "next/navigation";
 import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentUser } from "@/redux/slices/authSlice";
+import { useState } from "react";
+import ShareSpaceModal from "@/components/Modal/ShareSpaceModal/ShareSpaceModal";
 
 const FooterMenuBar = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   const user = useAppSelector(selectCurrentUser);
 
   const pathname = usePathname();
@@ -25,7 +36,7 @@ const FooterMenuBar = () => {
         <Link href="/" className="flex-1 text-center">
           <FontAwesomeIcon
             icon={faHome}
-            className={`text-xl  mx-auto ${
+            className={`text-lg  mx-auto ${
               pathname === "/" ? "text-teal-600" : "text-gray-500"
             }`}
           />
@@ -35,29 +46,40 @@ const FooterMenuBar = () => {
         <Link href="/allFlatList" className="flex-1 text-center">
           <FontAwesomeIcon
             icon={faMagnifyingGlass}
-            className={`text-xl mx-auto ${
+            className={`text-lg mx-auto ${
               pathname === "/allFlatList" ? "text-teal-600" : "text-gray-500"
             }`}
           />
-          <span className="block text-xs mt-1">Find Home</span>
+          <span className="block text-xs mt-1">Find</span>
         </Link>
 
         {/* Add New Flat/Home */}
-        <Link href="/postFlat" className="flex-1 text-center">
+
+        <button onClick={openModal} className="flex-1 text-center">
           <FontAwesomeIcon
             icon={faPlus}
-            className={`text-xl mx-auto ${
+            className={`text-lg mx-auto ${
               pathname === "/postFlat" ? "text-teal-600" : "text-gray-500"
             }`}
           />
           <span className="block text-xs mt-1">Share Flat</span>
-        </Link>
+        </button>
+
+        {/* <Link href="/postFlat" className="flex-1 text-center">
+          <FontAwesomeIcon
+            icon={faPlus}
+            className={`text-lg mx-auto ${
+              pathname === "/postFlat" ? "text-teal-600" : "text-gray-500"
+            }`}
+          />
+          <span className="block text-xs mt-1">Share Flat</span>
+        </Link> */}
 
         {user && (
           <Link href="/myList" className="flex-1 text-center">
             <FontAwesomeIcon
               icon={faList}
-              className={`text-xl mx-auto ${
+              className={`text-lg mx-auto ${
                 pathname === "/myList" ? "text-teal-600" : "text-gray-500"
               }`}
             />
@@ -76,6 +98,9 @@ const FooterMenuBar = () => {
         <span className="block text-xs mt-1">Contact Us</span>
       </Link> */}
       </div>
+
+      {/* Share Space Modal */}
+      <ShareSpaceModal isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
 };

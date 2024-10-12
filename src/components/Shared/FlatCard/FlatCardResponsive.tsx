@@ -36,7 +36,7 @@ const FlatCardResponsive = ({ flat, path }: { flat: TFlat; path: string }) => {
             alt={title}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="rounded-lg object-cover"
+            className="rounded-lg object-cover "
           />
         ) : (
           <div className="h-full flex items-center justify-center text-gray-500">
