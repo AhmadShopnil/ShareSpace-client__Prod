@@ -1,27 +1,23 @@
+"use client";
+
 import { TFlatData } from "@/interfaces";
-import { useDeleteFlatMutation } from "@/redux/api/flatApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faEdit,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const TableRow = ({
   flat,
-
+  openModal,
+  setSelectedId,
 }: {
   flat: TFlatData;
- 
+  openModal: any;
+  setSelectedId: any;
 }) => {
-  const { title, location, rent, description, images } = flat;
-
-const [deleteFlat]=useDeleteFlatMutation()
-
-
+  const { title, location, rent, _id } = flat;
 
   const handleDeleteSingleFalt = () => {
- 
-    deleteFlat(flat?._id)
+    setSelectedId(_id);
+    openModal();
   };
 
   return (
@@ -30,12 +26,14 @@ const [deleteFlat]=useDeleteFlatMutation()
       <td className="px-6 py-2">{rent}</td>
       <td className="px-6 py-2">{location}</td>
       <td className="px-6 py-2 flex  justify-center gap-4">
-        <button className="text-blue-500 hover:underline"><FontAwesomeIcon icon={faEdit} /></button>
+        <button className="text-blue-500 hover:underline">
+          <FontAwesomeIcon icon={faEdit} />
+        </button>
         <button
           onClick={handleDeleteSingleFalt}
           className="ml-2 text-red-500 hover:underline"
         >
-        <FontAwesomeIcon icon={faTrash} />
+          <FontAwesomeIcon icon={faTrash} />
         </button>
       </td>
     </tr>

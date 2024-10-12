@@ -2,7 +2,7 @@ import { TFlat } from "@/components/Shared/FlatCard/FlatCard";
 import FlatCardResponsive from "@/components/Shared/FlatCard/FlatCardResponsive";
 import React, { useState } from "react";
 
-const FlatListSSR = async () => {
+const FeaturedFlatListSSR = async () => {
   let flats: TFlat[];
 
   try {
@@ -32,12 +32,17 @@ const FlatListSSR = async () => {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-around">
-      {flats?.slice(0, 7).map((flat: TFlat, index: number) => (
-        <FlatCardResponsive key={index} flat={flat} path={"flatDetails"} />
-      ))}
+    <div>
+      <h3 className="text-sm sm:text-lg  md:text-xl mb-4">
+        Best Home For You-
+      </h3>
+      <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-around">
+        {flats?.slice(0, 7).map((flat: TFlat, index: number) => (
+          <FlatCardResponsive key={index} space={flat} path={"flatDetails"} />
+        ))}
+      </div>
     </div>
   );
 };
 
-export default FlatListSSR;
+export default FeaturedFlatListSSR;

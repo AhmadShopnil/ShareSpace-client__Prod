@@ -1,34 +1,24 @@
 "use client";
 
 import SkeletonTable from "@/components/Loading/SkeletonTable";
-import MyPostedList from "@/components/MyPostedTable/MyPostedLIst";
+import MyPostedList from "@/components/MyPostedTable/MyPostedHomeList/MyPostedHome";
+import MyPostedWorkSpace from "@/components/MyPostedTable/MyPostedWorkSpace/MyPostedWorkSpace";
 
 import { useGetMyAllFlatsQuery } from "@/redux/api/flatApi";
-import { useGetAllWorkSpacesQuery } from "@/redux/api/shopSpaceApi";
 
-import { useState, useEffect } from "react";
+import { useGetMyAllWorkSpacesQuery } from "@/redux/api/workSpaceApi";
 
 const MyList = () => {
-  // const [myAllPostedList, setMyAllPostedList] = useState([{}]);
-
   const {
-    data: FlatData,
+    data: flatData,
     isLoading: isLoadingFlats,
     error: errorFlats,
   } = useGetMyAllFlatsQuery("");
   const {
-    data: WorkSpaceData,
+    data: workSpaceData,
     isLoading: isLoadingWorkSpaces,
     error: errorWorkSpaces,
-  } = useGetAllWorkSpacesQuery("");
-
-  // useEffect(() => {
-  //   if (FlatData?.flats && WorkSpaceData?.workSpaces) {
-  //     // Combine flats and workspaces data
-  //     const combinedData = [...FlatData.flats, ...WorkSpaceData.workSpaces];
-  //     setMyAllPostedList(combinedData);
-  //   }
-  // }, [FlatData, WorkSpaceData]);
+  } = useGetMyAllWorkSpacesQuery("");
 
   if (errorFlats || errorWorkSpaces) {
     return (
@@ -37,15 +27,28 @@ const MyList = () => {
       </div>
     ); // Render error message if there's an error
   }
-
   if (isLoadingFlats || isLoadingWorkSpaces) {
     return <SkeletonTable></SkeletonTable>;
   }
 
   return (
     <div className="w-full">
-      {FlatData?.flats?.length > 0 ? (
-        <MyPostedList data={FlatData?.flats}></MyPostedList>
+      {flatData?.flats?.length > 0 || workSpaceData?.workSpaces?.length > 0 ? (
+        <div className="px-4">
+          <div className="mb-8">
+            <h1 className="mb-2 font-semibold">My Listed Home :</h1>
+            <MyPostedList data={flatData?.flats}></MyPostedList>
+          </div>
+
+          <div>
+            <h1 className="mb-2 font-semibold">
+              My Listed Work/Office Spaces :
+            </h1>
+            <MyPostedWorkSpace
+              WorkSpaces={workSpaceData?.workSpaces}
+            ></MyPostedWorkSpace>
+          </div>
+        </div>
       ) : (
         <div className="mx-auto w-3/4 md:w-1/3 p-4 mt-14 bg-teal-50">
           <h1 className="text-center">

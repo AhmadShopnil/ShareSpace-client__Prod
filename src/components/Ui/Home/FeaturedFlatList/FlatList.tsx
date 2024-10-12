@@ -30,7 +30,7 @@ const FlatList = () => {
         {data?.flats?.flats.slice(0, 7).map((flat: TFlat, index: number) => (
           // <FlatCard key={index} flat={flat} />
 
-          <FlatCardResponsive key={index} flat={flat} path={"flatDetails"} />
+          <FlatCardResponsive key={index} space={flat} path={"flatDetails"} />
         ))}
       </div>
     </div>
