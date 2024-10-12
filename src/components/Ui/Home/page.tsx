@@ -1,14 +1,17 @@
 import React from "react";
 import Hero from "./Hero/Hero";
-import FlatList from "./FeaturedFlatList/FlatList";
-import FlatListSSR from "./FeaturedFlatList/FlatListSSR";
+
+import FeaturedWorkSpaceListSSR from "./FeaturedWorkSpaceList/FeaturedWorkSpaceListSSR";
+import FeaturedFlatListSSR from "./FeaturedFlatList/FeaturedFlatListSSR";
 
 const HomePage = () => {
   return (
     <>
       <Hero />
-      {/* <FlatList /> */}
-      <FlatListSSR></FlatListSSR>
+      <div className="flex flex-col gap-10 md:gap-20">
+        <FeaturedFlatListSSR />
+        <FeaturedWorkSpaceListSSR />
+      </div>
     </>
   );
 };

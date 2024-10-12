@@ -13,6 +13,7 @@ export interface TFlatData {
 }
 
 export type TWorkSpace = {
+  _id?: string;
   title: string;
   location: string;
   description: string;

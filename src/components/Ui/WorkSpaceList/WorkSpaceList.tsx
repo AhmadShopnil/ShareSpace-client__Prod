@@ -27,7 +27,7 @@ const WorkSpaceList = ({ queryString }: { queryString: any }) => {
         {data?.workSpaces?.workSpaces.map((flat: TFlat, index: number) => (
           <FlatCardResponsive
             key={index}
-            flat={flat}
+            space={flat}
             path={"workSpaceDetails"}
           />
         ))}

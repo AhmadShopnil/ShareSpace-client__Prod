@@ -18,8 +18,8 @@ export type TFlat = {
   images?: string[];
 };
 
-const FlatCardResponsive = ({ flat, path }: { flat: TFlat; path: string }) => {
-  const { title, location, rent, _id, images } = flat;
+const FlatCardResponsive = ({ space, path }: { space: any; path: string }) => {
+  const { title, location, rent, _id, images } = space;
 
   return (
     <Link

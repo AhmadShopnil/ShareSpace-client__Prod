@@ -9,8 +9,8 @@ import ShareSpaceButton from "@/components/Modal/ShareSpaceModal/ShareSpaceButto
 
 const Hero = () => {
   return (
-    <div className="bg-white px-2 sm:px-0">
-      <div className="flex flex-col lg:flex-row items-center justify-between">
+    <div className=" px-2 sm:px-0">
+      <div className="  flex flex-col lg:flex-row items-center justify-between">
         <div className="w-full lg:w-1/2">
           <h1 className="text-2xl md:text-4xl font-bold mb-4">
             Looking for a Home? We’ve Got You Covered
@@ -30,7 +30,7 @@ const Hero = () => {
             </Link>
           </div>
         </div>
-        <div className="w-full lg:w-1/2 mt-6 lg:mt-0 flex justify-center">
+        <div className=" w-full lg:w-1/2 mt-6 lg:mt-0 flex justify-center">
           <Image
             priority
             src={findHome}
