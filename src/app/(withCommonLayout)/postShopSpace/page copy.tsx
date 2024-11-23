@@ -1,5 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
+// pages/postFlat.tsx
+import React, { useEffect, useState } from "react";
+
 import { TUserData, TTokenData } from "@/interfaces";
 import { getUserInfo, saveUserInfo } from "@/services/authServices";
 import UserCard from "@/components/Ui/UserCard/UserCard";
@@ -8,13 +10,13 @@ import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 import SkeletonPostFlat from "@/components/Loading/SkeletonPostFlat";
 import ErrorComponent from "@/components/Shared/Error/ErrorComponent";
+import { useCreateFlatMutation } from "@/redux/api/flatApi";
 import { decodedToken } from "@/utils/jwt";
 import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
-import { useCreateWorkSpaceMutation } from "@/redux/api/workSpaceApi";
-import { TWorkSpacePayload } from "@/interfaces/workspace";
+import { TFlatPyload } from "@/interfaces/flat";
 
-const PostWorkSpace = () => {
+const PostShopSpace = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,7 +24,7 @@ const PostWorkSpace = () => {
   const [urls, setUrls] = useState<string[]>([]);
   const [isLodaing, setIsloading] = useState(false);
   const [error, setError] = useState();
-  const [createWorkSpace] = useCreateWorkSpaceMutation();
+  const [createFlat] = useCreateFlatMutation();
 
   // get user info from localStorage by accessToekn
   const loggedInUserData = getUserInfo() as TTokenData;
@@ -31,9 +33,8 @@ const PostWorkSpace = () => {
     register,
     handleSubmit,
     setValue,
-    watch,
     formState: { errors },
-  } = useForm<TWorkSpacePayload & TUserData>();
+  } = useForm<TFlatPyload & TUserData>();
 
   useEffect(() => {
     if (loggedInUserData?.phone) {
@@ -55,9 +56,7 @@ const PostWorkSpace = () => {
   };
 
   // handle submit button
-  const onSubmit: SubmitHandler<TWorkSpacePayload & TUserData> = async (
-    data
-  ) => {
+  const onSubmit: SubmitHandler<TFlatPyload & TUserData> = async (data) => {
     try {
       setIsloading(true);
       let uploadImageUrls = null;
@@ -69,13 +68,15 @@ const PostWorkSpace = () => {
         });
       }
 
-      const workSpaceData: TWorkSpacePayload = {
+      const flatData: TFlatPyload = {
         title: data?.title,
+        totalBedrooms: data?.totalBedrooms,
         location: data?.location,
         description: data.description,
         rent: data?.rent,
         advanceAmount: data?.advanceAmount,
         images: uploadImageUrls,
+        totalBathrooms: data?.totalBathrooms,
         category: data?.category,
       };
       const userData: TUserData = {
@@ -84,8 +85,8 @@ const PostWorkSpace = () => {
         password: data?.password,
       };
 
-      const response = await createWorkSpace({
-        workSpaceData,
+      const response = await createFlat({
+        flatData,
         userData,
       });
       setIsloading(false);
@@ -101,6 +102,8 @@ const PostWorkSpace = () => {
     } catch (error: any) {
       setError(error?.message);
       setIsloading(false);
+      // eslint-disable-next-line no-console
+      // console.error("Error posting flat:", error);
     }
   };
 
@@ -180,12 +183,12 @@ const PostWorkSpace = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-semibold mb-4">Post Office Space</h1>
+      <h1 className="text-3xl font-semibold mb-4">Post Space For Shop</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {userSection}
 
         <div className="border p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-2">Space Details</h2>
+          <h2 className="text-xl font-semibold mb-2">Flat Details</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex flex-col">
               <label htmlFor="title" className="text-sm text-gray-600 mb-1">
@@ -202,7 +205,44 @@ const PostWorkSpace = () => {
                 <span className="text-red-600">This field is required</span>
               )}
             </div>
-
+            {/* bedroom input */}
+            <div className="flex flex-col">
+              <label
+                htmlFor="totalBedrooms"
+                className="text-sm text-gray-600 mb-1"
+              >
+                Total Bedrooms
+              </label>
+              <input
+                type="number"
+                id="totalBedrooms"
+                {...register("totalBedrooms", { required: true })}
+                placeholder="Total Bedrooms"
+                className="w-full p-2 border rounded"
+              />
+              {errors.totalBedrooms && (
+                <span className="text-red-600">This field is required</span>
+              )}
+            </div>
+            {/* bathroom input */}
+            <div className="flex flex-col">
+              <label
+                htmlFor="totalBathrooms"
+                className="text-sm text-gray-600 mb-1"
+              >
+                Total Bathrooms
+              </label>
+              <input
+                type="number"
+                id="totalBathrooms"
+                {...register("totalBathrooms", { required: true })}
+                placeholder="Total Bathrooms"
+                className="w-full p-2 border rounded"
+              />
+              {errors.totalBathrooms && (
+                <span className="text-red-600">This field is required</span>
+              )}
+            </div>
             {/* location input */}
             <div className="flex flex-col">
               <label htmlFor="location" className="text-sm text-gray-600 mb-1">
@@ -313,4 +353,4 @@ const PostWorkSpace = () => {
   );
 };
 
-export default PostWorkSpace;
+export default PostShopSpace;

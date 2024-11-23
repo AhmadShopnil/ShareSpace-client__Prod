@@ -1,8 +1,6 @@
 "use client";
 
 import { TFlat } from "@/components/Shared/FlatCard/FlatCard";
-
-import SkeletonFlatList from "@/components/Loading/SkeletonFlaList";
 import FlatCardResponsive from "@/components/Shared/FlatCard/FlatCardResponsive";
 import SkeletonResFlatList from "@/components/Loading/SkeletonResFlatList";
 import NotFoundData from "@/components/Shared/NotFoundData/NotFoundData";

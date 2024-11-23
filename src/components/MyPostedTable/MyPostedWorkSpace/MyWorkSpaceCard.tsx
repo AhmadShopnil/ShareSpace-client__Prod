@@ -1,4 +1,3 @@
-import { TWorkSpace } from "@/interfaces";
 import Image from "next/image";
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,17 +5,16 @@ import {
   faEdit,
   faTrash,
   faMapMarkerAlt,
-  faHome,
   faBangladeshiTakaSign,
-  faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
+import { TWorkSpaceInRes } from "@/interfaces";
 
 const MyWorkSpaceCard = ({
   workSpace,
   openModal,
   setSelectedId,
 }: {
-  workSpace: TWorkSpace;
+  workSpace: TWorkSpaceInRes;
   openModal: any;
   setSelectedId: any;
 }) => {

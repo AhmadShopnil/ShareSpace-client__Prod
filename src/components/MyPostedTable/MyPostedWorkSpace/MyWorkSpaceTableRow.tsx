@@ -1,14 +1,13 @@
-import { TFlatData, TWorkSpace } from "@/interfaces";
-import { useDeleteFlatMutation } from "@/redux/api/flatApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { TWorkSpaceInRes } from "@/interfaces";
 
 const MyWorkSpaceTableRow = ({
   workSpace,
   openModal,
   setSelectedId,
 }: {
-  workSpace: TWorkSpace;
+  workSpace: TWorkSpaceInRes;
   openModal: any;
   setSelectedId: any;
 }) => {

@@ -1,8 +1,8 @@
 "use client";
 // pages/postFlat.tsx
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { TFlatData, TUserData, TTokenData } from "@/interfaces";
+
+import { TUserData, TTokenData } from "@/interfaces";
 import { getUserInfo, saveUserInfo } from "@/services/authServices";
 import UserCard from "@/components/Ui/UserCard/UserCard";
 import { uploadImageToCLoudinary } from "@/utils/uploadImage";
@@ -14,16 +14,17 @@ import { useCreateFlatMutation } from "@/redux/api/flatApi";
 import { decodedToken } from "@/utils/jwt";
 import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
+import { TFlatPyload } from "@/interfaces/flat";
 
 const PostFlat = () => {
-  const dispatch=useAppDispatch()
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [images, setImages] = useState<File[]>([]);
   const [urls, setUrls] = useState<string[]>([]);
   const [isLodaing, setIsloading] = useState(false);
   const [error, setError] = useState();
-  const [createFlat]=useCreateFlatMutation()
+  const [createFlat] = useCreateFlatMutation();
 
   // get user info from localStorage by accessToekn
   const loggedInUserData = getUserInfo() as TTokenData;
@@ -34,7 +35,7 @@ const PostFlat = () => {
     setValue,
     watch,
     formState: { errors },
-  } = useForm<TFlatData & TUserData>();
+  } = useForm<TFlatPyload & TUserData>();
 
   useEffect(() => {
     if (loggedInUserData?.phone) {
@@ -56,7 +57,7 @@ const PostFlat = () => {
   };
 
   // handle submit button
-  const onSubmit: SubmitHandler<TFlatData & TUserData> = async (data) => {
+  const onSubmit: SubmitHandler<TFlatPyload & TUserData> = async (data) => {
     try {
       setIsloading(true);
       let uploadImageUrls = null;
@@ -68,7 +69,7 @@ const PostFlat = () => {
         });
       }
 
-      const flatData: TFlatData = {
+      const flatData: TFlatPyload = {
         title: data?.title,
         totalBedrooms: data?.totalBedrooms,
         location: data?.location,
@@ -85,20 +86,18 @@ const PostFlat = () => {
         password: data?.password,
       };
 
-      const response = await createFlat(
-        {
-          flatData,
-          userData,
-        }
-      );
+      const response = await createFlat({
+        flatData,
+        userData,
+      });
       setIsloading(false);
       const accessToken = response?.data?.accessToken;
       if (accessToken) {
         saveUserInfo({ accessToken });
-        
+
         const user = decodedToken(accessToken);
 
-        dispatch(setUser({user,token:accessToken}))
+        dispatch(setUser({ user, token: accessToken }));
         router.push("/myList");
       }
     } catch (error: any) {
@@ -108,7 +107,6 @@ const PostFlat = () => {
       // console.error("Error posting flat:", error);
     }
   };
-
 
   // display userINfo Section conditionally
   let userSection;

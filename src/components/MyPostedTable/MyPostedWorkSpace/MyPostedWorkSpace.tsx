@@ -1,12 +1,17 @@
 "use client";
-import { TWorkSpace } from "@/interfaces";
+
 import React, { useState } from "react";
 import MyWorkSpaceTableRow from "./MyWorkSpaceTableRow";
 import MyWorkSpaceCard from "./MyWorkSpaceCard";
 import ConfirmDeleteModal from "@/components/Modal/ConfirmDeleteModal/ConfirmDeleteModal";
 import { useDeleteWorkSpaceMutation } from "@/redux/api/workSpaceApi";
+import { TWorkSpaceInRes } from "@/interfaces";
 
-const MyPostedWorkSpace = ({ WorkSpaces }: { WorkSpaces: TWorkSpace[] }) => {
+const MyPostedWorkSpace = ({
+  WorkSpaces,
+}: {
+  WorkSpaces: TWorkSpaceInRes[];
+}) => {
   const [deleteWorkSpace, { isError, error }] = useDeleteWorkSpaceMutation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedId, setSelectedId] = useState("");
@@ -44,7 +49,7 @@ const MyPostedWorkSpace = ({ WorkSpaces }: { WorkSpaces: TWorkSpace[] }) => {
             </tr>
           </thead>
           <tbody>
-            {WorkSpaces?.map((workSpace: TWorkSpace, index) => (
+            {WorkSpaces?.map((workSpace: TWorkSpaceInRes, index) => (
               <MyWorkSpaceTableRow
                 key={index}
                 workSpace={workSpace}
