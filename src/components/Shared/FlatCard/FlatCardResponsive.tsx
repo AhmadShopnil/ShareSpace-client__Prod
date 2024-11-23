@@ -7,16 +7,16 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export type TFlat = {
-  _id?: string;
-  title: string;
-  totalBedrooms: number;
-  location: string;
-  description: string;
-  rent: number;
-  advanceAmount: number;
-  images?: string[];
-};
+// export type TFlat = {
+//   _id?: string;
+//   title: string;
+//   totalBedrooms: number;
+//   location: string;
+//   description: string;
+//   rent: number;
+//   advanceAmount: number;
+//   images?: string[];
+// };
 
 const FlatCardResponsive = ({ space, path }: { space: any; path: string }) => {
   const { title, location, rent, _id, images } = space;

@@ -1,7 +1,7 @@
-import { TFlatData, TUserData } from "@/interfaces";
+import { TFlatDataInRes, TUserData } from "@/interfaces";
 
 type TModifyPostFlatPayload = {
-  flatData: TFlatData;
+  flatData: Partial<TFlatDataInRes>;
   userData: TUserData;
   image: any;
 };

@@ -1,18 +1,22 @@
 // interfaces.ts
-export interface TFlatData {
-  _id?: string;
-  title: string;
+export type TFlatDataInRes = {
+  _id: string;
+  ownerId: string;
   totalBedrooms: number;
+  totalBathrooms: number;
+  title: string;
   location: string;
   description: string;
   rent: number;
   advanceAmount: number;
+  availability: boolean;
+  isDeleted?: boolean;
+  postStatus: "approved" | "rejected" | "pending";
+  category: "Flat" | "Tin-Shade" | "Tiner-ghor";
   images?: string[] | null;
-  totalBathrooms: number;
-  category: string;
-}
+};
 
-export type TWorkSpace = {
+export type TWorkSpaceInRes = {
   _id?: string;
   title: string;
   location: string;

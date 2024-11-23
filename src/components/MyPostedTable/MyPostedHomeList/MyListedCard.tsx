@@ -1,22 +1,19 @@
-import { TFlatData } from "@/interfaces";
 import Image from "next/image";
-import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEdit,
   faTrash,
   faMapMarkerAlt,
-  faHome,
   faBangladeshiTakaSign,
-  faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
+import { TFlatDataInRes } from "@/interfaces";
 
 const MyListedCard = ({
   flat,
   openModal,
   setSelectedId,
 }: {
-  flat: TFlatData;
+  flat: TFlatDataInRes;
   openModal: any;
   setSelectedId: any;
 }) => {

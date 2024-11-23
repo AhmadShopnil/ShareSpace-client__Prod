@@ -1,13 +1,13 @@
 "use client";
 
-import { TFlatData } from "@/interfaces";
 import React, { useState } from "react";
 import TableRow from "./TableRow";
 import MyListedCard from "./MyListedCard";
 import { useDeleteFlatMutation } from "@/redux/api/flatApi";
 import ConfirmDeleteModal from "@/components/Modal/ConfirmDeleteModal/ConfirmDeleteModal";
+import { TFlatDataInRes } from "@/interfaces";
 
-const MyPostedList = ({ data }: { data: TFlatData[] }) => {
+const MyPostedList = ({ data }: { data: TFlatDataInRes[] }) => {
   const [deleteFlat] = useDeleteFlatMutation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedId, setSelectedId] = useState("");
