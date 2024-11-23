@@ -6,8 +6,13 @@ import SkeletonResFlatList from "@/components/Loading/SkeletonResFlatList";
 import NotFoundData from "@/components/Shared/NotFoundData/NotFoundData";
 
 import { useGetAllWorkSpacesQuery } from "@/redux/api/workSpaceApi";
+import { cleanQueryParams } from "@/utils/CleanQueryParams";
 
 const WorkSpaceList = ({ queryString }: { queryString: any }) => {
+  //  have to work on  this part
+  // const cleandedQueryString = cleanQueryParams(queryString);
+
+  // console.log("from ofices space", cleandedQueryString);
   const { data, isLoading } = useGetAllWorkSpacesQuery(queryString);
 
   if (isLoading) {

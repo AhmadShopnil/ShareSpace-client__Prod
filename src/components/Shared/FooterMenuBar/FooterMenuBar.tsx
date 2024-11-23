@@ -5,7 +5,6 @@ import {
   faHome,
   faList,
   faPlus,
-  faPhone,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import { usePathname } from "next/navigation";
@@ -62,7 +61,7 @@ const FooterMenuBar = () => {
               pathname === "/postFlat" ? "text-teal-600" : "text-gray-500"
             }`}
           />
-          <span className="block text-xs mt-1">Share Flat</span>
+          <span className="block text-xs mt-1">Share Space</span>
         </button>
 
         {/* <Link href="/postFlat" className="flex-1 text-center">
