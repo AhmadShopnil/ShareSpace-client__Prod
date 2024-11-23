@@ -65,7 +65,7 @@ const Navbar = () => {
                   pathname === "/myList" ? "text-teal-600" : "text-gray-500"
                 }`}
               >
-                My Posted Home
+                My Posted Sapces
               </Link>
             )}
 
@@ -164,14 +164,14 @@ const Navbar = () => {
                 href="/allFlatList"
                 className="block text-gray-600 text-base hover:text-teal-600  transition"
               >
-                Listed Home
+                Listed Sapces
               </Link>
               {user && (
                 <Link
                   href="/myList"
                   className="block text-gray-600 text-base hover:text-teal-600 transition"
                 >
-                  My Posted Home
+                  My Posted Sapces
                 </Link>
               )}
               <Link

@@ -28,8 +28,11 @@ const FeaturedFlatList = ({ flatData }: Props) => {
   return (
     <div>
       <h3 className="text-sm sm:text-lg md:text-xl mb-4">Best Home For You</h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-around">
-        {flats.slice(0, 7).map((flat: TFlatDataInRes, index: number) => (
+      <div
+        className="grid grid-cols-1 sm:grid-cols-3 
+      lg:grid-cols-4 xl:grid-cols-5 gap-4 justify-around"
+      >
+        {flats.slice(0, 9).map((flat: TFlatDataInRes, index: number) => (
           <FlatCardResponsive key={index} space={flat} path="flatDetails" />
         ))}
       </div>
