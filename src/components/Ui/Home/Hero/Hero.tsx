@@ -24,7 +24,7 @@ const Hero = () => {
           <div className="flex gap-4 md:gap-8">
             <ShareSpaceButton></ShareSpaceButton>
             <Link
-              href={`/allFlatList`}
+              href={`/allSpacesList`}
               className="text-xs sm:text-base px-4 py-2 sm:px-6  bg-teal-100
                text-teal-500  rounded"
             >
@@ -35,13 +35,14 @@ const Hero = () => {
         {/* Right Side */}
         <div className=" w-full lg:w-1/2  flex justify-center ">
           <Image
-            priority // Ensures the image is prioritized for loading
-            src={findHome} // Make sure 'findHome' is the correct image path
-            alt="Flat sharing illustration" // Descriptive alt text for accessibility
+            priority
+            src={findHome} // Ensure the path is correct
+            alt="Flat sharing illustration"
             width={400} // Explicit width
             height={400} // Explicit height
-            layout="intrinsic" // Ensures the image maintains its aspect ratio
-            quality={75} // Optional: Adjust image quality for better performance
+            sizes="(max-width: 768px) 50vw, 400px" // Adjust for responsiveness if needed
+            quality={50} // Optional: Adjust quality for performance
+            style={{ maxWidth: "100%", height: "auto" }} // Ensures responsive behavior
           />
         </div>
       </div>
