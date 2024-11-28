@@ -35,11 +35,13 @@ const Hero = () => {
         {/* Right Side */}
         <div className=" w-full lg:w-1/2  flex justify-center ">
           <Image
-            priority
-            src={findHome}
-            alt="Flat sharing illustration"
-            width={400} // Adjust width as needed
-            height={400} // Adjust height as needed
+            priority // Ensures the image is prioritized for loading
+            src={findHome} // Make sure 'findHome' is the correct image path
+            alt="Flat sharing illustration" // Descriptive alt text for accessibility
+            width={400} // Explicit width
+            height={400} // Explicit height
+            layout="intrinsic" // Ensures the image maintains its aspect ratio
+            quality={75} // Optional: Adjust image quality for better performance
           />
         </div>
       </div>
