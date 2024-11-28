@@ -42,11 +42,11 @@ const FooterMenuBar = () => {
           <span className="block text-xs mt-1">Home </span>
         </Link>
 
-        <Link href="/allFlatList" className="flex-1 text-center">
+        <Link href="/allSpacesList" className="flex-1 text-center">
           <FontAwesomeIcon
             icon={faMagnifyingGlass}
             className={`text-lg mx-auto ${
-              pathname === "/allFlatList" ? "text-teal-600" : "text-gray-500"
+              pathname === "/allSpacesList" ? "text-teal-600" : "text-gray-500"
             }`}
           />
           <span className="block text-xs mt-1">Find</span>

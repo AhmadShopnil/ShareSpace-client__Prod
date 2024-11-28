@@ -51,9 +51,11 @@ const Navbar = () => {
               Home
             </Link>
             <Link
-              href="/allFlatList"
+              href="/allSpacesList"
               className={`text-gray-600 hover:text-teal-600 ${
-                pathname === "/allFlatList" ? "text-teal-600" : "text-gray-500"
+                pathname === "/allSpacesList"
+                  ? "text-teal-600"
+                  : "text-gray-500"
               }`}
             >
               Listed Sapces
@@ -164,7 +166,7 @@ const Navbar = () => {
                 Home
               </Link>
               <Link
-                href="/allFlatList"
+                href="/allSpacesList"
                 className="block text-gray-600 text-base hover:text-teal-600  transition"
               >
                 Listed Sapces

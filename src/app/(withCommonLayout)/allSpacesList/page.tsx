@@ -1,6 +1,7 @@
 "use client";
-import FilterFlat from "@/components/Shared/FilterFlat/FilterFlat";
-import FilterMainCategory from "@/components/Shared/FilterMainCategory/FilterMainCategory";
+import FilterFlat from "@/components/Shared/Filter/FilterFlat";
+import FilterMainCategory from "@/components/Shared/Filter/FilterMainCategory";
+import FilterWorkSpace from "@/components/Shared/Filter/FilterWorkSpace";
 import AllFlatList from "@/components/Ui/AllFlatLIst/AllFlatList";
 import WorkSpaceList from "@/components/Ui/WorkSpaceList/WorkSpaceList";
 import { useState } from "react";
@@ -14,23 +15,31 @@ const AllFlatListPage = () => {
 
   if (listCategory === "All") {
     listContent = (
-      <div className="flex flex-col gap-10">
-        <AllFlatList queryString={queryString}></AllFlatList>
-        <WorkSpaceList queryString={queryString}></WorkSpaceList>;
-      </div>
+      <>
+        <FilterFlat setQueries={setQueries}></FilterFlat>
+        <div className="flex flex-col gap-10">
+          <AllFlatList queryString={queryString}></AllFlatList>
+          <WorkSpaceList queryString={queryString}></WorkSpaceList>;
+        </div>
+      </>
     );
   }
 
   if (listCategory === "Flat") {
     listContent = (
       <>
+        <FilterFlat setQueries={setQueries}></FilterFlat>
         <AllFlatList queryString={queryString}></AllFlatList>;
       </>
     );
   }
   if (listCategory === "OfficeSpace") {
-    listContent = <WorkSpaceList queryString={queryString}></WorkSpaceList>;
-    // listContent = <h1>Workspace list..</h1>;
+    listContent = (
+      <>
+        <FilterWorkSpace setQueries={setQueries} />
+        <WorkSpaceList queryString={queryString}></WorkSpaceList>;
+      </>
+    );
   }
 
   if (listCategory === "ShopSpace") {
@@ -47,7 +56,6 @@ const AllFlatListPage = () => {
         listCategory={listCategory}
         setListCategory={setListCategory}
       ></FilterMainCategory>
-      <FilterFlat setQueries={setQueries}></FilterFlat>
 
       {listContent}
     </div>
