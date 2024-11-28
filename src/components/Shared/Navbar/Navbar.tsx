@@ -26,7 +26,7 @@ const Navbar = () => {
       <div>
         <div className="flex justify-between items-center py-4">
           {/* logo section */}
-          <div className="text-2xl sm:text-3xl font-bold">
+          <div className="text-2xl sm:text-3xl   font-bold">
             <Link href="/">
               Share
               <span className=" text-teal-500">Space</span>
