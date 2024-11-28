@@ -55,13 +55,25 @@ const Footer: React.FC = () => {
             <p className="mb-2">Email: demo@gmail.com</p>
             <p className="mb-2">Phone: (123) 456-7890</p>
             <div className="mt-4">
-              <Link href="#" className="text-teal-300 hover:text-teal-100 mr-4">
+              <Link
+                href="#"
+                className="text-teal-300 hover:text-teal-100 mr-4"
+                aria-label="Visit our Facebook page"
+              >
                 <FontAwesomeIcon icon={faFacebook} size="2x" />
               </Link>
-              <Link href="#" className="text-teal-300 hover:text-teal-100 mr-4">
+              <Link
+                href="#"
+                className="text-teal-300 hover:text-teal-100 mr-4"
+                aria-label="Visit our Twitter profile"
+              >
                 <FontAwesomeIcon icon={faTwitter} size="2x" />
               </Link>
-              <Link href="#" className="text-teal-300 hover:text-teal-100 mr-4">
+              <Link
+                href="#"
+                className="text-teal-300 hover:text-teal-100 mr-4"
+                aria-label="Visit our Instagram profile"
+              >
                 <FontAwesomeIcon icon={faInstagram} size="2x" />
               </Link>
             </div>

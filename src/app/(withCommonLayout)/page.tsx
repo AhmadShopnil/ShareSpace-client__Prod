@@ -19,8 +19,6 @@ const Home = async () => {
 
     flatData = await resFlats.json();
 
-    // console.log("from home", flatData);
-
     // Fetch workspaces data
     const resWorkspaces = await fetch(
       "https://server-flate-share.vercel.app/api/workspaces",
@@ -32,11 +30,7 @@ const Home = async () => {
     );
 
     workspacesData = await resWorkspaces.json();
-
-    // console.log("from home:", workspacesData);
-  } catch (error) {
-    // console.log(error);
-  }
+  } catch (error) {}
 
   return (
     <>

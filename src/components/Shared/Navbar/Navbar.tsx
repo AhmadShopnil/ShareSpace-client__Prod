@@ -115,7 +115,10 @@ const Navbar = () => {
 
           {/* for mobile */}
           <div className="md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)}>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+            >
               <FontAwesomeIcon
                 icon={isOpen ? faTimes : faBars}
                 className="h-6 w-6 text-gray-600"
