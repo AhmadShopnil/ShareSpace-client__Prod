@@ -10,6 +10,7 @@ type Props = {
 };
 
 const FeaturedFlatList = ({ flatData }: Props) => {
+  // console.log("flat data", flatData);
   const { success, message, data } = flatData;
   const flats = data?.flats || [];
 

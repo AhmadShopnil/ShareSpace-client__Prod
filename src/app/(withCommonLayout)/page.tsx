@@ -4,47 +4,53 @@ import FeaturedWorkSpaceList from "@/components/Ui/Home/FeaturedWorkSpaceList/Fe
 import Hero from "@/components/Ui/Home/Hero/Hero";
 
 const Home = async () => {
-  let flatData;
-  let workspacesData;
-  let shopSpacesData;
+  let flatData = null;
+  let workspacesData = null;
+  let shopSpacesData = null;
+  // const basUrl="http://localhost:5000/api"
+  const basUrl = "https://server-flate-share.vercel.app/api";
 
   try {
     // Fetch flats data
-    const resFlats = await fetch(
-      "https://server-flate-share.vercel.app/api/flats",
-      {
-        next: {
-          revalidate: 30, // Revalidate every 10 seconds
-        },
-      }
-    );
+    const resFlats = await fetch(`${basUrl}/flats`, {
+      next: { revalidate: 30 },
+    });
 
+    // if (!resFlats.ok) {
+    //   throw new Error(`Failed to fetch flats: ${resFlats.statusText}`);
+    // }
     flatData = await resFlats.json();
 
     // Fetch workspaces data
-    const resWorkspaces = await fetch(
-      "https://server-flate-share.vercel.app/api/workspaces",
-      {
-        next: {
-          revalidate: 30, // Revalidate every 10 seconds
-        },
-      }
-    );
+    const resWorkspaces = await fetch(`${basUrl}/workspaces`, {
+      next: { revalidate: 30 },
+    });
 
+    // if (!resWorkspaces.ok) {
+    //   throw new Error(
+    //     `Failed to fetch workspaces: ${resWorkspaces.statusText}`
+    //   );
+    // }
     workspacesData = await resWorkspaces.json();
 
-    // Fetch workspaces data
-    const resShopspaces = await fetch(
-      "https://server-flate-share.vercel.app/api/shopspaces",
-      {
-        next: {
-          revalidate: 30, // Revalidate every 10 seconds
-        },
-      }
-    );
+    // Fetch shop spaces data
+    const resShopspaces = await fetch(`${basUrl}/shopspaces`, {
+      next: { revalidate: 30 },
+    });
 
+    // if (!resShopspaces.ok) {
+    //   throw new Error(
+    //     `Failed to fetch shop spaces: ${resShopspaces.statusText}`
+    //   );
+    // }
     shopSpacesData = await resShopspaces.json();
-  } catch (error) {}
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+
+  // console.log("from home flat", flatData);
+  // console.log("from home office", workspacesData);
+  // console.log("from home shopSpacesData", shopSpacesData);
 
   return (
     <>

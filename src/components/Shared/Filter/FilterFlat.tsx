@@ -58,7 +58,7 @@ const FilterFlat = ({
   ]);
 
   return (
-    <div className="p-4">
+    <div className="p-2">
       <PriceRange min={0} max={40000} onChange={handlePriceChange} />
 
       <div className="my-8">

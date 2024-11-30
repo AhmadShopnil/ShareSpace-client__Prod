@@ -6,6 +6,7 @@ import {
   faList,
   faPlus,
   faMagnifyingGlass,
+  faRightToBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { usePathname } from "next/navigation";
 import { useAppSelector } from "@/redux/hooks";
@@ -64,15 +65,17 @@ const FooterMenuBar = () => {
           <span className="block text-xs mt-1">Share Space</span>
         </button>
 
-        {/* <Link href="/postFlat" className="flex-1 text-center">
-          <FontAwesomeIcon
-            icon={faPlus}
-            className={`text-lg mx-auto ${
-              pathname === "/postFlat" ? "text-teal-600" : "text-gray-500"
-            }`}
-          />
-          <span className="block text-xs mt-1">Share Flat</span>
-        </Link> */}
+        {!user && (
+          <Link href="/login" className="flex-1 text-center">
+            <FontAwesomeIcon
+              icon={faRightToBracket}
+              className={`text-lg mx-auto ${
+                pathname === "/login" ? "text-teal-600" : "text-gray-500"
+              }`}
+            />
+            <span className="block text-xs mt-1">Login </span>
+          </Link>
+        )}
 
         {user && (
           <Link href="/myList" className="flex-1 text-center">
