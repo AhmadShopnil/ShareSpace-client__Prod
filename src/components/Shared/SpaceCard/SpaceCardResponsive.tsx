@@ -18,7 +18,7 @@ import React from "react";
 //   images?: string[];
 // };
 
-const FlatCardResponsive = ({ space, path }: { space: any; path: string }) => {
+const SpaceCardResponsive = ({ space, path }: { space: any; path: string }) => {
   const { title, location, rent, _id, images } = space;
 
   return (
@@ -65,4 +65,4 @@ const FlatCardResponsive = ({ space, path }: { space: any; path: string }) => {
   );
 };
 
-export default FlatCardResponsive;
+export default SpaceCardResponsive;

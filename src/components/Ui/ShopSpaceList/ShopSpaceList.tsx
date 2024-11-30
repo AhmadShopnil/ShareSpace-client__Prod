@@ -1,39 +1,36 @@
 "use client";
 
-import { TFlat } from "@/components/Shared/SpaceCard/SpaceCard";
-import FlatCardResponsive from "@/components/Shared/SpaceCard/SpaceCardResponsive";
 import SkeletonResFlatList from "@/components/Loading/SkeletonResFlatList";
 import NotFoundData from "@/components/Shared/NotFoundData/NotFoundData";
+import { useGetAllShopSpacesQuery } from "@/redux/api/shopSpaceApi";
+import SpaceCardResponsive from "@/components/Shared/SpaceCard/SpaceCardResponsive";
 
-import { useGetAllWorkSpacesQuery } from "@/redux/api/workSpaceApi";
-import { cleanQueryParams } from "@/utils/CleanQueryParams";
-
-const WorkSpaceList = ({ queryString }: { queryString: any }) => {
+const ShopSpaceList = ({ queryString }: { queryString: any }) => {
   //  have to work on  this part
   // const cleandedQueryString = cleanQueryParams(queryString);
 
   // console.log("from ofices space", cleandedQueryString);
-  const { data, isLoading } = useGetAllWorkSpacesQuery(queryString);
+  const { data, isLoading } = useGetAllShopSpacesQuery(queryString);
 
   if (isLoading) {
     return <SkeletonResFlatList></SkeletonResFlatList>;
   }
 
-  if (data?.workSpaces?.workSpaces?.length <= 0) {
+  if (data?.shopSpaces?.shopSpaces?.length <= 0) {
     return <NotFoundData text="No Ofice Space Found"></NotFoundData>;
   }
 
   return (
     <div className="mt-2">
       <h1 className="mb-2 text-lg">
-        For Office, Total: {data?.workSpaces?.meta?.total}
+        For shop, Total: {data?.shopSpaces?.meta?.total}
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-around">
-        {data?.workSpaces?.workSpaces.map((flat: TFlat, index: number) => (
-          <FlatCardResponsive
+        {data?.shopSpaces?.shopSpaces?.map((shopSpace: any, index: number) => (
+          <SpaceCardResponsive
             key={index}
-            space={flat}
-            path={"workSpaceDetails"}
+            space={shopSpace}
+            path={"shopSpaceDetails"}
           />
         ))}
       </div>
@@ -41,4 +38,4 @@ const WorkSpaceList = ({ queryString }: { queryString: any }) => {
   );
 };
 
-export default WorkSpaceList;
+export default ShopSpaceList;

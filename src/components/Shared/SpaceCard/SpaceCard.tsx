@@ -17,7 +17,7 @@ export type TFlat = {
   advanceAmount: number;
 };
 
-const FlatCard = ({ flat }: { flat: any }) => {
+const SpaceCard = ({ flat }: { flat: any }) => {
   const { title, location, rent, _id, description, images } = flat;
 
   return (
@@ -63,4 +63,4 @@ const FlatCard = ({ flat }: { flat: any }) => {
   );
 };
 
-export default FlatCard;
+export default SpaceCard;

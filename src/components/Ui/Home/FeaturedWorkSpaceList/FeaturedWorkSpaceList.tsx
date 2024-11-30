@@ -1,4 +1,4 @@
-import FlatCardResponsive from "@/components/Shared/FlatCard/FlatCardResponsive";
+import FlatCardResponsive from "@/components/Shared/SpaceCard/SpaceCardResponsive";
 import { TWorkSpaceInRes } from "@/interfaces";
 import { TApiResponse, TResponseWokSpace } from "@/interfaces/common";
 

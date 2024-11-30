@@ -1,85 +1,85 @@
-// import { baseApi } from "./baseApi";
-// import { tagTypes } from "../tag-types";
+import { baseApi } from "./baseApi";
+import { tagTypes } from "../tag-types";
 
-// import { IMeta } from "@/interfaces/common";
+import { IMeta } from "@/interfaces/common";
 
-// export const workSpaceApi = baseApi.injectEndpoints({
-//   endpoints: (build) => ({
-//     createWorkSpace: build.mutation({
-//       query: (data) => ({
-//         url: "/workSpaces/add",
-//         method: "POST",
-//         // contentType: 'multipart/form-data',
-//         data,
-//       }),
-//       invalidatesTags: [tagTypes.workSpaces],
-//     }),
+export const shopSpaceApi = baseApi.injectEndpoints({
+  endpoints: (build) => ({
+    createShopSpace: build.mutation({
+      query: (data) => ({
+        url: "/shopSpaces/add",
+        method: "POST",
+        // contentType: 'multipart/form-data',
+        data,
+      }),
+      invalidatesTags: [tagTypes.shopSpaces],
+    }),
 
-//     getAllWorkSpaces: build.query({
-//       query: (arg) => ({
-//         url: `/workSpaces?${arg}`,
-//         method: "GET",
-//         // params: arg,
-//       }),
-//       transformResponse: (response: any, meta: IMeta) => {
-//         return {
-//           workSpaces: response,
-//           meta,
-//         };
-//       },
-//       providesTags: [tagTypes.workSpaces],
-//     }),
+    getAllShopSpaces: build.query({
+      query: (arg) => ({
+        url: `/shopSpaces?${arg}`,
+        method: "GET",
+        // params: arg,
+      }),
+      transformResponse: (response: any, meta: IMeta) => {
+        return {
+          shopSpaces: response,
+          meta,
+        };
+      },
+      providesTags: [tagTypes.shopSpaces],
+    }),
 
-//     getMyAllWorkSpaces: build.query({
-//       query: (arg) => ({
-//         url: `/workSpaces/myPostedWorkSpace`,
-//         method: "GET",
-//         // params: arg,
-//       }),
-//       transformResponse: (response: any, meta: IMeta) => {
-//         return {
-//           workSpaces: response,
-//           meta,
-//         };
-//       },
-//       providesTags: [tagTypes.workSpaces],
-//     }),
+    getMyAllShopSpaces: build.query({
+      query: (arg) => ({
+        url: `/shopSpaces/myPostedshopSpace`,
+        method: "GET",
+        // params: arg,
+      }),
+      transformResponse: (response: any, meta: IMeta) => {
+        return {
+          shopSpaces: response,
+          meta,
+        };
+      },
+      providesTags: [tagTypes.shopSpaces],
+    }),
 
-//     deleteWorkSpace: build.mutation({
-//       query: (workSpaceId) => ({
-//         url: `/workSpaces/${workSpaceId}`,
-//         method: "DELETE",
-//       }),
-//       invalidatesTags: [tagTypes.workSpaces],
-//     }),
-//     //get single workSpace
-//     getSingleWorkSpace: build.query({
-//       query: (id: string | string[] | undefined) => ({
-//         url: `/workSpaces/${id}`,
-//         method: "GET",
-//       }),
-//       providesTags: [tagTypes.workSpaces],
-//     }),
-//     // update a workSpace
-//     updateWorkSpace: build.mutation({
-//       query: (data) => {
-//         // console.log(data);
-//         return {
-//           url: `/workSpaces/${data.id}`,
-//           method: "PATCH",
-//           data: data.body,
-//         };
-//       },
-//       invalidatesTags: [tagTypes.workSpaces, tagTypes.users],
-//     }),
-//   }),
-// });
+    deleteShopSpace: build.mutation({
+      query: (shopSpaceId) => ({
+        url: `/shopSpaces/${shopSpaceId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [tagTypes.shopSpaces],
+    }),
+    //get single shopSpace
+    getSingleShopSpace: build.query({
+      query: (id: string | string[] | undefined) => ({
+        url: `/shopSpaces/${id}`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.shopSpaces],
+    }),
+    // update a shopSpace
+    updateShopSpace: build.mutation({
+      query: (data) => {
+        // console.log(data);
+        return {
+          url: `/shopSpaces/${data.id}`,
+          method: "PUT",
+          data: data.updatedData,
+        };
+      },
+      invalidatesTags: [tagTypes.shopSpaces, tagTypes.users],
+    }),
+  }),
+});
 
-// export const {
-//   useCreateWorkSpaceMutation,
-//   useDeleteWorkSpaceMutation,
-//   useGetSingleWorkSpaceQuery,
-//   useUpdateWorkSpaceMutation,
-//   useGetAllWorkSpacesQuery,
-//   useGetMyAllWorkSpacesQuery,
-// } = workSpaceApi;
+export const {
+  useCreateShopSpaceMutation,
+  useDeleteShopSpaceMutation,
+  useGetSingleShopSpaceQuery,
+  useUpdateShopSpaceMutation,
+  useGetAllShopSpacesQuery,
+  useGetMyAllShopSpacesQuery,
+} = shopSpaceApi;

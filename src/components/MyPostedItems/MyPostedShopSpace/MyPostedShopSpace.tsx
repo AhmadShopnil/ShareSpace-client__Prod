@@ -1,21 +1,22 @@
 "use client";
 
 import React, { useState } from "react";
-import MyWorkSpaceTableRow from "./MyWorkSpaceTableRow";
-import MyWorkSpaceCard from "./MyWorkSpaceCard";
+
 import ConfirmDeleteModal from "@/components/Modal/ConfirmDeleteModal/ConfirmDeleteModal";
 import { useDeleteWorkSpaceMutation } from "@/redux/api/workSpaceApi";
 import { TFlatDataInRes, TWorkSpaceInRes } from "@/interfaces";
-import UpdatePostedWorkSpacesModal from "./UpdatePostedWorkSpacesModal";
+import UpdatePostedWorkSpacesModal from "./UpdatePostedShopSpacesModal";
 import MyListedTableRow from "../MyListedTableRow";
 import MyListedCard from "../MyListedCard";
+import { useDeleteShopSpaceMutation } from "@/redux/api/shopSpaceApi";
+import UpdatePostedShopSpacesModal from "./UpdatePostedShopSpacesModal";
 
-const MyPostedWorkSpace = ({
-  WorkSpaces,
+const MyPostedShopSpace = ({
+  shopSpaces,
 }: {
-  WorkSpaces: TWorkSpaceInRes[];
+  shopSpaces: TWorkSpaceInRes[];
 }) => {
-  const [deleteWorkSpace, { isError, error }] = useDeleteWorkSpaceMutation();
+  const [deleteShopSpace, { isError, error }] = useDeleteShopSpaceMutation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedId, setSelectedId] = useState("");
   const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
@@ -31,7 +32,7 @@ const MyPostedWorkSpace = ({
 
   // handle delete
   const handleDelete = async () => {
-    await deleteWorkSpace(selectedId);
+    await deleteShopSpace(selectedId);
   };
 
   const handleCloseUpdateModal = () => {
@@ -55,7 +56,7 @@ const MyPostedWorkSpace = ({
             </tr>
           </thead>
           <tbody>
-            {WorkSpaces?.map((workSpace: TWorkSpaceInRes, index) => (
+            {shopSpaces?.map((workSpace: TWorkSpaceInRes, index) => (
               <MyListedTableRow
                 key={index}
                 spaceInfo={workSpace}
@@ -71,10 +72,10 @@ const MyPostedWorkSpace = ({
 
       {/* Cards for smaller screens */}
       <div className="sm:hidden space-y-4">
-        {WorkSpaces?.map((workSpace, index) => (
+        {shopSpaces?.map((shopSpace, index) => (
           <MyListedCard
             key={index}
-            spaceInfo={workSpace}
+            spaceInfo={shopSpace}
             openModal={openModal}
             setSelectedId={setSelectedId}
             setUpdateModalOpen={setUpdateModalOpen}
@@ -91,7 +92,7 @@ const MyPostedWorkSpace = ({
 
       {/* Update Bike Modal */}
       {selectedItem && (
-        <UpdatePostedWorkSpacesModal
+        <UpdatePostedShopSpacesModal
           selectedItem={selectedItem}
           onClose={handleCloseUpdateModal}
           isOpen={isUpdateModalOpen}
@@ -101,4 +102,4 @@ const MyPostedWorkSpace = ({
   );
 };
 
-export default MyPostedWorkSpace;
+export default MyPostedShopSpace;
