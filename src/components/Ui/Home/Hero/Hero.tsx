@@ -9,7 +9,7 @@ import ShareSpaceButton from "@/components/Modal/ShareSpaceModal/ShareSpaceButto
 
 const Hero = () => {
   return (
-    <div className=" px-2 sm:px-0">
+    <div className="">
       <div className="  flex flex-col lg:flex-row items-center ">
         {/* Left Side */}
         <div className="w-full lg:w-1/2 ">
