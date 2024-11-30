@@ -1,27 +1,30 @@
+"use client";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { TWorkSpaceInRes } from "@/interfaces";
+import { TFlatDataInRes } from "@/interfaces";
 
-const MyWorkSpaceTableRow = ({
-  workSpace,
+const MyPostedHomeTableRow = ({
+  flat,
   openModal,
   setSelectedId,
   setSelectedItem,
   setUpdateModalOpen,
 }: {
-  workSpace: TWorkSpaceInRes;
+  flat: TFlatDataInRes;
   openModal: any;
   setSelectedId: any;
   setSelectedItem: any;
   setUpdateModalOpen: any;
 }) => {
-  const { title, location, rent, _id } = workSpace;
+  const { title, location, rent, _id } = flat;
 
-  const handleUpdateSingleWorkSpace = () => {
-    setSelectedItem(workSpace);
+  const handleUpdateSingleFalt = () => {
+    setSelectedItem(flat);
     setUpdateModalOpen(true);
   };
-  const handleDeleteSingleWorkSpace = () => {
+
+  const handleDeleteSingleFalt = () => {
     setSelectedId(_id);
     openModal();
   };
@@ -33,13 +36,13 @@ const MyWorkSpaceTableRow = ({
       <td className="px-6 py-2">{location}</td>
       <td className="px-6 py-2 flex  justify-center gap-4">
         <button
-          onClick={handleUpdateSingleWorkSpace}
+          onClick={handleUpdateSingleFalt}
           className="text-blue-500 hover:underline"
         >
           <FontAwesomeIcon icon={faEdit} />
         </button>
         <button
-          onClick={handleDeleteSingleWorkSpace}
+          onClick={handleDeleteSingleFalt}
           className="ml-2 text-red-500 hover:underline"
         >
           <FontAwesomeIcon icon={faTrash} />
@@ -49,4 +52,4 @@ const MyWorkSpaceTableRow = ({
   );
 };
 
-export default MyWorkSpaceTableRow;
+export default MyPostedHomeTableRow;

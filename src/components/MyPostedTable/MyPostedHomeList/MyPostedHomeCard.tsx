@@ -8,16 +8,25 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { TFlatDataInRes } from "@/interfaces";
 
-const MyListedCard = ({
+const MyPostedHomeCard = ({
   flat,
   openModal,
   setSelectedId,
+  setSelectedItem,
+  setUpdateModalOpen,
 }: {
   flat: TFlatDataInRes;
   openModal: any;
   setSelectedId: any;
+  setSelectedItem: any;
+  setUpdateModalOpen: any;
 }) => {
   const { title, location, rent, images, _id } = flat;
+
+  const handleUpdateSingleFalt = () => {
+    setSelectedItem(flat);
+    setUpdateModalOpen(true);
+  };
 
   const handleDeleteSingleFalt = () => {
     setSelectedId(_id);
@@ -67,7 +76,10 @@ const MyListedCard = ({
 
         {/* action buttons */}
         <div className="  flex flex-col justify-between">
-          <button className="text-blue-500 hover:underline ">
+          <button
+            onClick={handleUpdateSingleFalt}
+            className="text-blue-500 hover:underline "
+          >
             <FontAwesomeIcon icon={faEdit} />
           </button>
           <button
@@ -82,4 +94,4 @@ const MyListedCard = ({
   );
 };
 
-export default MyListedCard;
+export default MyPostedHomeCard;
