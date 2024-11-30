@@ -1,16 +1,19 @@
 "use client";
 
 import React, { useState } from "react";
-import TableRow from "./TableRow";
-import MyListedCard from "./MyListedCard";
 import { useDeleteFlatMutation } from "@/redux/api/flatApi";
 import ConfirmDeleteModal from "@/components/Modal/ConfirmDeleteModal/ConfirmDeleteModal";
 import { TFlatDataInRes } from "@/interfaces";
+import UpdatePostedHomeModal from "./UpdatePostedHomeModal";
+import MyListedTableRow from "../MyListedTableRow";
+import MyListedCard from "../MyListedCard";
 
 const MyPostedList = ({ data }: { data: TFlatDataInRes[] }) => {
+  const [selectedItem, setSelectedItem] = useState<TFlatDataInRes | null>(null);
   const [deleteFlat] = useDeleteFlatMutation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedId, setSelectedId] = useState("");
+  const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
 
   // handle modal
   const openModal = () => {
@@ -21,9 +24,13 @@ const MyPostedList = ({ data }: { data: TFlatDataInRes[] }) => {
   };
 
   // handle delete
-
   const handleDelete = () => {
     deleteFlat(selectedId);
+  };
+
+  const handleCloseUpdateModal = () => {
+    setUpdateModalOpen(false);
+    setSelectedItem(null);
   };
 
   return (
@@ -43,12 +50,14 @@ const MyPostedList = ({ data }: { data: TFlatDataInRes[] }) => {
           </thead>
           <tbody>
             {data?.map((flat, index) => (
-              <TableRow
+              <MyListedTableRow
                 key={index}
-                flat={flat}
+                spaceInfo={flat}
                 openModal={openModal}
                 setSelectedId={setSelectedId}
-              ></TableRow>
+                setUpdateModalOpen={setUpdateModalOpen}
+                setSelectedItem={setSelectedItem}
+              ></MyListedTableRow>
             ))}
           </tbody>
         </table>
@@ -59,9 +68,11 @@ const MyPostedList = ({ data }: { data: TFlatDataInRes[] }) => {
         {data?.map((flat, index) => (
           <MyListedCard
             key={index}
-            flat={flat}
+            spaceInfo={flat}
             openModal={openModal}
             setSelectedId={setSelectedId}
+            setUpdateModalOpen={setUpdateModalOpen}
+            setSelectedItem={setSelectedItem}
           ></MyListedCard>
         ))}
       </div>
@@ -70,6 +81,15 @@ const MyPostedList = ({ data }: { data: TFlatDataInRes[] }) => {
         onClose={closeModal}
         handleDelete={handleDelete}
       ></ConfirmDeleteModal>
+
+      {/* Update Bike Modal */}
+      {selectedItem && (
+        <UpdatePostedHomeModal
+          selectedItem={selectedItem}
+          onClose={handleCloseUpdateModal}
+          isOpen={isUpdateModalOpen}
+        />
+      )}
     </div>
   );
 };

@@ -2,20 +2,28 @@
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { TFlatDataInRes } from "@/interfaces";
 
-const TableRow = ({
-  flat,
+const MyListedTableRow = ({
+  spaceInfo,
   openModal,
   setSelectedId,
+  setSelectedItem,
+  setUpdateModalOpen,
 }: {
-  flat: TFlatDataInRes;
+  spaceInfo: any;
   openModal: any;
   setSelectedId: any;
+  setSelectedItem: any;
+  setUpdateModalOpen: any;
 }) => {
-  const { title, location, rent, _id } = flat;
+  const { title, location, rent, _id } = spaceInfo;
 
-  const handleDeleteSingleFalt = () => {
+  const handleUpdateSingleSpace = () => {
+    setSelectedItem(spaceInfo);
+    setUpdateModalOpen(true);
+  };
+
+  const handleDeleteSingleSpace = () => {
     setSelectedId(_id);
     openModal();
   };
@@ -26,11 +34,14 @@ const TableRow = ({
       <td className="px-6 py-2">{rent}</td>
       <td className="px-6 py-2">{location}</td>
       <td className="px-6 py-2 flex  justify-center gap-4">
-        <button className="text-blue-500 hover:underline">
+        <button
+          onClick={handleUpdateSingleSpace}
+          className="text-blue-500 hover:underline"
+        >
           <FontAwesomeIcon icon={faEdit} />
         </button>
         <button
-          onClick={handleDeleteSingleFalt}
+          onClick={handleDeleteSingleSpace}
           className="ml-2 text-red-500 hover:underline"
         >
           <FontAwesomeIcon icon={faTrash} />
@@ -40,4 +51,4 @@ const TableRow = ({
   );
 };
 
-export default TableRow;
+export default MyListedTableRow;

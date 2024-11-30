@@ -66,8 +66,8 @@ export const workSpaceApi = baseApi.injectEndpoints({
         // console.log(data);
         return {
           url: `/workSpaces/${data.id}`,
-          method: "PATCH",
-          data: data.body,
+          method: "PUT",
+          data: data.updatedData,
         };
       },
       invalidatesTags: [tagTypes.workSpaces, tagTypes.users],

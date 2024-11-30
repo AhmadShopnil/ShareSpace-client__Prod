@@ -1,5 +1,4 @@
 import Image from "next/image";
-import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEdit,
@@ -7,28 +6,29 @@ import {
   faMapMarkerAlt,
   faBangladeshiTakaSign,
 } from "@fortawesome/free-solid-svg-icons";
-import { TWorkSpaceInRes } from "@/interfaces";
+import { TFlatDataInRes } from "@/interfaces";
 
-const MyWorkSpaceCard = ({
-  workSpace,
+const MyListedCard = ({
+  spaceInfo,
   openModal,
   setSelectedId,
   setSelectedItem,
   setUpdateModalOpen,
 }: {
-  workSpace: TWorkSpaceInRes;
+  spaceInfo: any;
   openModal: any;
   setSelectedId: any;
   setSelectedItem: any;
   setUpdateModalOpen: any;
 }) => {
-  const { title, location, rent, images, _id } = workSpace;
+  const { title, location, rent, images, _id } = spaceInfo;
 
-  const handleUpdateSingleWorkSpace = () => {
-    setSelectedItem(workSpace);
+  const handleUpdateSingleSpace = () => {
+    setSelectedItem(spaceInfo);
     setUpdateModalOpen(true);
   };
-  const handleDeleteSingleWorkSpace = () => {
+
+  const handleDeleteSingleSpace = () => {
     setSelectedId(_id);
     openModal();
   };
@@ -77,13 +77,13 @@ const MyWorkSpaceCard = ({
         {/* action buttons */}
         <div className="  flex flex-col justify-between">
           <button
-            onClick={handleUpdateSingleWorkSpace}
+            onClick={handleUpdateSingleSpace}
             className="text-blue-500 hover:underline "
           >
             <FontAwesomeIcon icon={faEdit} />
           </button>
           <button
-            onClick={handleDeleteSingleWorkSpace}
+            onClick={handleDeleteSingleSpace}
             className="text-red-500 hover:underline"
           >
             <FontAwesomeIcon icon={faTrash} />
@@ -94,4 +94,4 @@ const MyWorkSpaceCard = ({
   );
 };
 
-export default MyWorkSpaceCard;
+export default MyListedCard;

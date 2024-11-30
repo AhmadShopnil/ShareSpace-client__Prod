@@ -5,7 +5,10 @@ import MyWorkSpaceTableRow from "./MyWorkSpaceTableRow";
 import MyWorkSpaceCard from "./MyWorkSpaceCard";
 import ConfirmDeleteModal from "@/components/Modal/ConfirmDeleteModal/ConfirmDeleteModal";
 import { useDeleteWorkSpaceMutation } from "@/redux/api/workSpaceApi";
-import { TWorkSpaceInRes } from "@/interfaces";
+import { TFlatDataInRes, TWorkSpaceInRes } from "@/interfaces";
+import UpdatePostedWorkSpacesModal from "./UpdatePostedWorkSpacesModal";
+import MyListedTableRow from "../MyListedTableRow";
+import MyListedCard from "../MyListedCard";
 
 const MyPostedWorkSpace = ({
   WorkSpaces,
@@ -15,6 +18,8 @@ const MyPostedWorkSpace = ({
   const [deleteWorkSpace, { isError, error }] = useDeleteWorkSpaceMutation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedId, setSelectedId] = useState("");
+  const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<TFlatDataInRes | null>(null);
 
   // handle modal
   const openModal = () => {
@@ -25,14 +30,15 @@ const MyPostedWorkSpace = ({
   };
 
   // handle delete
-
   const handleDelete = async () => {
     await deleteWorkSpace(selectedId);
   };
 
-  // if (isError) {
-  //   console.log("delete eere", error);
-  // }
+  const handleCloseUpdateModal = () => {
+    setUpdateModalOpen(false);
+    setSelectedItem(null);
+  };
+
   return (
     <div className="">
       {/* Table for larger screens */}
@@ -50,12 +56,14 @@ const MyPostedWorkSpace = ({
           </thead>
           <tbody>
             {WorkSpaces?.map((workSpace: TWorkSpaceInRes, index) => (
-              <MyWorkSpaceTableRow
+              <MyListedTableRow
                 key={index}
-                workSpace={workSpace}
+                spaceInfo={workSpace}
                 openModal={openModal}
                 setSelectedId={setSelectedId}
-              ></MyWorkSpaceTableRow>
+                setUpdateModalOpen={setUpdateModalOpen}
+                setSelectedItem={setSelectedItem}
+              ></MyListedTableRow>
             ))}
           </tbody>
         </table>
@@ -64,12 +72,14 @@ const MyPostedWorkSpace = ({
       {/* Cards for smaller screens */}
       <div className="sm:hidden space-y-4">
         {WorkSpaces?.map((workSpace, index) => (
-          <MyWorkSpaceCard
+          <MyListedCard
             key={index}
-            workSpace={workSpace}
+            spaceInfo={workSpace}
             openModal={openModal}
             setSelectedId={setSelectedId}
-          ></MyWorkSpaceCard>
+            setUpdateModalOpen={setUpdateModalOpen}
+            setSelectedItem={setSelectedItem}
+          ></MyListedCard>
         ))}
       </div>
 
@@ -78,6 +88,15 @@ const MyPostedWorkSpace = ({
         onClose={closeModal}
         handleDelete={handleDelete}
       ></ConfirmDeleteModal>
+
+      {/* Update Bike Modal */}
+      {selectedItem && (
+        <UpdatePostedWorkSpacesModal
+          selectedItem={selectedItem}
+          onClose={handleCloseUpdateModal}
+          isOpen={isUpdateModalOpen}
+        />
+      )}
     </div>
   );
 };
