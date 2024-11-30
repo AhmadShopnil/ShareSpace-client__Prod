@@ -1,12 +1,12 @@
 "use client";
 
 import { TFlat } from "@/components/Shared/SpaceCard/SpaceCard";
-import FlatCardResponsive from "@/components/Shared/SpaceCard/SpaceCardResponsive";
+
 import SkeletonResFlatList from "@/components/Loading/SkeletonResFlatList";
 import NotFoundData from "@/components/Shared/NotFoundData/NotFoundData";
 
 import { useGetAllWorkSpacesQuery } from "@/redux/api/workSpaceApi";
-import { cleanQueryParams } from "@/utils/CleanQueryParams";
+import SpaceCardResponsive from "@/components/Shared/SpaceCard/SpaceCardResponsive";
 
 const WorkSpaceList = ({ queryString }: { queryString: any }) => {
   //  have to work on  this part
@@ -30,7 +30,7 @@ const WorkSpaceList = ({ queryString }: { queryString: any }) => {
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-around">
         {data?.workSpaces?.workSpaces.map((flat: TFlat, index: number) => (
-          <FlatCardResponsive
+          <SpaceCardResponsive
             key={index}
             space={flat}
             path={"workSpaceDetails"}
