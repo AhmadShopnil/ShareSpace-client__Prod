@@ -1,12 +1,13 @@
 "use client";
 
 import { TFlat } from "@/components/Shared/SpaceCard/SpaceCard";
-import FlatCardResponsive from "@/components/Shared/SpaceCard/SpaceCardResponsive";
+
 import SkeletonResFlatList from "@/components/Loading/SkeletonResFlatList";
 import NotFoundData from "@/components/Shared/NotFoundData/NotFoundData";
 import { useGetAllFlatsQuery } from "@/redux/api/flatApi";
+import SpaceCardResponsive from "@/components/Shared/SpaceCard/SpaceCardResponsive";
 
-const AllFlatList = ({ queryString }: { queryString: any }) => {
+const HomeList = ({ queryString }: { queryString: any }) => {
   const { data, isLoading } = useGetAllFlatsQuery(queryString);
 
   if (isLoading) {
@@ -24,11 +25,11 @@ const AllFlatList = ({ queryString }: { queryString: any }) => {
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-around">
         {data?.flats?.flats.map((flat: TFlat, index: number) => (
-          <FlatCardResponsive key={index} space={flat} path={"flatDetails"} />
+          <SpaceCardResponsive key={index} space={flat} path={"flatDetails"} />
         ))}
       </div>
     </div>
   );
 };
 
-export default AllFlatList;
+export default HomeList;

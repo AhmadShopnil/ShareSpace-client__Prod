@@ -2,7 +2,8 @@
 import FilterFlat from "@/components/Shared/Filter/FilterFlat";
 import FilterMainCategory from "@/components/Shared/Filter/FilterMainCategory";
 import FilterWorkSpace from "@/components/Shared/Filter/FilterWorkSpace";
-import AllFlatList from "@/components/Ui/AllFlatLIst/AllFlatList";
+import HomeList from "@/components/Ui/HomeList/HomeList";
+
 import ShopSpaceList from "@/components/Ui/ShopSpaceList/ShopSpaceList";
 import WorkSpaceList from "@/components/Ui/WorkSpaceList/WorkSpaceList";
 import { useState } from "react";
@@ -31,7 +32,7 @@ const AllFlatListPage = () => {
     listContent = (
       <>
         <FilterFlat setQueries={setQueries}></FilterFlat>
-        <AllFlatList queryString={queryString}></AllFlatList>
+        <HomeList queryString={queryString}></HomeList>
       </>
     );
   }
