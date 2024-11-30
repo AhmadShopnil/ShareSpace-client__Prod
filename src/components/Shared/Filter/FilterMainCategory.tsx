@@ -3,11 +3,18 @@ import { Dispatch, SetStateAction } from "react";
 const FilterMainCategory = ({
   listCategory,
   setListCategory,
+  setQueries,
 }: {
   listCategory: string;
   setListCategory: Dispatch<SetStateAction<string>>;
+  setQueries: Dispatch<SetStateAction<{}>>;
 }) => {
-  const categories = ["All", "Flat", "OfficeSpace", "ShopSpace"];
+  const categories = ["Home", "OfficeSpace", "ShopSpace"];
+
+  const handleSetCategory = (cat: string) => {
+    setListCategory(cat);
+    setQueries({});
+  };
 
   return (
     <div className="flex justify-center">
@@ -18,7 +25,7 @@ const FilterMainCategory = ({
           {categories.map((cat) => (
             <button
               key={cat}
-              onClick={() => setListCategory(cat)}
+              onClick={() => handleSetCategory(cat)}
               className={`p-3 rounded ${
                 listCategory === cat ? "bg-teal-600 text-white" : "bg-gray-200"
               }`}

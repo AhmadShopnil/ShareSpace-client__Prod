@@ -3,33 +3,35 @@ import FilterFlat from "@/components/Shared/Filter/FilterFlat";
 import FilterMainCategory from "@/components/Shared/Filter/FilterMainCategory";
 import FilterWorkSpace from "@/components/Shared/Filter/FilterWorkSpace";
 import AllFlatList from "@/components/Ui/AllFlatLIst/AllFlatList";
+import ShopSpaceList from "@/components/Ui/ShopSpaceList/ShopSpaceList";
 import WorkSpaceList from "@/components/Ui/WorkSpaceList/WorkSpaceList";
 import { useState } from "react";
 
 const AllFlatListPage = () => {
   const [queries, setQueries] = useState({});
   const queryString = new URLSearchParams(queries).toString();
-  const [listCategory, setListCategory] = useState("All");
+  const [listCategory, setListCategory] = useState("Home");
 
   let listContent;
 
-  if (listCategory === "All") {
-    listContent = (
-      <>
-        <FilterFlat setQueries={setQueries}></FilterFlat>
-        <div className="flex flex-col gap-10">
-          <AllFlatList queryString={queryString}></AllFlatList>
-          <WorkSpaceList queryString={queryString}></WorkSpaceList>;
-        </div>
-      </>
-    );
-  }
+  // if (listCategory === "All") {
+  //   listContent = (
+  //     <>
+  //       <FilterFlat setQueries={setQueries}></FilterFlat>
+  //       <div className="flex flex-col gap-10">
+  //         <AllFlatList queryString={queryString}></AllFlatList>
+  //         <WorkSpaceList queryString={queryString}></WorkSpaceList>
+  //         <ShopSpaceList queryString={queryString}></ShopSpaceList>
+  //       </div>
+  //     </>
+  //   );
+  // }
 
-  if (listCategory === "Flat") {
+  if (listCategory === "Home") {
     listContent = (
       <>
         <FilterFlat setQueries={setQueries}></FilterFlat>
-        <AllFlatList queryString={queryString}></AllFlatList>;
+        <AllFlatList queryString={queryString}></AllFlatList>
       </>
     );
   }
@@ -37,16 +39,17 @@ const AllFlatListPage = () => {
     listContent = (
       <>
         <FilterWorkSpace setQueries={setQueries} />
-        <WorkSpaceList queryString={queryString}></WorkSpaceList>;
+        <WorkSpaceList queryString={queryString}></WorkSpaceList>
       </>
     );
   }
 
   if (listCategory === "ShopSpace") {
     listContent = (
-      <div className="flex flex-col gap-10">
-        <h1 className="text-center">Cooming Soon..</h1>
-      </div>
+      <>
+        <FilterWorkSpace setQueries={setQueries} />
+        <ShopSpaceList queryString={queryString}></ShopSpaceList>
+      </>
     );
   }
 
@@ -55,6 +58,7 @@ const AllFlatListPage = () => {
       <FilterMainCategory
         listCategory={listCategory}
         setListCategory={setListCategory}
+        setQueries={setQueries}
       ></FilterMainCategory>
 
       {listContent}

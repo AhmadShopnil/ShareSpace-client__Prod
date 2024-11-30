@@ -1,7 +1,7 @@
 "use client";
 import SkeletonResFlatList from "@/components/Loading/SkeletonResFlatList";
 
-import FlatCardResponsive from "@/components/Shared/FlatCard/FlatCardResponsive";
+import FlatCardResponsive from "@/components/Shared/SpaceCard/SpaceCardResponsive";
 import NotFoundData from "@/components/Shared/NotFoundData/NotFoundData";
 import { TFlatDataInRes } from "@/interfaces";
 

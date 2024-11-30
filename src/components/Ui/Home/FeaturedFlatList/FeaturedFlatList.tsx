@@ -1,6 +1,6 @@
 // pages/featured-flats.tsx
 
-import FlatCardResponsive from "@/components/Shared/FlatCard/FlatCardResponsive";
+import FlatCardResponsive from "@/components/Shared/SpaceCard/SpaceCardResponsive";
 import { TFlatDataInRes } from "@/interfaces";
 import { TApiResponse, TResponseFlat } from "@/interfaces/common";
 import React from "react";

@@ -1,10 +1,12 @@
 import FeaturedFlatList from "@/components/Ui/Home/FeaturedFlatList/FeaturedFlatList";
+import FeaturedShopSpaceList from "@/components/Ui/Home/FeaturedShopSpaceList/FeaturedShopSpaceList";
 import FeaturedWorkSpaceList from "@/components/Ui/Home/FeaturedWorkSpaceList/FeaturedWorkSpaceList";
 import Hero from "@/components/Ui/Home/Hero/Hero";
 
 const Home = async () => {
   let flatData;
   let workspacesData;
+  let shopSpacesData;
 
   try {
     // Fetch flats data
@@ -30,6 +32,18 @@ const Home = async () => {
     );
 
     workspacesData = await resWorkspaces.json();
+
+    // Fetch workspaces data
+    const resShopspaces = await fetch(
+      "https://server-flate-share.vercel.app/api/shopspaces",
+      {
+        next: {
+          revalidate: 30, // Revalidate every 10 seconds
+        },
+      }
+    );
+
+    shopSpacesData = await resShopspaces.json();
   } catch (error) {}
 
   return (
@@ -38,6 +52,7 @@ const Home = async () => {
       <div className="flex flex-col gap-10 md:gap-20">
         <FeaturedFlatList flatData={flatData} />
         <FeaturedWorkSpaceList workspacesData={workspacesData} />
+        <FeaturedShopSpaceList shopSpacesData={shopSpacesData} />
       </div>
     </>
   );

@@ -1,7 +1,7 @@
 "use client";
 
-import { TFlat } from "@/components/Shared/FlatCard/FlatCard";
-import FlatCardResponsive from "@/components/Shared/FlatCard/FlatCardResponsive";
+import { TFlat } from "@/components/Shared/SpaceCard/SpaceCard";
+import FlatCardResponsive from "@/components/Shared/SpaceCard/SpaceCardResponsive";
 import SkeletonResFlatList from "@/components/Loading/SkeletonResFlatList";
 import NotFoundData from "@/components/Shared/NotFoundData/NotFoundData";
 import { useGetAllFlatsQuery } from "@/redux/api/flatApi";
