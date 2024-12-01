@@ -20,10 +20,10 @@ const CommmonLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className=" mx-auto max-w-screen-2xl flex flex-col min-h-screen  ">
-      <div className="px-4 sm:px-6 md:px-10">
-        <Navbar />
-        <div className="flex-grow 0">{children}</div>
-      </div>
+      <Navbar />
+
+      <div className="flex-grow px-4 sm:px-6 md:px-10 ">{children}</div>
+
       <Footer />
       <div className="lg:hidden  ">
         <FooterMenuBar></FooterMenuBar>

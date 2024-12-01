@@ -32,7 +32,7 @@ const FeaturedShopSpaceList = ({ shopSpacesData }: Props) => {
       </h3>
       <div
         className="grid grid-cols-1 sm:grid-cols-3 
-      lg:grid-cols-4 xl:grid-cols-5 gap-4 justify-around"
+      lg:grid-cols-4 xl:grid-cols-5 gap-2 md:gap-4 justify-around"
       >
         {shopSpaces
           .slice(0, 9)
@@ -40,7 +40,7 @@ const FeaturedShopSpaceList = ({ shopSpacesData }: Props) => {
             <FlatCardResponsive
               key={index}
               space={shopSpace} // Passing workspace data to FlatCardResponsive
-              path="workSpaceDetails"
+              path="spaceDetails/shopSpace"
             />
           ))}
       </div>

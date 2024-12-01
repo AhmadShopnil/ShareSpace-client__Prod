@@ -58,14 +58,14 @@ const FilterFlat = ({
   ]);
 
   return (
-    <div className="p-2">
+    <div>
       <PriceRange min={0} max={40000} onChange={handlePriceChange} />
 
-      <div className="my-8">
-        <div className="mb-2 gap-3 grid sm:grid-cols-2 lg:grid-cols-3 justify-between">
+      <div className="my-4 md:my-6">
+        <div className=" gap-3 grid sm:grid-cols-2 lg:grid-cols-3 justify-between">
           {/* Beds */}
-          <div className="mb-3">
-            <h3 className="text-lg mb-1">Beds</h3>
+          <div className="">
+            <h3 className="text-md md:text-lg mb-1">Beds</h3>
             <div className="flex text-xs md:text-sm space-x-2">
               {["Any", "1", "2", "3", "4", "5", "6", "7", "8"].map((item) => (
                 <button
@@ -82,8 +82,8 @@ const FilterFlat = ({
           </div>
 
           {/* Bathrooms */}
-          <div className="mb-3">
-            <h3 className="text-lg mb-1">Bathrooms</h3>
+          <div className="">
+            <h3 className="text-md md:text-lg mb-1">Bathrooms</h3>
             <div className="flex text-xs md:text-sm space-x-2">
               {["Any", "1", "2", "3", "4", "5", "6", "7", "8"].map((item) => (
                 <button
@@ -100,8 +100,8 @@ const FilterFlat = ({
           </div>
 
           {/* Categories */}
-          <div className="mb-3">
-            <h2 className="text-lg mb-1">Type</h2>
+          <div className="">
+            <h2 className="text-md md:text-lg mb-1">Type</h2>
             <div className="flex text-xs md:text-sm space-x-2">
               {categories.map((cat) => (
                 <button
@@ -120,7 +120,9 @@ const FilterFlat = ({
       </div>
 
       <div className="mb-4">
-        <h2 className="text-lg mb-4">Search by Category, Location</h2>
+        <h2 className="text-md md:text-lg mb-1 md:mb-2">
+          Search by Category, Location
+        </h2>
         <input
           type="text"
           value={searchTerm}

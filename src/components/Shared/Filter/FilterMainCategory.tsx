@@ -17,7 +17,7 @@ const FilterMainCategory = ({
   };
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center ">
       {/* Categories */}
       <div className="mb-3  ">
         <h2 className="text-xl mb-4 text-center">What You Need</h2>
@@ -26,7 +26,7 @@ const FilterMainCategory = ({
             <button
               key={cat}
               onClick={() => handleSetCategory(cat)}
-              className={`p-3 rounded ${
+              className={`px-3 py-2 rounded ${
                 listCategory === cat ? "bg-teal-600 text-white" : "bg-gray-200"
               }`}
             >

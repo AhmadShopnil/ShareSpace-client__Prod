@@ -2,10 +2,10 @@
 import FilterFlat from "@/components/Shared/Filter/FilterFlat";
 import FilterMainCategory from "@/components/Shared/Filter/FilterMainCategory";
 import FilterWorkSpace from "@/components/Shared/Filter/FilterWorkSpace";
-import HomeList from "@/components/Ui/HomeList/HomeList";
+import HomeList from "@/components/Ui/AllList/HomeList";
 
-import ShopSpaceList from "@/components/Ui/ShopSpaceList/ShopSpaceList";
-import WorkSpaceList from "@/components/Ui/WorkSpaceList/WorkSpaceList";
+import ShopSpaceList from "@/components/Ui/AllList/ShopSpaceList";
+import WorkSpaceList from "@/components/Ui/AllList/WorkSpaceList";
 import { useState } from "react";
 
 const AllFlatListPage = () => {

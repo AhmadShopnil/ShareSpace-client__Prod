@@ -28,12 +28,12 @@ const WorkSpaceList = ({ queryString }: { queryString: any }) => {
       <h1 className="mb-2 text-lg">
         For Office, Total: {data?.workSpaces?.meta?.total}
       </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-around">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4justify-around">
         {data?.workSpaces?.workSpaces.map((flat: TFlat, index: number) => (
           <SpaceCardResponsive
             key={index}
             space={flat}
-            path={"workSpaceDetails"}
+            path="spaceDetails/workSpace"
           />
         ))}
       </div>

@@ -23,20 +23,23 @@ const SpaceCardResponsive = ({ space, path }: { space: any; path: string }) => {
 
   return (
     <Link
-      className="rounded-lg p-3 md:p-4 overflow-hidden shadow-lg border
+      className="rounded-md p-2 md:p-3 overflow-hidden shadow-sm border
      border-teal-100 hover:border-teal-300
-      flex flex-row sm:flex-col gap-6 "
+      flex flex-row sm:flex-col  gap-6 "
       href={`/${path}/${_id}`}
     >
       {/* Image section start */}
-      <div className="bg-gray-200 h-24 sm:h-36 w-24 sm:w-full sm:mr-4 rounded-lg overflow-hidden relative flex-shrink-0">
+      <div
+        className="bg-gray-200 h-18 sm:h-36 w-20 sm:w-full sm:mr-4 rounded-md overflow-hidden
+      relative flex-shrink-0"
+      >
         {images && images.length > 0 ? (
           <Image
             src={images[0]}
             alt={title}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="rounded-lg object-cover "
+            className="rounded-md object-cover "
           />
         ) : (
           <div className="h-full flex items-center justify-center text-gray-500">
@@ -47,14 +50,14 @@ const SpaceCardResponsive = ({ space, path }: { space: any; path: string }) => {
       {/* End image section */}
 
       {/* Content section start */}
-      <div className="py-1 ">
-        <p className="font-bold text-lg md:text-xl mb-2">{title}</p>
-        <div className="pb-2 text-xs font-light">
-          <div className="flex items-center ">
+      <div className="  flex flex-col justify-center ">
+        <p className="font-semibold text-xs md:text-xl mb-2 ">{title}</p>
+        <div className="pb-2  text-[10px] font-light">
+          <div className="flex  items-center ">
             <FontAwesomeIcon icon={faBangladeshiTakaSign} color="teal" />
             <span className="text-gray-600 ml-2 ">{rent} Per Month</span>
           </div>
-          <div className="flex items-center mt-2">
+          <div className="flex items-center mt-1 ">
             <FontAwesomeIcon icon={faLocationDot} color="teal" />
             <span className="text-gray-600 ml-2 ">{location}</span>
           </div>

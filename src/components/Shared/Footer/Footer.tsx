@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-teal-600 text-white py-10 mt-14 mb-10 lg:mb-0">
+    <footer className="bg-teal-600 text-white py-10 mt-10 mb-10 lg:mb-0">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Company Info Section */}

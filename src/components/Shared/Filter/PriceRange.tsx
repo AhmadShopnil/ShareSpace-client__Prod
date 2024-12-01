@@ -98,7 +98,7 @@ const PriceRange: React.FC<PriceRangeProps> = ({
   };
 
   return (
-    <div className="my-2">
+    <div className="md:my-2">
       <div
         className="relative h-4 w-full bg-gray-300 rounded-md cursor-pointer"
         ref={rangeRef}

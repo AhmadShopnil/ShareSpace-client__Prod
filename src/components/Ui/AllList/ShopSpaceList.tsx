@@ -25,12 +25,12 @@ const ShopSpaceList = ({ queryString }: { queryString: any }) => {
       <h1 className="mb-2 text-lg">
         For shop, Total: {data?.shopSpaces?.meta?.total}
       </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-around">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4 justify-around">
         {data?.shopSpaces?.shopSpaces?.map((shopSpace: any, index: number) => (
           <SpaceCardResponsive
             key={index}
             space={shopSpace}
-            path={"shopSpaceDetails"}
+            path="spaceDetails/shopSpace"
           />
         ))}
       </div>
