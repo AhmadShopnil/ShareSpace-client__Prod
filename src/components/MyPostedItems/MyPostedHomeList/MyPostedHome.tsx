@@ -64,7 +64,7 @@ const MyPostedList = ({ data }: { data: TFlatDataInRes[] }) => {
       </div>
 
       {/* Cards for smaller screens */}
-      <div className="sm:hidden space-y-4">
+      <div className="sm:hidden space-y-2 md:space-y-3">
         {data?.map((flat, index) => (
           <MyListedCard
             key={index}

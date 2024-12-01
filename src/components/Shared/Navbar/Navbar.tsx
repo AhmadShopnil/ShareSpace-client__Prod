@@ -22,7 +22,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white sticky top-0  z-20 px-4 sm:px-6 md:px-10  ">
+    <nav className="bg-white sticky top-0  z-20 px-4 sm:px-6 md:px-10   ">
       <div className="flex justify-between items-center py-3">
         {/* logo section */}
         <div className="text-2xl sm:text-3xl   font-bold">
@@ -78,7 +78,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <div className="hidden   md:block">
+        <div className="hidden md:block">
           {!user ? (
             <div className="flex gap-2">
               <Link
@@ -118,7 +118,7 @@ const Navbar = () => {
             <button onClick={handleLogOut} className="flex-1 text-center">
               <FontAwesomeIcon
                 icon={faRightFromBracket}
-                className={`text-xl mx-auto text-red-400`}
+                className={`text-xl mx-auto text-teal-500`}
               />
               {/* <span className="block text-xs mt-1">LogOut </span> */}
             </button>

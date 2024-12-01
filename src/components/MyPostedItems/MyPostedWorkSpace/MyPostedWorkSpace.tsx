@@ -68,7 +68,7 @@ const MyPostedWorkSpace = ({
       </div>
 
       {/* Cards for smaller screens */}
-      <div className="sm:hidden space-y-4">
+      <div className="sm:hidden space-y-2 md:space-y-3">
         {WorkSpaces?.map((workSpace, index) => (
           <MyListedCard
             key={index}

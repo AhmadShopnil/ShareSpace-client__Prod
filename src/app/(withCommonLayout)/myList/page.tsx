@@ -32,10 +32,10 @@ const MyList = () => {
   } = useGetMyAllShopSpacesQuery("");
 
   return (
-    <div className="w-full ">
+    <div className="w-full pt-5">
       {/* Flats Section */}
-      <div className="mb-8">
-        <h1 className="mb-4 font-semibold">My Listed Home:</h1>
+      <div className="mb-4 md:mb-8">
+        <h1 className="mb-2 md:mb-4 font-semibold">My Listed Home:</h1>
         {isLoadingFlats ? (
           <SkeletonTable />
         ) : errorFlats ? (
@@ -50,8 +50,10 @@ const MyList = () => {
       </div>
 
       {/* Workspaces Section */}
-      <div className="mb-8">
-        <h1 className="mb-4 font-semibold">My Listed Work/Office Spaces:</h1>
+      <div className="mb-4 md:mb-8">
+        <h1 className="mb-2 md:mb-4 font-semibold">
+          My Listed Work/Office Spaces:
+        </h1>
         {isLoadingWorkSpaces ? (
           <SkeletonTable />
         ) : errorWorkSpaces ? (
@@ -67,7 +69,7 @@ const MyList = () => {
 
       {/* Shop Spaces Section */}
       <div>
-        <h1 className="mb-4 font-semibold">My Listed Shop Spaces:</h1>
+        <h1 className="mb-2 md:mb-4 font-semibold">My Listed Shop Spaces:</h1>
         {isLoadingShopSpaces ? (
           <SkeletonTable />
         ) : errorShopSpaces ? (

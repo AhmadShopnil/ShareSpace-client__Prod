@@ -34,7 +34,7 @@ const MyListedCard = ({
   };
 
   return (
-    <div className="bg-white p-4   rounded-lg shadow-md flex justify-between ">
+    <div className="bg-white p-4 rounded-md shadow-sm border flex justify-between ">
       {/* details section */}
       <div className="w-2/3 text-xs text-gray-600">
         <div className="mb-2 flex items-center">

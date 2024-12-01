@@ -71,7 +71,7 @@ const MyPostedShopSpace = ({
       </div>
 
       {/* Cards for smaller screens */}
-      <div className="sm:hidden space-y-4">
+      <div className="sm:hidden space-y-2 md:space-y-3">
         {shopSpaces?.map((shopSpace, index) => (
           <MyListedCard
             key={index}
