@@ -30,7 +30,10 @@ const FooterMenuBar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-11 bg-white border-b  border-teal-100 shadow-xl">
+    <div
+      className="fixed bottom-0 left-0 right-0 z-11 bg-white border-b 
+     border-teal-100 shadow-xl"
+    >
       <div className="flex justify-between items-center py-2 ">
         {/* Flat/Home List */}
         <Link href="/" className="flex-1 text-center">

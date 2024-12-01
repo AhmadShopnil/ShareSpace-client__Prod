@@ -15,7 +15,7 @@ interface IFormInput {
 }
 
 const LoginPage = () => {
-  const dispatch=useAppDispatch()
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const [error, setError] = useState("");
   const [isError, setIsError] = useState(false);
@@ -39,12 +39,10 @@ const LoginPage = () => {
       if (accessToken) {
         saveUserInfo({ accessToken });
         setIsError(false);
-        setIsLoading(false); 
+        setIsLoading(false);
         const user = decodedToken(accessToken);
-        dispatch(setUser({user,token:accessToken}))
+        dispatch(setUser({ user, token: accessToken }));
         router.push("/");
-        
-
       }
     } catch (error: any) {
       setError(error?.response?.data?.message);
@@ -54,8 +52,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-teal-50">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
+    <div className="h-full md:py-10  flex items-center justify-center md:bg-teal-50">
+      <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8 mt-14 md:mt-0">
         {isLoading ? (
           <div className="space-y-6">
             <div className="h-8 bg-teal-100 rounded w-1/3 mx-auto"></div>
@@ -85,7 +83,8 @@ const LoginPage = () => {
                   type="phone"
                   id="phone"
                   {...register("phone", { required: "phone is required" })}
-                  className="w-full p-3 mt-1 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
+                  className="w-full p-3 mt-1 border border-gray-300 rounded-lg shadow-sm
+                   focus:outline-none focus:ring-teal-500 focus:border-teal-500"
                   placeholder="Enter your phone"
                 />
                 {errors.phone && (
@@ -118,13 +117,14 @@ const LoginPage = () => {
               </div>
               <button
                 type="submit"
-                className="w-full py-3 mt-4 bg-teal-600 text-white font-semibold rounded-lg shadow-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-75"
+                className="w-full py-3 mt-4 bg-teal-600 text-white font-semibold rounded-md 
+                shadow-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-75"
               >
                 Login
               </button>
             </form>
-            ;
-            <p className="text-sm">
+
+            <p className="text-sm mt-2">
               Do not have an account ? Please{" "}
               <span className="text-teal-600">
                 <Link href="/signUp">SignUp</Link>

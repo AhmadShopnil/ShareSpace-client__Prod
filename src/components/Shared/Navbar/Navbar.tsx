@@ -13,8 +13,6 @@ const Navbar = () => {
   const router = useRouter();
   const user = useAppSelector(selectCurrentUser);
 
-  // const role = user?.role;
-
   const handleLogOut = () => {
     removeUser();
     dispatch(logout());
