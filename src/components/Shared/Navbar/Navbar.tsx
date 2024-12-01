@@ -13,8 +13,6 @@ const Navbar = () => {
   const router = useRouter();
   const user = useAppSelector(selectCurrentUser);
 
-  // const role = user?.role;
-
   const handleLogOut = () => {
     removeUser();
     dispatch(logout());
@@ -96,7 +94,7 @@ const Navbar = () => {
                     hover:bg-teal-500
                     hover:text-white whitespace-nowrap"
               >
-                Sign In
+                SignUp
               </Link>
             </div>
           ) : (

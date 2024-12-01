@@ -50,7 +50,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-teal-50">
+    <div className="md:py-10 flex items-center justify-center bg-teal-50">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
         {/* display on loading time */}
         {isLoading ? (
