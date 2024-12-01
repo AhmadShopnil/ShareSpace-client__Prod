@@ -1,7 +1,7 @@
-import FeaturedFlatList from "@/components/Ui/Home/FeaturedFlatList/FeaturedFlatList";
-import FeaturedShopSpaceList from "@/components/Ui/Home/FeaturedShopSpaceList/FeaturedShopSpaceList";
-import FeaturedWorkSpaceList from "@/components/Ui/Home/FeaturedWorkSpaceList/FeaturedWorkSpaceList";
-import Hero from "@/components/Ui/Home/Hero/Hero";
+import FeaturedFlatList from "@/components/Ui/Home/FeaturedFlatList";
+import FeaturedShopSpaceList from "@/components/Ui/Home/FeaturedShopSpaceList";
+import FeaturedWorkSpaceList from "@/components/Ui/Home/FeaturedWorkSpaceList";
+import Hero from "@/components/Ui/Home/Hero";
 
 const Home = async () => {
   let flatData = null;

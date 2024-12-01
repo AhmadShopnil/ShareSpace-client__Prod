@@ -32,13 +32,13 @@ const FeaturedWorkSpaceList = ({ workspacesData }: Props) => {
       </h3>
       <div
         className="grid grid-cols-1 sm:grid-cols-3 
-      lg:grid-cols-4 xl:grid-cols-5 gap-4 justify-around"
+      lg:grid-cols-4 xl:grid-cols-5 gap-2 md:gap-4 justify-around"
       >
         {workSpaces.slice(0, 9).map((workSpace: TWorkSpaceInRes, index) => (
           <FlatCardResponsive
             key={index}
             space={workSpace} // Passing workspace data to FlatCardResponsive
-            path="workSpaceDetails"
+            path="spaceDetails/workSpace"
           />
         ))}
       </div>
