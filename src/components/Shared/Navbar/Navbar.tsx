@@ -94,7 +94,7 @@ const Navbar = () => {
                     hover:bg-teal-500
                     hover:text-white whitespace-nowrap"
               >
-                Sign In
+                SignUp
               </Link>
             </div>
           ) : (
