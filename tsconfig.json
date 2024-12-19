@@ -26,7 +26,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/components/Ui/Home/Hero/HomeSvg.tsx"
+    "src/components/Ui/Home/Hero/HomeSvg.tsx",
+    "src/app/(withDashboadLayout)/dashboard/admin/home-space-management"
   ],
   "exclude": ["node_modules"]
 }

@@ -30,8 +30,23 @@ export const flatApi = baseApi.injectEndpoints({
       providesTags: [tagTypes.flats],
     }),
 
-    getMyAllFlats: build.query({
+    getAllFlatsByAdmin: build.query({
       query: (arg) => ({
+        url: `/flats/admin?${arg}`,
+        method: "GET",
+        // params: arg,
+      }),
+      transformResponse: (response: any, meta: IMeta) => {
+        return {
+          flats: response,
+          meta,
+        };
+      },
+      providesTags: [tagTypes.flats],
+    }),
+
+    getMyAllFlats: build.query({
+      query: () => ({
         url: `/flats/myPostedHouse`,
         method: "GET",
         // params: arg,
@@ -82,4 +97,5 @@ export const {
   useUpdateFlatMutation,
   useGetAllFlatsQuery,
   useGetMyAllFlatsQuery,
+  useGetAllFlatsByAdminQuery,
 } = flatApi;
