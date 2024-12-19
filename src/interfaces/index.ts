@@ -47,3 +47,9 @@ export type TMeta = {
   total: number;
   totalPage: number;
 };
+
+export interface TSidebarItem {
+  name: string;
+  path: string;
+  icon: any;
+}

@@ -44,6 +44,20 @@ export const workSpaceApi = baseApi.injectEndpoints({
       },
       providesTags: [tagTypes.workSpaces],
     }),
+    getAllWorkSpacesByAdmin: build.query({
+      query: (arg) => ({
+        url: `/workSpaces/admin?${arg}`,
+        method: "GET",
+        // params: arg,
+      }),
+      transformResponse: (response: any, meta: IMeta) => {
+        return {
+          workSpaces: response,
+          meta,
+        };
+      },
+      providesTags: [tagTypes.workSpaces],
+    }),
 
     deleteWorkSpace: build.mutation({
       query: (workSpaceId) => ({
@@ -82,4 +96,5 @@ export const {
   useUpdateWorkSpaceMutation,
   useGetAllWorkSpacesQuery,
   useGetMyAllWorkSpacesQuery,
+  useGetAllWorkSpacesByAdminQuery,
 } = workSpaceApi;

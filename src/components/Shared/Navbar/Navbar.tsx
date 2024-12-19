@@ -76,6 +76,17 @@ const Navbar = () => {
           </Link>
         </div>
 
+        {user?.role === "admin" && (
+          <Link
+            href="/dashboard"
+            className="hidden md:flex border border-teal-500
+            text-teal-500 px-3 py-1 rounded hover:bg-teal-500
+             hover:text-white whitespace-nowrap mr-2"
+          >
+            Dashboard
+          </Link>
+        )}
+
         <div className="hidden md:block">
           {!user ? (
             <div className="flex gap-2">

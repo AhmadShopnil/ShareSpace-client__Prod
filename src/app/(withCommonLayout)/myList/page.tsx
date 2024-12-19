@@ -6,10 +6,7 @@ import MyPostedShopSpace from "@/components/MyPostedItems/MyPostedShopSpace/MyPo
 import MyPostedWorkSpace from "@/components/MyPostedItems/MyPostedWorkSpace/MyPostedWorkSpace";
 
 import { useGetMyAllFlatsQuery } from "@/redux/api/flatApi";
-import {
-  useGetAllShopSpacesQuery,
-  useGetMyAllShopSpacesQuery,
-} from "@/redux/api/shopSpaceApi";
+import { useGetMyAllShopSpacesQuery } from "@/redux/api/shopSpaceApi";
 import { useGetMyAllWorkSpacesQuery } from "@/redux/api/workSpaceApi";
 
 const MyList = () => {

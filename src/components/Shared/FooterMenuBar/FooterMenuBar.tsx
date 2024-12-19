@@ -16,6 +16,7 @@ import ShareSpaceModal from "@/components/Modal/ShareSpaceModal/ShareSpaceModal"
 
 const FooterMenuBar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const user = useAppSelector(selectCurrentUser);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -24,8 +25,6 @@ const FooterMenuBar = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
-  const user = useAppSelector(selectCurrentUser);
 
   const pathname = usePathname();
 
@@ -80,7 +79,7 @@ const FooterMenuBar = () => {
           </Link>
         )}
 
-        {user && (
+        {user?.role === "user" && (
           <Link href="/myList" className="flex-1 text-center">
             <FontAwesomeIcon
               icon={faList}
@@ -89,6 +88,18 @@ const FooterMenuBar = () => {
               }`}
             />
             <span className="block text-xs mt-1">My List </span>
+          </Link>
+        )}
+
+        {user?.role === "admin" && (
+          <Link href="/dashboard" className="flex-1 text-center">
+            <FontAwesomeIcon
+              icon={faList}
+              className={`text-lg mx-auto ${
+                pathname === "/dasboard" ? "text-teal-600" : "text-gray-500"
+              }`}
+            />
+            <span className="block text-xs mt-1">Dashboard </span>
           </Link>
         )}
 

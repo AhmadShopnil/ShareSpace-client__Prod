@@ -30,6 +30,20 @@ export const shopSpaceApi = baseApi.injectEndpoints({
       providesTags: [tagTypes.shopSpaces],
     }),
 
+    getAllShopSpacesByAdmin: build.query({
+      query: (arg) => ({
+        url: `/shopSpaces/admin?${arg}`,
+        method: "GET",
+        // params: arg,
+      }),
+      transformResponse: (response: any, meta: IMeta) => {
+        return {
+          shopSpaces: response,
+          meta,
+        };
+      },
+      providesTags: [tagTypes.shopSpaces],
+    }),
     getMyAllShopSpaces: build.query({
       query: (arg) => ({
         url: `/shopSpaces/myPostedshopSpace`,
@@ -82,4 +96,5 @@ export const {
   useUpdateShopSpaceMutation,
   useGetAllShopSpacesQuery,
   useGetMyAllShopSpacesQuery,
+  useGetAllShopSpacesByAdminQuery,
 } = shopSpaceApi;
