@@ -2,6 +2,8 @@
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export const ListedTableRow = ({
   spaceInfo,
@@ -18,6 +20,7 @@ export const ListedTableRow = ({
 }) => {
   const { title, location, availability, _id, isDeleted, postStatus } =
     spaceInfo;
+  const pathname = usePathname();
 
   const handleUpdateSingleSpace = () => {
     setSelectedItem(spaceInfo);
@@ -42,9 +45,9 @@ export const ListedTableRow = ({
       </td>
       <td className="px-6 py-2">
         {isDeleted ? (
-          <span className="text-red-500">Deleted</span>
+          <span className="text-red-500">True</span>
         ) : (
-          <span className="text-green-500">Published</span>
+          <span className="text-green-500">False</span>
         )}
       </td>
       <td
@@ -59,7 +62,7 @@ export const ListedTableRow = ({
         {postStatus}
       </td>
 
-      <td className="px-6 py-2 flex  justify-center gap-4">
+      <td className="px-6 py-2 flex  justify-center items-center gap-4">
         <button
           onClick={handleUpdateSingleSpace}
           className="text-blue-500 hover:underline"
@@ -72,6 +75,10 @@ export const ListedTableRow = ({
         >
           <FontAwesomeIcon icon={faTrash} />
         </button>
+        <Link className="text-blue-500 text-sm " href={`${pathname}/${_id}`}>
+          View
+        </Link>
+        {/* <Link href={`/dashboard/admin/spaceDetails/home/${_id}`}>View</Link> */}
       </td>
     </tr>
   );

@@ -13,14 +13,14 @@ const Hero = () => {
       {/* Left Side */}
       <div className="w-full md:w-1/2  z-10">
         <h1 className="text-2xl md:text-4xl font-bold mb-4">
-          Looking for a Home? We’ve Got You Covered
+          Looking for Home / Workplace / Shop ? We’ve Got You Covered
         </h1>
         <p className="text-gray-600 mb-6 text-xs md:text-lg">
-          Find the perfect home or the ideal flat in your area. Connect with
-          others and create the living arrangement you’ve always wanted.
+          Find the perfect home or the ideal space for your ofice in your area.
+          Connect with others and create the arrangement you’ve always wanted.
         </p>
 
-        <div className="flex gap-4 md:gap-8">
+        <div className="flex gap-3 md:gap-4">
           <ShareSpaceButton></ShareSpaceButton>
           <Link
             href={`/allSpacesList`}

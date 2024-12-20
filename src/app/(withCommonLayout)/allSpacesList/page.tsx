@@ -6,33 +6,27 @@ import HomeList from "@/components/Ui/AllList/HomeList";
 
 import ShopSpaceList from "@/components/Ui/AllList/ShopSpaceList";
 import WorkSpaceList from "@/components/Ui/AllList/WorkSpaceList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const AllFlatListPage = () => {
   const [queries, setQueries] = useState({});
-  const queryString = new URLSearchParams(queries).toString();
+  const [queryString, setQueryString] = useState("");
+
+  // const queryString = new URLSearchParams(queries).toString();
   const [listCategory, setListCategory] = useState("Home");
 
-  let listContent;
+  useEffect(() => {
+    const value = new URLSearchParams(queries).toString();
+    setQueryString(value);
+  }, [queries]);
 
-  // if (listCategory === "All") {
-  //   listContent = (
-  //     <>
-  //       <FilterFlat setQueries={setQueries}></FilterFlat>
-  //       <div className="flex flex-col gap-10">
-  //         <AllFlatList queryString={queryString}></AllFlatList>
-  //         <WorkSpaceList queryString={queryString}></WorkSpaceList>
-  //         <ShopSpaceList queryString={queryString}></ShopSpaceList>
-  //       </div>
-  //     </>
-  //   );
-  // }
+  let listContent;
 
   if (listCategory === "Home") {
     listContent = (
       <>
         <FilterFlat setQueries={setQueries}></FilterFlat>
-        <HomeList queryString={queryString}></HomeList>
+        <HomeList queryString={queryString} setQueries={setQueries}></HomeList>
       </>
     );
   }
@@ -40,7 +34,10 @@ const AllFlatListPage = () => {
     listContent = (
       <>
         <FilterWorkSpace setQueries={setQueries} />
-        <WorkSpaceList queryString={queryString}></WorkSpaceList>
+        <WorkSpaceList
+          queryString={queryString}
+          setQueries={setQueries}
+        ></WorkSpaceList>
       </>
     );
   }
@@ -49,7 +46,10 @@ const AllFlatListPage = () => {
     listContent = (
       <>
         <FilterWorkSpace setQueries={setQueries} />
-        <ShopSpaceList queryString={queryString}></ShopSpaceList>
+        <ShopSpaceList
+          queryString={queryString}
+          setQueries={setQueries}
+        ></ShopSpaceList>
       </>
     );
   }
