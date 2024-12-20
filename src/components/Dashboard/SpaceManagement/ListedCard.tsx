@@ -7,6 +7,8 @@ import {
   faBangladeshiTakaSign,
 } from "@fortawesome/free-solid-svg-icons";
 import { TFlatDataInRes } from "@/interfaces";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export const ListedCard = ({
   spaceInfo,
@@ -21,7 +23,9 @@ export const ListedCard = ({
   setSelectedItem: any;
   setUpdateModalOpen: any;
 }) => {
-  const { title, location, rent, images, _id } = spaceInfo;
+  const { title, location, rent, images, _id, postStatus, isDeleted } =
+    spaceInfo;
+  const pathname = usePathname();
 
   const handleUpdateSingleSpace = () => {
     setSelectedItem(spaceInfo);
@@ -38,7 +42,21 @@ export const ListedCard = ({
       {/* details section */}
       <div className="w-2/3 text-xs text-gray-600">
         <div className="mb-2 flex items-center">
-          <span className="font-bold text-sm">{title}</span>
+          <p className="font-bold text-sm">
+            {title}{" "}
+            <span
+              className={`px-2 py-1 ml-1 text-[8px] font-normal rounded-md ${
+                postStatus === "approved"
+                  ? "bg-green-200"
+                  : postStatus === "rejected"
+                  ? "bg-red-200"
+                  : "bg-yellow-200"
+              }`}
+            >
+              {postStatus}
+            </span>
+          </p>
+          {/* <span className="font-bold text-sm">{title}</span> */}
         </div>
         <div className="mb-2 flex items-center">
           <FontAwesomeIcon
@@ -55,6 +73,10 @@ export const ListedCard = ({
           />
           <span className="font-semibold "></span> {location}
         </div>
+
+        <Link className="text-blue-500 text-xs" href={`${pathname}/${_id}`}>
+          View
+        </Link>
       </div>
       {/* image section */}
       <div className="w-1/3 flex gap-4">

@@ -25,8 +25,8 @@ const Navbar = () => {
         {/* logo section */}
         <div className="text-2xl sm:text-3xl   font-bold">
           <Link href="/">
-            Share
-            <span className=" text-teal-500">Space</span>
+            Tangail
+            <span className=" text-teal-500">Spaces</span>
           </Link>
         </div>
 

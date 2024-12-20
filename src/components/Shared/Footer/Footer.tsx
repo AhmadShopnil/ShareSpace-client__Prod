@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Company Info Section */}
           <div>
-            <h2 className="text-2xl font-semibold mb-4">Share Space</h2>
+            <h2 className="text-2xl font-semibold mb-4">Tangail Spaces</h2>
             <p className="mb-4">
               Find your ideal flat with ease. We provide the best listings to
               help you find the perfect home.

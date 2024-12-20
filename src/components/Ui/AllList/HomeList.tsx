@@ -1,14 +1,42 @@
 "use client";
 
 import { TFlat } from "@/components/Shared/SpaceCard/SpaceCard";
-
 import SkeletonResFlatList from "@/components/Loading/SkeletonResFlatList";
 import NotFoundData from "@/components/Shared/NotFoundData/NotFoundData";
 import { useGetAllFlatsQuery } from "@/redux/api/flatApi";
 import SpaceCardResponsive from "@/components/Shared/SpaceCard/SpaceCardResponsive";
+import Pagination from "@/components/Shared/Pagination";
+import { useEffect, useState } from "react";
 
-const HomeList = ({ queryString }: { queryString: any }) => {
+const HomeList = ({
+  queryString,
+  setQueries,
+}: {
+  queryString: any;
+  setQueries: any;
+}) => {
   const { data, isLoading } = useGetAllFlatsQuery(queryString);
+  const [page, setPage] = useState<number>();
+
+  useEffect(() => {
+    const query: { [key: string]: any } = {};
+    query.page = page;
+    query.limit = 10;
+
+    setQueries(query);
+  }, [page, setQueries]);
+
+  const handlePageChange = (page: number) => {
+    setPage(page);
+  };
+
+  // const handlePageChange = (page: number) => {
+  //   const query: { [key: string]: any } = {};
+  //   query.page = page;
+  //   query.limit = 8;
+
+  //   setQueries(query);
+  // };
 
   if (isLoading) {
     return <SkeletonResFlatList></SkeletonResFlatList>;
@@ -23,7 +51,7 @@ const HomeList = ({ queryString }: { queryString: any }) => {
       <h1 className="mb-2 text-lg">
         For Home, Total: {data?.flats?.meta?.total}
       </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4 justify-around">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2 md:gap-4 justify-around">
         {data?.flats?.flats.map((flat: TFlat, index: number) => (
           <SpaceCardResponsive
             key={index}
@@ -32,6 +60,12 @@ const HomeList = ({ queryString }: { queryString: any }) => {
           />
         ))}
       </div>
+
+      <Pagination
+        currentPage={data?.flats?.meta?.page || 1}
+        totalPages={data?.flats?.meta?.totalPage}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 };

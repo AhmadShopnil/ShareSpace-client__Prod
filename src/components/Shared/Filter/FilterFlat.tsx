@@ -120,15 +120,15 @@ const FilterFlat = ({
       </div>
 
       <div className="mb-4">
-        <h2 className="text-md md:text-lg mb-1 md:mb-2">
-          Search by Category, Location
+        <h2 className="text-md md:text-lg mb-1 md:mb-2 ">
+          Search by Location, Description and Title
         </h2>
         <input
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search by location, category"
-          className="w-full p-2 border rounded focus:outline-none focus:ring focus:ring-teal-500"
+          placeholder=" Search by Location, Description and Title"
+          className="text-xs md:text-lg w-full p-2 border rounded focus:outline-none focus:ring focus:ring-teal-500"
         />
       </div>
     </div>
