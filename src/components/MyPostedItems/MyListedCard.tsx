@@ -21,7 +21,7 @@ const MyListedCard = ({
   setSelectedItem: any;
   setUpdateModalOpen: any;
 }) => {
-  const { title, location, rent, images, _id } = spaceInfo;
+  const { title, location, rent, images, _id, postStatus } = spaceInfo;
 
   const handleUpdateSingleSpace = () => {
     setSelectedItem(spaceInfo);
@@ -37,9 +37,23 @@ const MyListedCard = ({
     <div className="bg-white p-4 rounded-md shadow-sm border flex justify-between ">
       {/* details section */}
       <div className="w-2/3 text-xs text-gray-600">
-        <div className="mb-2 flex items-center">
-          <span className="font-bold text-sm">{title}</span>
+        <div className="mb-2  ">
+          <p className="font-bold text-sm">
+            {title}{" "}
+            <span
+              className={`px-2 py-1 ml-1 text-xs font-normal rounded-md ${
+                postStatus === "approved"
+                  ? "bg-green-200"
+                  : postStatus === "rejected"
+                  ? "bg-red-200"
+                  : "bg-yellow-200"
+              }`}
+            >
+              {postStatus}
+            </span>
+          </p>
         </div>
+
         <div className="mb-2 flex items-center">
           <FontAwesomeIcon
             icon={faBangladeshiTakaSign}

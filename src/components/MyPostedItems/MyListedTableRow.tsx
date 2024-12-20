@@ -16,7 +16,7 @@ const MyListedTableRow = ({
   setSelectedItem: any;
   setUpdateModalOpen: any;
 }) => {
-  const { title, location, rent, _id } = spaceInfo;
+  const { title, location, rent, _id, postStatus } = spaceInfo;
 
   const handleUpdateSingleSpace = () => {
     setSelectedItem(spaceInfo);
@@ -33,6 +33,17 @@ const MyListedTableRow = ({
       <td className="px-6 py-2">{title}</td>
       <td className="px-6 py-2">{rent}</td>
       <td className="px-6 py-2">{location}</td>
+      <td
+        className={`px-6 py-2 ${
+          postStatus === "approved"
+            ? "text-green-500"
+            : postStatus === "rejected"
+            ? "text-red-500"
+            : "text-yellow-500"
+        }`}
+      >
+        {postStatus}
+      </td>
       <td className="px-6 py-2 flex  justify-center gap-4">
         <button
           onClick={handleUpdateSingleSpace}
