@@ -4,7 +4,6 @@ import SkeletonTable from "@/components/Loading/SkeletonTable";
 import MyPostedList from "@/components/MyPostedItems/MyPostedHomeList/MyPostedHome";
 import MyPostedShopSpace from "@/components/MyPostedItems/MyPostedShopSpace/MyPostedShopSpace";
 import MyPostedWorkSpace from "@/components/MyPostedItems/MyPostedWorkSpace/MyPostedWorkSpace";
-
 import { useGetMyAllFlatsQuery } from "@/redux/api/flatApi";
 import { useGetMyAllShopSpacesQuery } from "@/redux/api/shopSpaceApi";
 import { useGetMyAllWorkSpacesQuery } from "@/redux/api/workSpaceApi";

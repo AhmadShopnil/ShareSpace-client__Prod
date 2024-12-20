@@ -75,7 +75,7 @@ export const SpaceList = ({
             </tr>
           </thead>
           <tbody>
-            {data?.map((flat, index) => (
+            {data?.map((flat: any, index) => (
               <ListedTableRow
                 key={index}
                 spaceInfo={flat}

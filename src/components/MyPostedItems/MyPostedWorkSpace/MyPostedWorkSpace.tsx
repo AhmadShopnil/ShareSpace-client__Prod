@@ -49,6 +49,9 @@ const MyPostedWorkSpace = ({
               <th className="w-1/4 px-5 py-2 text-left text-gray-600">
                 Location
               </th>
+              <th className="w-1/4 px-5 py-2 text-left text-gray-600">
+                Status
+              </th>
               <th className="w-1/4 px-5 py-2  text-gray-600">Action</th>
             </tr>
           </thead>
