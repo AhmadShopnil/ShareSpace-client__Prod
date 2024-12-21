@@ -11,9 +11,9 @@ const Hero = () => {
   return (
     <div className="flex flex-col md:flex-row items-center  ">
       {/* Left Side */}
-      <div className="w-full md:w-1/2  z-10">
-        <h1 className="text-2xl md:text-4xl font-bold mb-4">
-          Looking for Home / Workplace / Shop ? We’ve Got You Covered
+      <div className="w-full md:w-1/2  z-10 pt-5">
+        <h1 className="text-xl md:text-4xl font-bold mb-4">
+          Looking for sapces ? We’ve Got You Covered
         </h1>
         <p className="text-gray-600 mb-6 text-xs md:text-lg">
           Find the perfect home or the ideal space for your ofice in your area.
