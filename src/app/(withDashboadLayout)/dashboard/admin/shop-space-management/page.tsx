@@ -10,7 +10,6 @@ const Page = () => {
   const [queries, setQueries] = useState({});
   const [queryString, setQueryString] = useState("");
   const [page, setPage] = useState<number>();
-
   const { data, isLoading, error } =
     useGetAllShopSpacesByAdminQuery(queryString);
 
