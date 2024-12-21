@@ -31,10 +31,11 @@ const FeaturedFlatList = ({ flatData }: Props) => {
     <div>
       {/* Update heading level to <h2> or ensure it's logically following an <h1>/<h2> */}
       <div className="flex justify-between">
-        <span className="text-sm sm:text-lg md:text-xl mb-4">
-          Best Home For You
-        </span>
-        <Link href="/allSpacesList" className="text-teal-500">
+        <span className="text-sm sm:text-lg md:text-xl mb-4">Best Home</span>
+        <Link
+          href="/allSpacesList"
+          className="text-teal-500 text-sm sm:text-lg"
+        >
           See More
         </Link>
       </div>

@@ -30,9 +30,12 @@ const FeaturedWorkSpaceList = ({ workspacesData }: Props) => {
     <div>
       <div className="flex justify-between">
         <span className="text-sm sm:text-lg md:text-xl mb-4">
-          Best Work Spaces / Office Spaces For You
+          Best Work/Shop Spaces
         </span>
-        <Link href="/allSpacesList" className="text-teal-500">
+        <Link
+          href="/allSpacesList"
+          className="text-teal-500 text-sm sm:text-lg"
+        >
           See More
         </Link>
       </div>
