@@ -4,42 +4,36 @@ import { SpaceList } from "@/components/Dashboard/SpaceManagement/SpaceList";
 import SkeletonTable from "@/components/Loading/SkeletonTable";
 import Pagination from "@/components/Shared/Pagination";
 import { useGetAllWorkSpacesByAdminQuery } from "@/redux/api/workSpaceApi";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const Page = () => {
-  const [queries, setQueries] = useState({});
-  const [queryString, setQueryString] = useState("");
-  const [page, setPage] = useState<number>();
+  const [page, setPage] = useState<number>(1); // Default to page 1
+  const queryString = new URLSearchParams({
+    page: page.toString(),
+    limit: "10",
+  }).toString();
 
-  // fetch data by rtk
+  // Fetch data using RTK query
   const { data, isLoading, error } =
     useGetAllWorkSpacesByAdminQuery(queryString);
 
-  useEffect(() => {
-    const query: { [key: string]: any } = {};
-    query.page = page;
-    query.limit = 10;
-    setQueries(query);
-    const originalQuery = new URLSearchParams(queries).toString();
-    setQueryString(originalQuery);
-  }, [page, queries]);
-
-  // page change
-  const handlePageChange = (page: number) => {
-    setPage(page);
+  // Handle page change
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
   };
 
   return (
     <div>
       <div className="mb-4 md:mb-8">
         <h1 className="mb-2 md:mb-4 font-semibold">
-          Work /Office Spaces Management:
+          Work / Office Spaces Management:
         </h1>
         {isLoading ? (
           <SkeletonTable />
         ) : error ? (
           <p className="text-red-500">
-            Error loading flats: Somthing Went Wrong ! Try later
+            Error loading workspaces: Something went wrong! Please try again
+            later.
           </p>
         ) : data?.workSpaces?.workSpaces?.length > 0 ? (
           <SpaceList
@@ -47,13 +41,13 @@ const Page = () => {
             data={data?.workSpaces?.workSpaces}
           />
         ) : (
-          <p className="text-gray-500">No flats listed.</p>
+          <p className="text-gray-500">No workspaces listed.</p>
         )}
       </div>
 
       <Pagination
         currentPage={data?.workSpaces?.meta?.page || 1}
-        totalPages={data?.workSpaces?.meta?.totalPage}
+        totalPages={data?.workSpaces?.meta?.totalPage || 1}
         onPageChange={handlePageChange}
       />
     </div>

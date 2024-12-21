@@ -4,25 +4,16 @@ import { SpaceList } from "@/components/Dashboard/SpaceManagement/SpaceList";
 import SkeletonTable from "@/components/Loading/SkeletonTable";
 import Pagination from "@/components/Shared/Pagination";
 import { useGetAllShopSpacesByAdminQuery } from "@/redux/api/shopSpaceApi";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const Page = () => {
-  const [queries, setQueries] = useState({});
-  const [queryString, setQueryString] = useState("");
-  const [page, setPage] = useState<number>();
+  const [page, setPage] = useState<number>(1); // Default to page 1
+  const queryString = new URLSearchParams({
+    page: page.toString(),
+    limit: "10",
+  }).toString();
   const { data, isLoading, error } =
     useGetAllShopSpacesByAdminQuery(queryString);
-
-  useEffect(() => {
-    const query: { [key: string]: any } = {};
-    query.page = page;
-    query.limit = 10;
-
-    setQueries(query);
-
-    const originalQuery = new URLSearchParams(queries).toString();
-    setQueryString(originalQuery);
-  }, [page, queries]);
 
   const handlePageChange = (page: number) => {
     setPage(page);
@@ -36,7 +27,7 @@ const Page = () => {
           <SkeletonTable />
         ) : error ? (
           <p className="text-red-500">
-            Error loading flats: Somthing Went Wrong ! Try later
+            Error loading flats: Something went wrong! Try again later.
           </p>
         ) : data?.shopSpaces?.shopSpaces?.length > 0 ? (
           <SpaceList
@@ -50,7 +41,7 @@ const Page = () => {
 
       <Pagination
         currentPage={data?.shopSpaces?.meta?.page || 1}
-        totalPages={data?.shopSpaces?.meta?.totalPage}
+        totalPages={data?.shopSpaces?.meta?.totalPage || 1}
         onPageChange={handlePageChange}
       />
     </div>
