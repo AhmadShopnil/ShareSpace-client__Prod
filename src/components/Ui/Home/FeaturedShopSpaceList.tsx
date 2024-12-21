@@ -1,6 +1,7 @@
 import FlatCardResponsive from "@/components/Shared/SpaceCard/SpaceCardResponsive";
 import { TWorkSpaceInRes } from "@/interfaces";
 import { TApiResponse, TResponseWokSpace } from "@/interfaces/common";
+import Link from "next/link";
 
 type Props = {
   shopSpacesData: TApiResponse<any>; // API response type with workSpaces
@@ -27,9 +28,14 @@ const FeaturedShopSpaceList = ({ shopSpacesData }: Props) => {
 
   return (
     <div>
-      <h3 className="text-sm sm:text-lg md:text-xl mb-4">
-        Best Shop Spaces For You
-      </h3>
+      <div className="flex justify-between">
+        <span className="text-sm sm:text-lg md:text-xl mb-4">
+          Best Shop Spaces For You
+        </span>
+        <Link href="/allSpacesList" className="text-teal-500">
+          See More
+        </Link>
+      </div>
       <div
         className="grid grid-cols-1 sm:grid-cols-3 
       lg:grid-cols-4 xl:grid-cols-5 gap-2 md:gap-4 justify-around"

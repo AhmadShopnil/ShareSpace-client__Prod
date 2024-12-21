@@ -32,7 +32,8 @@ export type TWorkSpaceInRes = {
 export interface TUserData {
   name: string;
   phone: string;
-  password: string;
+  password?: string;
+  role?: string;
 }
 export interface TTokenData {
   _id: string;

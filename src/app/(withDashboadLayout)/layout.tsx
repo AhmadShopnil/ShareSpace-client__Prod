@@ -6,23 +6,22 @@ import { MoveLeft, MoveRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import { DashboardNav } from "@/components/Dashboard/DashboardNav";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { getFromLocalStorage } from "@/utils/localStorage";
 import { setUser } from "@/redux/slices/authSlice";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  const dispatch: any = useAppDispatch();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const sidebarRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
+  const dispatch: any = useAppDispatch();
   const token = getFromLocalStorage("accessToken");
-  const user = getUserInfo();
+  const user: any = getUserInfo();
 
   useEffect(() => {
     dispatch(setUser({ user, token }));
   });
-
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const sidebarRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
 
   // Toggle sidebar open/close
   const toggleSidebar = () => {
@@ -40,15 +39,15 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       }
     };
 
-    if (!isLoggedIn()) {
-      return router.push("/login");
-    }
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  if (user?.role !== "admin") {
+    return router.push("/custom-error-page");
+  }
 
   return (
     <div>

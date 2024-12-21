@@ -12,7 +12,7 @@ const Home = async () => {
 
   try {
     // Fetch flats data
-    const resFlats = await fetch(`${basUrl}/flats`, {
+    const resFlats = await fetch(`${basUrl}/flats?limit=5`, {
       next: { revalidate: 30 },
     });
 
@@ -22,7 +22,7 @@ const Home = async () => {
     flatData = await resFlats.json();
 
     // Fetch workspaces data
-    const resWorkspaces = await fetch(`${basUrl}/workspaces`, {
+    const resWorkspaces = await fetch(`${basUrl}/workspaces?limit=5`, {
       next: { revalidate: 30 },
     });
 
@@ -34,7 +34,7 @@ const Home = async () => {
     workspacesData = await resWorkspaces.json();
 
     // Fetch shop spaces data
-    const resShopspaces = await fetch(`${basUrl}/shopspaces`, {
+    const resShopspaces = await fetch(`${basUrl}/shopspaces?limit=5`, {
       next: { revalidate: 30 },
     });
 
