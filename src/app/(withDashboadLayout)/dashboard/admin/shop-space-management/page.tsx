@@ -2,14 +2,31 @@
 
 import { SpaceList } from "@/components/Dashboard/SpaceManagement/SpaceList";
 import SkeletonTable from "@/components/Loading/SkeletonTable";
-import { useGetAllFlatsQuery } from "@/redux/api/flatApi";
-import {
-  useGetAllShopSpacesByAdminQuery,
-  useGetAllShopSpacesQuery,
-} from "@/redux/api/shopSpaceApi";
+import Pagination from "@/components/Shared/Pagination";
+import { useGetAllShopSpacesByAdminQuery } from "@/redux/api/shopSpaceApi";
+import { useEffect, useState } from "react";
 
 const Page = () => {
-  const { data, isLoading, error } = useGetAllShopSpacesByAdminQuery("");
+  const [queries, setQueries] = useState({});
+  const [queryString, setQueryString] = useState("");
+  const [page, setPage] = useState<number>();
+  const { data, isLoading, error } =
+    useGetAllShopSpacesByAdminQuery(queryString);
+
+  useEffect(() => {
+    const query: { [key: string]: any } = {};
+    query.page = page;
+    query.limit = 10;
+
+    setQueries(query);
+
+    const originalQuery = new URLSearchParams(queries).toString();
+    setQueryString(originalQuery);
+  }, [page, queries]);
+
+  const handlePageChange = (page: number) => {
+    setPage(page);
+  };
 
   return (
     <div>
@@ -30,6 +47,12 @@ const Page = () => {
           <p className="text-gray-500">No flats listed.</p>
         )}
       </div>
+
+      <Pagination
+        currentPage={data?.shopSpaces?.meta?.page || 1}
+        totalPages={data?.shopSpaces?.meta?.totalPage}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 };
