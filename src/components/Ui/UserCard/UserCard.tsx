@@ -1,15 +1,13 @@
 import { removeUser } from "@/services/authServices";
 import React from "react";
 
-interface UserCardProps {
-  userData: {
-    name: string;
-    phone: string;
-  };
+const UserCard = ({
+  userData,
+  setIsLoggedIn,
+}: {
+  userData: any;
   setIsLoggedIn: any;
-}
-
-const UserCard: React.FC<UserCardProps> = ({ userData, setIsLoggedIn }) => {
+}) => {
   const { name, phone } = userData;
 
   const handleRemoveUser = () => {
@@ -30,7 +28,7 @@ const UserCard: React.FC<UserCardProps> = ({ userData, setIsLoggedIn }) => {
           onClick={handleRemoveUser}
           className="bg-teal-500 text-white text-xs sm:text-sm px-4 py-2 rounded mr-4"
         >
-         Change Owner Info
+          Change Owner Info
         </button>
       </div>
     </div>

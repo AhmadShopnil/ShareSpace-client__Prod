@@ -45,6 +45,7 @@ const LoginPage = () => {
         router.push("/");
       }
     } catch (error: any) {
+      console.log("from login error", error);
       setError(error?.response?.data?.message);
       setIsError(true);
       setIsLoading(false);
