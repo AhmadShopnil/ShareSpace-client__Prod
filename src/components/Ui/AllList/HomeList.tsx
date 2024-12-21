@@ -16,6 +16,7 @@ const HomeList = ({
   setQueries: any;
 }) => {
   const { data, isLoading } = useGetAllFlatsQuery(queryString);
+
   const [page, setPage] = useState<number>();
 
   useEffect(() => {
@@ -29,14 +30,6 @@ const HomeList = ({
   const handlePageChange = (page: number) => {
     setPage(page);
   };
-
-  // const handlePageChange = (page: number) => {
-  //   const query: { [key: string]: any } = {};
-  //   query.page = page;
-  //   query.limit = 8;
-
-  //   setQueries(query);
-  // };
 
   if (isLoading) {
     return <SkeletonResFlatList></SkeletonResFlatList>;
