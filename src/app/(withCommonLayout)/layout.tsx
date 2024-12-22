@@ -28,7 +28,7 @@ const CommmonLayout = ({ children }: { children: React.ReactNode }) => {
       <div className="hidden md:flex justify-center mt-10">
         <Footer />
       </div>
-      <div className="lg:hidden mt-16 bg-green-300  ">
+      <div className="lg:hidden mt-20 bg-green-300  ">
         <FooterMenuBar></FooterMenuBar>
       </div>
     </div>
