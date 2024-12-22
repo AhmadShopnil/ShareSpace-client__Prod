@@ -43,7 +43,7 @@ const FooterMenuBar = () => {
             }`}
           />
           <span
-            className={`block text-xs mt-1 ${
+            className={`block text-xs  ${
               pathname === "/" ? "text-teal-900" : "text-white"
             }`}
           >
@@ -60,7 +60,7 @@ const FooterMenuBar = () => {
             }`}
           />
           <span
-            className={`block text-xs mt-1 ${
+            className={`block text-xs ${
               pathname === "/allSpacesList" ? "text-teal-900" : "text-white"
             }`}
           >
@@ -78,7 +78,7 @@ const FooterMenuBar = () => {
             }`}
           />
           <span
-            className={`block text-xs mt-1 ${
+            className={`block text-xs ${
               pathname === "/postFlat" ? "text-teal-900" : "text-white"
             }`}
           >
@@ -95,7 +95,7 @@ const FooterMenuBar = () => {
               }`}
             />
             <span
-              className={`block text-xs mt-1 ${
+              className={`block text-xs ${
                 pathname === "/login" ? "text-teal-900" : "text-white"
               }`}
             >
@@ -113,7 +113,7 @@ const FooterMenuBar = () => {
               }`}
             />
             <span
-              className={`block text-xs mt-1 ${
+              className={`block text-xs ${
                 pathname === "/myList" ? "text-teal-900" : "text-white"
               }`}
             >
@@ -131,7 +131,7 @@ const FooterMenuBar = () => {
               }`}
             />
             <span
-              className={`block text-xs mt-1 ${
+              className={`block text-xs ${
                 pathname === "/dasboard" ? "text-teal-900" : "text-white"
               }`}
             >
