@@ -30,8 +30,8 @@ const FooterMenuBar = () => {
 
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-11 bg-white border-b 
-     border-teal-100 shadow-xl"
+      className="fixed bottom-0 left-0 right-0 z-10 bg-teal-500 text-white border-b 
+     border-teal-100 shadow-xl "
     >
       <div className="flex justify-between items-center py-2 ">
         {/* Flat/Home List */}
@@ -39,20 +39,33 @@ const FooterMenuBar = () => {
           <FontAwesomeIcon
             icon={faHome}
             className={`text-lg  mx-auto ${
-              pathname === "/" ? "text-teal-600" : "text-gray-500"
+              pathname === "/" ? "text-teal-900" : "text-white"
             }`}
           />
-          <span className="block text-xs mt-1">Home </span>
+          <span
+            className={`block text-xs mt-1 ${
+              pathname === "/" ? "text-teal-900" : "text-white"
+            }`}
+          >
+            Home{" "}
+          </span>
+          {/* <span className="block text-xs mt-1">Home </span> */}
         </Link>
 
         <Link href="/allSpacesList" className="flex-1 text-center">
           <FontAwesomeIcon
             icon={faMagnifyingGlass}
             className={`text-lg mx-auto ${
-              pathname === "/allSpacesList" ? "text-teal-600" : "text-gray-500"
+              pathname === "/allSpacesList" ? "text-teal-900" : "text-white"
             }`}
           />
-          <span className="block text-xs mt-1">Find</span>
+          <span
+            className={`block text-xs mt-1 ${
+              pathname === "/allSpacesList" ? "text-teal-900" : "text-white"
+            }`}
+          >
+            Find
+          </span>
         </Link>
 
         {/* Add New Flat/Home */}
@@ -61,10 +74,16 @@ const FooterMenuBar = () => {
           <FontAwesomeIcon
             icon={faPlus}
             className={`text-lg mx-auto ${
-              pathname === "/postFlat" ? "text-teal-600" : "text-gray-500"
+              pathname === "/postFlat" ? "text-teal-900" : "text-white"
             }`}
           />
-          <span className="block text-xs mt-1">Share Space</span>
+          <span
+            className={`block text-xs mt-1 ${
+              pathname === "/postFlat" ? "text-teal-900" : "text-white"
+            }`}
+          >
+            Post For Rent
+          </span>
         </button>
 
         {!user && (
@@ -72,10 +91,16 @@ const FooterMenuBar = () => {
             <FontAwesomeIcon
               icon={faRightToBracket}
               className={`text-lg mx-auto ${
-                pathname === "/login" ? "text-teal-600" : "text-gray-500"
+                pathname === "/login" ? "text-teal-900" : "text-white"
               }`}
             />
-            <span className="block text-xs mt-1">Login </span>
+            <span
+              className={`block text-xs mt-1 ${
+                pathname === "/login" ? "text-teal-900" : "text-white"
+              }`}
+            >
+              Login{" "}
+            </span>
           </Link>
         )}
 
@@ -84,10 +109,16 @@ const FooterMenuBar = () => {
             <FontAwesomeIcon
               icon={faList}
               className={`text-lg mx-auto ${
-                pathname === "/myList" ? "text-teal-600" : "text-gray-500"
+                pathname === "/myList" ? "text-teal-900" : "text-white"
               }`}
             />
-            <span className="block text-xs mt-1">My List </span>
+            <span
+              className={`block text-xs mt-1 ${
+                pathname === "/myList" ? "text-teal-900" : "text-white"
+              }`}
+            >
+              My List{" "}
+            </span>
           </Link>
         )}
 
@@ -96,10 +127,16 @@ const FooterMenuBar = () => {
             <FontAwesomeIcon
               icon={faList}
               className={`text-lg mx-auto ${
-                pathname === "/dasboard" ? "text-teal-600" : "text-gray-500"
+                pathname === "/dasboard" ? "text-teal-900" : "text-white"
               }`}
             />
-            <span className="block text-xs mt-1">Dashboard </span>
+            <span
+              className={`block text-xs mt-1 ${
+                pathname === "/dasboard" ? "text-teal-900" : "text-white"
+              }`}
+            >
+              Dashboard{" "}
+            </span>
           </Link>
         )}
 

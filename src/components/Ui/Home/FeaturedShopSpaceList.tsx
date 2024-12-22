@@ -53,6 +53,14 @@ const FeaturedShopSpaceList = ({ shopSpacesData }: Props) => {
             />
           ))}
       </div>
+      <div className=" mt-3 flex justify-center">
+        <Link
+          href="/allSpacesList"
+          className="text-center bg-teal-500 text-white px-3 py-1 rounded-md text-xs sm:text-sm"
+        >
+          See More
+        </Link>
+      </div>
     </div>
   );
 };

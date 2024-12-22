@@ -11,7 +11,7 @@ const Hero = () => {
   return (
     <div className="flex flex-col md:flex-row items-center  ">
       {/* Left Side */}
-      <div className="w-full md:w-1/2  z-10 pt-5">
+      <div className="w-full md:w-1/2   pt-5">
         <h1 className="text-xl md:text-4xl font-bold mb-4">
           Looking for sapces ? We’ve Got You Covered
         </h1>
