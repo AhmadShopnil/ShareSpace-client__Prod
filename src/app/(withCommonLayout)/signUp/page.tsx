@@ -72,12 +72,12 @@ const SignUp = () => {
             )}
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-6">
               <div>
-                <label
+                {/* <label
                   htmlFor="phone"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Name
-                </label>
+                </label> */}
                 <input
                   type="name"
                   id="name"
@@ -92,12 +92,12 @@ const SignUp = () => {
                 )}
               </div>
               <div>
-                <label
+                {/* <label
                   htmlFor="phone"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Phone
-                </label>
+                </label> */}
                 <input
                   type="phone"
                   id="phone"
@@ -112,12 +112,12 @@ const SignUp = () => {
                 )}
               </div>
               <div>
-                <label
+                {/* <label
                   htmlFor="password"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Password
-                </label>
+                </label> */}
                 <input
                   type="password"
                   id="password"
@@ -140,8 +140,8 @@ const SignUp = () => {
                 SignUp
               </button>
             </form>
-            ;
-            <p className="text-sm">
+
+            <p className="text-sm mt-1">
               Already have an account ? Please{" "}
               <span className="text-teal-600">
                 <Link href="/login">Login</Link>

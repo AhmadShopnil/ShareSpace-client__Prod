@@ -14,7 +14,8 @@ export const HomeSpaceForm = () => {
   const router = useRouter();
   const [images, setImages] = useState<File[]>([]);
   const [urls, setUrls] = useState<string[]>([]);
-  const [createFlat, { error: postError }] = useCreateFlatMutation();
+  const [uploadingImage, setUpLoadingImage] = useState(false);
+  const [createFlat, { error: postError, isLoading }] = useCreateFlatMutation();
 
   const {
     register,
@@ -32,6 +33,8 @@ export const HomeSpaceForm = () => {
 
   // handle submit button
   const onSubmit: SubmitHandler<TFlatPyload & TUserData> = async (data) => {
+    setUpLoadingImage(true);
+
     try {
       let uploadImageUrls = null;
 
@@ -58,11 +61,15 @@ export const HomeSpaceForm = () => {
         flatData,
       });
 
+      setUpLoadingImage(false);
+
       const addedSpace = response?.data?.addedSpace;
       if (addedSpace) {
         router.push("/myList");
       }
-    } catch (error: any) {}
+    } catch (error: any) {
+      setUpLoadingImage(false);
+    }
   };
 
   // if (isLodaing) {
@@ -234,8 +241,9 @@ export const HomeSpaceForm = () => {
         <button
           type="submit"
           className="w-full bg-teal-500 text-white p-2 rounded hover:bg-teal-600"
+          disabled={uploadingImage}
         >
-          Submit
+          {uploadingImage ? "Uploading Image..." : "Post"}
         </button>
       </form>
     </div>
