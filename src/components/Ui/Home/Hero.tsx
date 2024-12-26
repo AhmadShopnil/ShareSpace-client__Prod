@@ -16,9 +16,19 @@ const Hero = () => {
           Looking for sapces ? We’ve Got You Covered
         </h1>
         <p className="text-gray-600 mb-6 text-xs md:text-lg">
+          Need a space in Tangail or have extra space to share? TangailSpace
+          makes it easy and seamless!
+        </p>
+        {/* <p className="text-gray-600 mb-6 text-xs md:text-lg">
+          Struggling to find the perfect space in Tangail for your work, events,
+          or storage needs? Or maybe you have extra space sitting idle, wasting
+          its potential? TangailSpaces is here to bridge the gap and make
+          sharing seamless!
+        </p> */}
+        {/* <p className="text-gray-600 mb-6 text-xs md:text-lg">
           Find the perfect home or the ideal space for your ofice in your area.
           Connect with others and create the arrangement you’ve always wanted.
-        </p>
+        </p> */}
 
         <div className="flex gap-3 md:gap-4">
           <ShareSpaceButton></ShareSpaceButton>

@@ -52,11 +52,11 @@ const Footer: React.FC = () => {
           <div>
             <h2 className="text-xl font-semibold mb-4">Contact Us</h2>
             <p className="mb-2">Tangail, Dhaka, Bangladesh</p>
-            <p className="mb-2">Email: demo@gmail.com</p>
-            <p className="mb-2">Phone: (123) 456-7890</p>
+            <p className="mb-2">Email: tangailspaces@gmail.com</p>
+            {/* <p className="mb-2">Phone: (123) 456-7890</p> */}
             <div className="mt-4">
               <Link
-                href="#"
+                href="https://www.facebook.com/profile.php?id=61571308793569&mibextid=ZbWKwL"
                 className="text-teal-300 hover:text-teal-100 mr-4"
                 aria-label="Visit our Facebook page"
               >

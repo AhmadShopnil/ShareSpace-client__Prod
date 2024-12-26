@@ -7,6 +7,7 @@ import {
   faPlus,
   faMagnifyingGlass,
   faRightToBracket,
+  faQuestion,
 } from "@fortawesome/free-solid-svg-icons";
 import { usePathname } from "next/navigation";
 import { useAppSelector } from "@/redux/hooks";
@@ -43,7 +44,7 @@ const FooterMenuBar = () => {
             }`}
           />
           <span
-            className={`block text-xs mt-1 ${
+            className={`block text-xs  ${
               pathname === "/" ? "text-teal-900" : "text-white"
             }`}
           >
@@ -60,7 +61,7 @@ const FooterMenuBar = () => {
             }`}
           />
           <span
-            className={`block text-xs mt-1 ${
+            className={`block text-xs ${
               pathname === "/allSpacesList" ? "text-teal-900" : "text-white"
             }`}
           >
@@ -78,11 +79,11 @@ const FooterMenuBar = () => {
             }`}
           />
           <span
-            className={`block text-xs mt-1 ${
+            className={`block text-xs ${
               pathname === "/postFlat" ? "text-teal-900" : "text-white"
             }`}
           >
-            Post For Rent
+            Post
           </span>
         </button>
 
@@ -95,7 +96,7 @@ const FooterMenuBar = () => {
               }`}
             />
             <span
-              className={`block text-xs mt-1 ${
+              className={`block text-xs ${
                 pathname === "/login" ? "text-teal-900" : "text-white"
               }`}
             >
@@ -113,7 +114,7 @@ const FooterMenuBar = () => {
               }`}
             />
             <span
-              className={`block text-xs mt-1 ${
+              className={`block text-xs ${
                 pathname === "/myList" ? "text-teal-900" : "text-white"
               }`}
             >
@@ -131,7 +132,7 @@ const FooterMenuBar = () => {
               }`}
             />
             <span
-              className={`block text-xs mt-1 ${
+              className={`block text-xs ${
                 pathname === "/dasboard" ? "text-teal-900" : "text-white"
               }`}
             >
@@ -141,15 +142,21 @@ const FooterMenuBar = () => {
         )}
 
         {/* Contact Us */}
-        {/* <Link href="/contactUs" className="flex-1 text-center">
-        <FontAwesomeIcon
-          icon={faPhone}
-          className={`text-2xl mx-auto ${
-            pathname === "/contact" ? "text-teal-600" : "text-gray-500"
-          }`}
-        />
-        <span className="block text-xs mt-1">Contact Us</span>
-      </Link> */}
+        <Link href="/contactUs" className="flex-1 text-center">
+          <FontAwesomeIcon
+            icon={faQuestion}
+            className={`text-lg mx-auto ${
+              pathname === "/contactUs" ? "text-teal-900" : "text-white"
+            }`}
+          />
+          <span
+            className={`block text-xs ${
+              pathname === "/contactUs" ? "text-teal-900" : "text-white"
+            }`}
+          >
+            Help
+          </span>
+        </Link>
       </div>
 
       {/* Share Space Modal */}
