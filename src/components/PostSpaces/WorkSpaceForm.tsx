@@ -12,6 +12,7 @@ export const WorkSpaceForm = () => {
   const router = useRouter();
   const [images, setImages] = useState<File[]>([]);
   const [urls, setUrls] = useState<string[]>([]);
+  const [uploadingImage, setUpLoadingImage] = useState(false);
   const [createWorkSpace, { isLoading }] = useCreateWorkSpaceMutation();
 
   const {
@@ -32,6 +33,7 @@ export const WorkSpaceForm = () => {
   const onSubmit: SubmitHandler<TWorkSpacePayload & TUserData> = async (
     data
   ) => {
+    setUpLoadingImage(true);
     try {
       let uploadImageUrls = null;
 
@@ -56,11 +58,15 @@ export const WorkSpaceForm = () => {
         workSpaceData,
       });
 
+      setUpLoadingImage(false);
+
       const addedSpace = response?.data?.addedSpace;
       if (addedSpace) {
         router.push("/myList");
       }
-    } catch (error: any) {}
+    } catch (error: any) {
+      setUpLoadingImage(false);
+    }
   };
 
   if (isLoading) {
@@ -195,8 +201,9 @@ export const WorkSpaceForm = () => {
         <button
           type="submit"
           className="w-full bg-teal-500 text-white p-2 rounded hover:bg-teal-600"
+          disabled={uploadingImage}
         >
-          Submit
+          {uploadingImage ? "Uploading Image..." : "Post"}
         </button>
       </form>
     </div>

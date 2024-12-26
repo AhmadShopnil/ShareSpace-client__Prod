@@ -13,6 +13,7 @@ export const ShopSpaceForm = () => {
   const router = useRouter();
   const [images, setImages] = useState<File[]>([]);
   const [urls, setUrls] = useState<string[]>([]);
+  const [uploadingImage, setUpLoadingImage] = useState(false);
   const [createShopSpace, { isLoading }] = useCreateShopSpaceMutation();
 
   const {
@@ -31,6 +32,7 @@ export const ShopSpaceForm = () => {
 
   // handle post space submit button
   const onSubmit: SubmitHandler<TFlatPyload & TUserData> = async (data) => {
+    setUpLoadingImage(true);
     try {
       let uploadImageUrls = null;
       if (images) {
@@ -53,11 +55,15 @@ export const ShopSpaceForm = () => {
         shopSpaceData,
       });
 
+      setUpLoadingImage(false);
+
       const addedSpace = response?.data?.addedSpace;
       if (addedSpace) {
         router.push("/myList");
       }
-    } catch (error: any) {}
+    } catch (error: any) {
+      setUpLoadingImage(false);
+    }
   };
 
   if (isLoading) {
@@ -192,8 +198,9 @@ export const ShopSpaceForm = () => {
         <button
           type="submit"
           className="w-full bg-teal-500 text-white p-2 rounded hover:bg-teal-600"
+          disabled={uploadingImage}
         >
-          Submit
+          {uploadingImage ? "Uploading Image..." : "Post"}
         </button>
       </form>
     </div>
