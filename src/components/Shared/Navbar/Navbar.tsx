@@ -23,7 +23,7 @@ const Navbar = () => {
     <nav className="bg-white sticky top-0  z-20 px-4 sm:px-6 md:px-10   ">
       <div className="flex justify-between items-center py-3 ">
         {/* logo section */}
-        <div className="text-2xl sm:text-3xl  font-bold">
+        <div className="text-xl sm:text-3xl  font-bold">
           <Link href="/" className="flex">
             Tangail
             <span className=" text-teal-500">Space</span>
@@ -137,7 +137,7 @@ const Navbar = () => {
           {!user && (
             <Link
               href="/signUp"
-              className="border border-teal-500
+              className=" text-sm border border-teal-500
               text-teal-500 px-3 py-1 rounded
                hover:bg-teal-500
                hover:text-white whitespace-nowrap"
