@@ -21,12 +21,13 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white sticky top-0  z-20 px-4 sm:px-6 md:px-10   ">
-      <div className="flex justify-between items-center py-3">
+      <div className="flex justify-between items-center py-3 ">
         {/* logo section */}
-        <div className="text-2xl sm:text-3xl   font-bold">
-          <Link href="/">
+        <div className="text-2xl sm:text-3xl  font-bold">
+          <Link href="/" className="flex">
             Tangail
-            <span className=" text-teal-500">Spaces</span>
+            <span className=" text-teal-500">Space</span>
+            <span className="text-xs ml-2 text-red-500 "> -Beta version</span>
           </Link>
         </div>
 
@@ -35,9 +36,9 @@ const Navbar = () => {
         {/* menuItem section */}
         <div
           className="hidden lg:flex
-           space-x-6 lg:space-x-10
+           space-x-6 lg:space-x-8
             justify-center
-            w-full text-md lg:text-base"
+             text-md lg:text-base "
         >
           <Link
             href="/"
