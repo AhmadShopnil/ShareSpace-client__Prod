@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
               Find your ideal flat with ease. We provide the best listings to
               help you find the perfect home.
             </p>
-            <p>&copy; 2024 Share Space. All rights reserved.</p>
+            <p>&copy; 2024 Tangail Space. All rights reserved.</p>
           </div>
 
           {/* Quick Links Section */}

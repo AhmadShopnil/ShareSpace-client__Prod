@@ -16,7 +16,7 @@ const Hero = () => {
           Looking for sapces ? We’ve Got You Covered
         </h1>
         <p className="text-gray-600 mb-6 text-xs md:text-lg">
-          Need a space in Tangail or have extra space to share? TangailSpace
+          Need a space in Tangail or have extra space to share? Tangail Space
           makes it easy and seamless!
         </p>
         {/* <p className="text-gray-600 mb-6 text-xs md:text-lg">
