@@ -22,11 +22,9 @@ const FooterMenuBar = () => {
   const openModal = () => {
     setIsModalOpen(true);
   };
-
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
   const pathname = usePathname();
 
   return (
@@ -87,24 +85,6 @@ const FooterMenuBar = () => {
           </span>
         </button>
 
-        {!user && (
-          <Link href="/login" className="flex-1 text-center">
-            <FontAwesomeIcon
-              icon={faRightToBracket}
-              className={`text-lg mx-auto ${
-                pathname === "/login" ? "text-teal-900" : "text-white"
-              }`}
-            />
-            <span
-              className={`block text-xs ${
-                pathname === "/login" ? "text-teal-900" : "text-white"
-              }`}
-            >
-              Login{" "}
-            </span>
-          </Link>
-        )}
-
         {user?.role === "user" && (
           <Link href="/myList" className="flex-1 text-center">
             <FontAwesomeIcon
@@ -157,6 +137,24 @@ const FooterMenuBar = () => {
             Help
           </span>
         </Link>
+
+        {!user && (
+          <Link href="/login" className="flex-1 text-center">
+            <FontAwesomeIcon
+              icon={faRightToBracket}
+              className={`text-lg mx-auto ${
+                pathname === "/login" ? "text-teal-900" : "text-white"
+              }`}
+            />
+            <span
+              className={`block text-xs ${
+                pathname === "/login" ? "text-teal-900" : "text-white"
+              }`}
+            >
+              Login{" "}
+            </span>
+          </Link>
+        )}
       </div>
 
       {/* Share Space Modal */}

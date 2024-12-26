@@ -30,12 +30,12 @@ const Hero = () => {
           Connect with others and create the arrangement you’ve always wanted.
         </p> */}
 
-        <div className="flex gap-3 md:gap-4">
+        <div className="flex gap-3 md:gap-4 ">
           <ShareSpaceButton></ShareSpaceButton>
           <Link
-            href={`/allSpacesList`}
+            href="/allSpacesList"
             className="text-xs sm:text-base px-4 py-2 sm:px-6  bg-teal-100
-               text-teal-500  rounded"
+               text-teal-500 rounded z-10"
           >
             Find for Rent
           </Link>
