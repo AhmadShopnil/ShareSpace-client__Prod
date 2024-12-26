@@ -23,7 +23,7 @@ const Navbar = () => {
     <nav className="bg-white sticky top-0  z-20 px-4 sm:px-6 md:px-10   ">
       <div className="flex justify-between items-center py-3 ">
         {/* logo section */}
-        <div className="text-xl sm:text-3xl  font-bold">
+        <div className="text-xl   sm:text-3xl  font-bold">
           <Link href="/" className="flex">
             Tangail
             <span className=" text-teal-500">Space</span>
