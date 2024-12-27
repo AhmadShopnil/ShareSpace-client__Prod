@@ -13,6 +13,8 @@ const FilterFlat = ({
   const [category, setCategory] = useState("Any");
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState(searchTerm);
+  const [isLineGas, setIsLineGas] = useState<"Any" | "Yes" | "No">("Any");
+
   const categories = ["Any", "Flat", "Tiner-ghor", "Tin-Shade"];
 
   // For PriceRange Component
@@ -43,6 +45,7 @@ const FilterFlat = ({
     if (baths !== "Any") query.totalBathrooms = baths;
     if (category !== "Any") query.category = category;
     if (debouncedSearchTerm) query.searchTerm = debouncedSearchTerm;
+    if (isLineGas !== "Any") query.isLineGas = isLineGas;
     query.minRent = minRent;
     query.maxRent = maxRent;
 
@@ -52,6 +55,7 @@ const FilterFlat = ({
     baths,
     category,
     debouncedSearchTerm,
+    isLineGas,
     minRent,
     maxRent,
     setQueries,
@@ -62,7 +66,7 @@ const FilterFlat = ({
       <PriceRange min={0} max={100000} onChange={handlePriceChange} />
 
       <div className="my-4 md:my-6">
-        <div className=" gap-3 grid sm:grid-cols-2 lg:grid-cols-3 justify-between">
+        <div className="gap-3 grid sm:grid-cols-2 lg:grid-cols-3 justify-between">
           {/* Beds */}
           <div className="">
             <h3 className="text-md md:text-lg mb-1">Beds</h3>
@@ -112,6 +116,26 @@ const FilterFlat = ({
                   }`}
                 >
                   {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Gas Line */}
+          <div className="">
+            <h2 className="text-md md:text-lg mb-1">Gas Line</h2>
+            <div className="flex text-xs md:text-sm space-x-2">
+              {["Any", "Yes", "No"].map((option) => (
+                <button
+                  key={option}
+                  onClick={() => setIsLineGas(option as "Any" | "Yes" | "No")}
+                  className={`p-2 rounded ${
+                    isLineGas === option
+                      ? "bg-teal-600 text-white"
+                      : "bg-gray-200"
+                  }`}
+                >
+                  {option}
                 </button>
               ))}
             </div>

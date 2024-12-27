@@ -21,6 +21,7 @@ const SingleHome = async ({ params }: { params: any }) => {
     rent,
     advanceAmount,
     images,
+    isLineGas,
     totalBathrooms,
     category,
   } = data;
@@ -57,6 +58,9 @@ const SingleHome = async ({ params }: { params: any }) => {
             </p>
             <p className="text-gray-700 mb-2">
               <strong>Location:</strong> {location}
+            </p>{" "}
+            <p className="text-gray-700 mb-2">
+              <strong>Line Gas:</strong> {isLineGas}
             </p>
             <p className="text-gray-700 mb-2">
               <strong>Bedrooms:</strong> {totalBedrooms}

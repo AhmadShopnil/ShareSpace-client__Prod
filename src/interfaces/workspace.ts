@@ -7,4 +7,5 @@ export type TWorkSpacePayload = {
   advanceAmount: number | null; // Advance amount could also be a number or null
   images?: string[] | null;
   category: string | null;
+  isLineGas?: boolean;
 };

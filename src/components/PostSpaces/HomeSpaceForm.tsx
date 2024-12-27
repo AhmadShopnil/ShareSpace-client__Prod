@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { TUserData, TTokenData } from "@/interfaces";
-import { getUserInfo } from "@/services/authServices";
 import { uploadImageToCLoudinary } from "@/utils/uploadImage";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useCreateFlatMutation } from "@/redux/api/flatApi";
@@ -51,6 +50,7 @@ export const HomeSpaceForm = () => {
         location: data?.location,
         description: data.description,
         rent: data?.rent,
+        isLineGas: data?.isLineGas,
         advanceAmount: data?.advanceAmount,
         images: uploadImageUrls,
         totalBathrooms: data?.totalBathrooms,
@@ -61,9 +61,9 @@ export const HomeSpaceForm = () => {
         flatData,
       });
 
+      const addedSpace = response?.data?.addedSpace;
       setUpLoadingImage(false);
 
-      const addedSpace = response?.data?.addedSpace;
       if (addedSpace) {
         router.push("/myList");
       }
@@ -190,6 +190,27 @@ export const HomeSpaceForm = () => {
                 <span className="text-red-600">This field is required</span>
               )}
             </div>
+
+            <div className="flex flex-col">
+              <label
+                htmlFor="isLineGash"
+                className="text-sm text-gray-600 mb-1"
+              >
+                Line Gash
+              </label>
+              <select
+                id="isLineGas"
+                {...register("isLineGas", { required: true })}
+                className="w-full p-2 border rounded"
+              >
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+              {errors.isLineGas && (
+                <span className="text-red-600">This field is required</span>
+              )}
+            </div>
+
             {/* category input */}
             <div className="flex flex-col">
               <label htmlFor="category" className="text-sm text-gray-600 mb-1">

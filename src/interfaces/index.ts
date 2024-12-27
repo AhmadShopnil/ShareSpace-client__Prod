@@ -11,6 +11,7 @@ export type TFlatDataInRes = {
   advanceAmount: number;
   availability: boolean;
   isDeleted?: boolean;
+  isLineGash?: boolean;
   postStatus: "approved" | "rejected" | "pending";
   category: "Flat" | "Tin-Shade" | "Tiner-ghor";
   images?: string[] | null;
@@ -24,6 +25,7 @@ export type TWorkSpaceInRes = {
   rent: number;
   advanceAmount: number;
   isDeleted?: boolean;
+  isLineGash?: boolean;
   postStatus?: "approved" | "rejected" | "pending";
   category: string;
   images?: string[] | null;

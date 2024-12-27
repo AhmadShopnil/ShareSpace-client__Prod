@@ -13,7 +13,7 @@ const Hero = () => {
       {/* Left Side */}
       <div className="w-full md:w-1/2   pt-5">
         <h1 className="text-xl md:text-4xl font-bold mb-4">
-          Looking for sapces ? We’ve Got You Covered
+          Looking for spaces ? We’ve Got You Covered
         </h1>
         <p className="text-gray-600 mb-6 text-xs md:text-lg">
           Need a space in Tangail or have extra space to share? Tangail Space
