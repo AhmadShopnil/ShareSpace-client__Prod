@@ -23,6 +23,7 @@ export type TFlatPyload = {
   location: string;
   description: string;
   rent: number;
+  isLineGas?: boolean;
   advanceAmount: number;
   category: "Flat" | "Tin-Shade" | "Tiner-ghor";
   images?: string[] | null;
