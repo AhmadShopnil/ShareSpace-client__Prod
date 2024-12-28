@@ -35,8 +35,8 @@ const UserInfoForm = ({ isLoggedIn, setIsLoggedIn }: any) => {
 
     try {
       const response = await axios.post(
-        "https://server-flate-share.vercel.app/api/login",
-        // "http://localhost:5000/api/login",
+        "https://server-flate-share.vercel.app/api/user/register",
+        // "http://localhost:5000/api/user/register",
         data
       );
       const accessToken = response?.data?.data?.accessToken;

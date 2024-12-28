@@ -54,7 +54,7 @@ const Navbar = () => {
               pathname === "/allSpacesList" ? "text-teal-600" : "text-gray-500"
             }`}
           >
-            Listed Sapces
+            Find
           </Link>
           {user && (
             <Link
@@ -63,7 +63,7 @@ const Navbar = () => {
                 pathname === "/myList" ? "text-teal-600" : "text-gray-500"
               }`}
             >
-              My Posted Sapces
+              My List
             </Link>
           )}
 

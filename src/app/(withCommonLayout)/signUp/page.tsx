@@ -1,7 +1,10 @@
 "use client";
 import SkeletonTable from "@/components/Loading/SkeletonTable";
 import SkeltonLoginForm from "@/components/Loading/SkeltonLoginForm";
+import { useAppDispatch } from "@/redux/hooks";
+import { setUser } from "@/redux/slices/authSlice";
 import { saveUserInfo } from "@/services/authServices";
+import { decodedToken } from "@/utils/jwt";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -15,6 +18,7 @@ interface IFormInput {
 }
 
 const SignUp = () => {
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const [error, setError] = useState("");
   const [isError, setIsError] = useState(false);
@@ -38,6 +42,9 @@ const SignUp = () => {
       const accessToken = response?.data?.data?.accessToken;
       if (accessToken) {
         saveUserInfo({ accessToken });
+        const user = decodedToken(accessToken);
+        dispatch(setUser({ user, token: accessToken }));
+
         setIsError(false);
         setIsLoading(false);
         router.push("/");

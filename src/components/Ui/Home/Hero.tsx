@@ -34,7 +34,7 @@ const Hero = () => {
           <ShareSpaceButton></ShareSpaceButton>
           <Link
             href="/allSpacesList"
-            className="text-xs sm:text-base px-4 py-2 sm:px-6  bg-teal-100
+            className="text-sm sm:text-base px-4 py-2 sm:px-6  bg-teal-100
                text-teal-500 rounded z-10"
           >
             Find for Rent

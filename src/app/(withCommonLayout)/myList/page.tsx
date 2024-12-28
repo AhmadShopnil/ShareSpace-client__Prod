@@ -1,5 +1,6 @@
 "use client";
 
+import SkeletonResFlatList from "@/components/Loading/SkeletonResFlatList";
 import SkeletonTable from "@/components/Loading/SkeletonTable";
 import MyPostedList from "@/components/MyPostedItems/MyPostedHomeList/MyPostedHome";
 import MyPostedShopSpace from "@/components/MyPostedItems/MyPostedShopSpace/MyPostedShopSpace";
@@ -7,6 +8,8 @@ import MyPostedWorkSpace from "@/components/MyPostedItems/MyPostedWorkSpace/MyPo
 import { useGetMyAllFlatsQuery } from "@/redux/api/flatApi";
 import { useGetMyAllShopSpacesQuery } from "@/redux/api/shopSpaceApi";
 import { useGetMyAllWorkSpacesQuery } from "@/redux/api/workSpaceApi";
+import { getUserInfo } from "@/services/authServices";
+import { useRouter } from "next/navigation";
 
 const MyList = () => {
   const {
@@ -14,6 +17,8 @@ const MyList = () => {
     isLoading: isLoadingFlats,
     error: errorFlats,
   } = useGetMyAllFlatsQuery("");
+  const user: any = getUserInfo();
+  const router = useRouter();
 
   const {
     data: workSpaceData,
@@ -27,13 +32,24 @@ const MyList = () => {
     error: errorShopSpaces,
   } = useGetMyAllShopSpacesQuery("");
 
+  // if (user?.role !== "admin") {
+  //   return router.push("/login");
+  // }
+
   return (
     <div className="w-full pt-5">
       {/* Flats Section */}
       <div className="mb-4 md:mb-8">
         <h1 className="mb-2 md:mb-4 font-semibold">My Listed Home:</h1>
         {isLoadingFlats ? (
-          <SkeletonTable />
+          <>
+            <div className="hidden md:block">
+              <SkeletonTable />
+            </div>
+            <div className="md:hidden">
+              <SkeletonResFlatList />
+            </div>
+          </>
         ) : errorFlats ? (
           <p className="text-red-500">
             Error loading flats: Somthing Went Wrong ! Try later
@@ -51,7 +67,14 @@ const MyList = () => {
           My Listed Work/Office Spaces:
         </h1>
         {isLoadingWorkSpaces ? (
-          <SkeletonTable />
+          <>
+            <div className="hidden md:block">
+              <SkeletonTable />
+            </div>
+            <div className="md:hidden">
+              <SkeletonResFlatList />
+            </div>
+          </>
         ) : errorWorkSpaces ? (
           <p className="text-red-500">
             Error loading workspaces: Somthing Went Wrong ! Try later
@@ -67,7 +90,14 @@ const MyList = () => {
       <div>
         <h1 className="mb-2 md:mb-4 font-semibold">My Listed Shop Spaces:</h1>
         {isLoadingShopSpaces ? (
-          <SkeletonTable />
+          <>
+            <div className="hidden md:block">
+              <SkeletonTable />
+            </div>
+            <div className="md:hidden">
+              <SkeletonResFlatList />
+            </div>
+          </>
         ) : errorShopSpaces ? (
           <p className="text-red-500">
             Error loading shop spaces: Somthing Went Wrong ! Try later

@@ -32,8 +32,8 @@ const SkeletonFlatCardResponsive = () => {
 
 const SkeletonResFlatList = () => {
   return (
-    <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-around">
-      {Array.from({ length: 8 }).map((_, index) => (
+    <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-around">
+      {Array.from({ length: 2 }).map((_, index) => (
         <SkeletonFlatCardResponsive key={index} />
       ))}
     </div>

@@ -8,6 +8,7 @@ import { useCreateFlatMutation } from "@/redux/api/flatApi";
 
 import { TFlatPyload } from "@/interfaces/flat";
 import { useRouter } from "next/navigation";
+import SkeletonPostFlat from "../Loading/SkeletonPostFlat";
 
 export const HomeSpaceForm = () => {
   const router = useRouter();
@@ -72,9 +73,9 @@ export const HomeSpaceForm = () => {
     }
   };
 
-  // if (isLodaing) {
-  //   return <SkeletonPostFlat></SkeletonPostFlat>;
-  // }
+  if (isLoading) {
+    return <SkeletonPostFlat></SkeletonPostFlat>;
+  }
   // if (error) {
   //   return <ErrorComponent error={error} setError={setError}></ErrorComponent>;
   // }
@@ -190,7 +191,7 @@ export const HomeSpaceForm = () => {
                 <span className="text-red-600">This field is required</span>
               )}
             </div>
-
+            {/* gas line input */}
             <div className="flex flex-col">
               <label
                 htmlFor="isLineGash"
@@ -264,7 +265,7 @@ export const HomeSpaceForm = () => {
           className="w-full bg-teal-500 text-white p-2 rounded hover:bg-teal-600"
           disabled={uploadingImage}
         >
-          {uploadingImage ? "Uploading Image..." : "Post"}
+          {uploadingImage ? "Processing..." : "Post"}
         </button>
       </form>
     </div>

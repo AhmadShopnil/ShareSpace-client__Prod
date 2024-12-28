@@ -203,7 +203,7 @@ export const WorkSpaceForm = () => {
           className="w-full bg-teal-500 text-white p-2 rounded hover:bg-teal-600"
           disabled={uploadingImage}
         >
-          {uploadingImage ? "Uploading Image..." : "Post"}
+          {uploadingImage ? "Processing..." : "Post"}
         </button>
       </form>
     </div>

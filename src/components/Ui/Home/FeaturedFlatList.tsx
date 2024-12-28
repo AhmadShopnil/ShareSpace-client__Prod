@@ -19,7 +19,7 @@ const FeaturedFlatList = ({ flatData }: Props) => {
     return (
       <div className="text-center text-gray-600">
         {success ? (
-          <p>No flats found.</p>
+          <p>No Living Spaces found.</p>
         ) : (
           <p>Something Went Wrong!! Failed to retrieve House</p>
         )}
