@@ -36,7 +36,7 @@ const ShopSpaceList = ({
   }
 
   if (data?.shopSpaces?.shopSpaces?.length <= 0) {
-    return <NotFoundData text="No Ofice Space Found"></NotFoundData>;
+    return <NotFoundData text="No Shop Spaces Found"></NotFoundData>;
   }
 
   return (

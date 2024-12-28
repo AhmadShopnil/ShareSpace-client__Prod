@@ -40,7 +40,7 @@ const WorkSpaceList = ({
   }
 
   if (data?.workSpaces?.workSpaces?.length <= 0) {
-    return <NotFoundData text="No Ofice Space Found"></NotFoundData>;
+    return <NotFoundData text="No Office / Work Spaces Found"></NotFoundData>;
   }
 
   return (

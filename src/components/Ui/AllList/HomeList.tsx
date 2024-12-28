@@ -36,7 +36,7 @@ const HomeList = ({
   }
 
   if (data?.flats?.flats?.length <= 0) {
-    return <NotFoundData text="No Flat/Home List Found"></NotFoundData>;
+    return <NotFoundData text="No Living Spaces List Found"></NotFoundData>;
   }
 
   return (

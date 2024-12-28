@@ -39,15 +39,17 @@ const LoginPage = () => {
       if (accessToken) {
         saveUserInfo({ accessToken });
         setIsError(false);
-        setIsLoading(false);
+
         const user = decodedToken(accessToken);
         dispatch(setUser({ user, token: accessToken }));
         router.push("/");
+        // setIsLoading(false);
       }
     } catch (error: any) {
-      console.log("from login error", error);
       setError(error?.response?.data?.message);
       setIsError(true);
+      setIsLoading(false);
+    } finally {
       setIsLoading(false);
     }
   };

@@ -19,7 +19,9 @@ export default function UpdatePostedHomeModal({
   const [updateFlat, { isLoading }] = useUpdateFlatMutation(); // Hook for updating bike
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value, type } = e.target;
     setFormData({
@@ -36,6 +38,7 @@ export default function UpdatePostedHomeModal({
       rent: formData?.rent,
       advanceAmount: formData?.advanceAmount,
       category: formData?.category,
+      isLineGas: formData?.isLineGas,
       totalBedrooms: formData?.totalBedrooms,
       totalBathrooms: formData?.totalBathrooms,
       description: formData?.description,
@@ -127,6 +130,27 @@ export default function UpdatePostedHomeModal({
                       />
                     </div>
                   </div>
+
+                  <div>
+                    <label
+                      htmlFor="isLineGas"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Line Gas
+                    </label>
+                    <select
+                      id="isLineGas"
+                      name="isLineGas"
+                      value={formData.isLineGas}
+                      onChange={handleChange}
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
+                    >
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+                  </div>
+
+                  {/* category field */}
                   <div>
                     <label
                       htmlFor="category"
@@ -134,15 +158,19 @@ export default function UpdatePostedHomeModal({
                     >
                       Category
                     </label>
-                    <input
-                      type="text"
+                    <select
                       id="category"
                       name="category"
                       value={formData.category}
                       onChange={handleChange}
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
-                    />
+                    >
+                      <option value="Flat">Flat</option>
+                      <option value="Tin-Shade">Tin-Shade</option>
+                      <option value="Tiner-ghor">Tiner-ghor</option>
+                    </select>
                   </div>
+
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label
@@ -177,22 +205,7 @@ export default function UpdatePostedHomeModal({
                       />
                     </div>
                   </div>
-                  <div>
-                    <label
-                      htmlFor="description"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Description
-                    </label>
-                    <textarea
-                      id="description"
-                      name="description"
-                      rows={3}
-                      value={formData.description}
-                      onChange={handleChange}
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
-                    ></textarea>
-                  </div>
+                  {/* address field */}
                   <div>
                     <label
                       htmlFor="location"
@@ -208,6 +221,23 @@ export default function UpdatePostedHomeModal({
                       onChange={handleChange}
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
                     />
+                  </div>
+                  {/* Description field */}
+                  <div>
+                    <label
+                      htmlFor="description"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Description
+                    </label>
+                    <textarea
+                      id="description"
+                      name="description"
+                      rows={3}
+                      value={formData.description}
+                      onChange={handleChange}
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
+                    ></textarea>
                   </div>
                 </form>
               </div>
