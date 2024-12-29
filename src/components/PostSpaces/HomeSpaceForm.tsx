@@ -16,6 +16,7 @@ export const HomeSpaceForm = () => {
   const [urls, setUrls] = useState<string[]>([]);
   const [uploadingImage, setUpLoadingImage] = useState(false);
   const [createFlat, { error: postError, isLoading }] = useCreateFlatMutation();
+  const [homeSpaceType, setHomeSpaceType] = useState<string>("");
 
   const {
     register,
@@ -56,6 +57,8 @@ export const HomeSpaceForm = () => {
         images: uploadImageUrls,
         totalBathrooms: data?.totalBathrooms,
         category: data?.category,
+        homeSpaceType: data?.homeSpaceType, // add the homeSpaceType here
+        subletGender: data?.subletGender, // add subletGender here if it's a sublet
       };
 
       const response = await createFlat({
@@ -76,9 +79,6 @@ export const HomeSpaceForm = () => {
   if (isLoading) {
     return <SkeletonPostFlat></SkeletonPostFlat>;
   }
-  // if (error) {
-  //   return <ErrorComponent error={error} setError={setError}></ErrorComponent>;
-  // }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -103,7 +103,8 @@ export const HomeSpaceForm = () => {
                 <span className="text-red-600">This field is required</span>
               )}
             </div>
-            {/* bedroom input */}
+
+            {/* Bedroom Input */}
             <div className="flex flex-col">
               <label
                 htmlFor="totalBedrooms"
@@ -122,7 +123,8 @@ export const HomeSpaceForm = () => {
                 <span className="text-red-600">This field is required</span>
               )}
             </div>
-            {/* bathroom input */}
+
+            {/* Bathroom Input */}
             <div className="flex flex-col">
               <label
                 htmlFor="totalBathrooms"
@@ -141,7 +143,8 @@ export const HomeSpaceForm = () => {
                 <span className="text-red-600">This field is required</span>
               )}
             </div>
-            {/* location input */}
+
+            {/* Location Input */}
             <div className="flex flex-col">
               <label htmlFor="location" className="text-sm text-gray-600 mb-1">
                 Location
@@ -157,7 +160,8 @@ export const HomeSpaceForm = () => {
                 <span className="text-red-600">This field is required</span>
               )}
             </div>
-            {/* rent input */}
+
+            {/* Rent Input */}
             <div className="flex flex-col">
               <label htmlFor="rent" className="text-sm text-gray-600 mb-1">
                 Rent
@@ -173,7 +177,8 @@ export const HomeSpaceForm = () => {
                 <span className="text-red-600">This field is required</span>
               )}
             </div>
-            {/* advance input */}
+
+            {/* Advance Input */}
             <div className="flex flex-col">
               <label
                 htmlFor="advanceAmount"
@@ -188,17 +193,12 @@ export const HomeSpaceForm = () => {
                 placeholder="Advance Amount"
                 className="w-full p-2 border rounded"
               />
-              {errors.advanceAmount && (
-                <span className="text-red-600">This field is required</span>
-              )}
             </div>
-            {/* gas line input */}
+
+            {/* Gas Line Input */}
             <div className="flex flex-col">
-              <label
-                htmlFor="isLineGash"
-                className="text-sm text-gray-600 mb-1"
-              >
-                Line Gash
+              <label htmlFor="isLineGas" className="text-sm text-gray-600 mb-1">
+                Line Gas
               </label>
               <select
                 id="isLineGas"
@@ -213,26 +213,56 @@ export const HomeSpaceForm = () => {
               )}
             </div>
 
-            {/* category input */}
+            {/* Home Space Type */}
             <div className="flex flex-col">
-              <label htmlFor="category" className="text-sm text-gray-600 mb-1">
+              <label
+                htmlFor="homeSpaceType"
+                className="text-sm text-gray-600 mb-1"
+              >
                 Category
               </label>
               <select
-                id="category"
-                {...register("category", { required: true })}
+                id="homeSpaceType"
+                {...register("homeSpaceType", { required: true })}
+                value={homeSpaceType}
+                onChange={(e) => setHomeSpaceType(e.target.value)}
                 className="w-full p-2 border rounded"
               >
-                <option value="Flat">Flat</option>
-                <option value="Tin-Shade">Tin-Shade</option>
-                <option value="Tiner-ghor">Tiner-ghor</option>
+                <option value="Family">Family</option>
+                <option value="Sublet">Sublet / Bachelor</option>
+                <option value="Any">Any</option>
               </select>
-              {errors.category && (
+              {errors.homeSpaceType && (
                 <span className="text-red-600">This field is required</span>
               )}
             </div>
+
+            {/* Sublet Gender Preference */}
+            {homeSpaceType === "Sublet" && (
+              <div className="flex flex-col">
+                <label
+                  htmlFor="subletGender"
+                  className="text-sm text-gray-600 mb-1"
+                >
+                  Sublet Gender Preference
+                </label>
+                <select
+                  id="subletGender"
+                  {...register("subletGender", { required: true })}
+                  className="w-full p-2 border rounded"
+                >
+                  <option value="Female">Female</option>
+                  <option value="Male">Male</option>
+                  <option value="Any">Any</option>
+                </select>
+                {errors.subletGender && (
+                  <span className="text-red-600">This field is required</span>
+                )}
+              </div>
+            )}
           </div>
-          {/* description input */}
+
+          {/* Description Input */}
           <div className="flex flex-col mt-4">
             <label htmlFor="description" className="text-sm text-gray-600 mb-1">
               Description
@@ -247,7 +277,8 @@ export const HomeSpaceForm = () => {
               <span className="text-red-600">This field is required</span>
             )}
           </div>
-          {/* image upload input */}
+
+          {/* Image Upload Input */}
           <div className="flex flex-col mt-4">
             <label htmlFor="images" className="text-sm text-gray-600 mb-1">
               Images
@@ -261,6 +292,7 @@ export const HomeSpaceForm = () => {
             />
           </div>
         </div>
+
         <button
           type="submit"
           className="w-full bg-teal-500 text-white p-2 rounded hover:bg-teal-600"

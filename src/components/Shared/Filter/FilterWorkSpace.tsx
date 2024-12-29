@@ -8,10 +8,11 @@ const FilterWorkSpace = ({
 }: {
   setQueries: Dispatch<SetStateAction<{}>>;
 }) => {
-  const [category, setCategory] = useState("Any");
+  // const [category, setCategory] = useState("Any");
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState(searchTerm);
-  const categories = ["Any", "Flat", "Tiner-ghor", "Tin-Shade"];
+
+  // const categories = ["Any", "Flat", "Tiner-ghor", "Tin-Shade"];
 
   // For PriceRange Component
   const [minRent, setMinRent] = useState(0);
@@ -37,22 +38,22 @@ const FilterWorkSpace = ({
   useEffect(() => {
     const query: { [key: string]: any } = {};
 
-    if (category !== "Any") query.category = category;
+    // if (category !== "Any") query.category = category;
     if (debouncedSearchTerm) query.searchTerm = debouncedSearchTerm;
     query.minRent = minRent;
     query.maxRent = maxRent;
 
     setQueries(query);
-  }, [category, debouncedSearchTerm, minRent, maxRent, setQueries]);
+  }, [, debouncedSearchTerm, minRent, maxRent, setQueries]);
 
   return (
     <div>
-      <PriceRange min={0} max={40000} onChange={handlePriceChange} />
+      <PriceRange min={0} max={100000} onChange={handlePriceChange} />
 
       <div className="my-4 md:my-6">
         <div className="mb-2 gap-3 grid sm:grid-cols-2 lg:grid-cols-3 justify-between">
           {/* Categories */}
-          <div className="">
+          {/* <div className="">
             <h2 className="text-md md:text-lg mb-1">Type</h2>
             <div className="flex text-xs md:text-sm space-x-2">
               {categories.map((cat) => (
@@ -67,7 +68,7 @@ const FilterWorkSpace = ({
                 </button>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 

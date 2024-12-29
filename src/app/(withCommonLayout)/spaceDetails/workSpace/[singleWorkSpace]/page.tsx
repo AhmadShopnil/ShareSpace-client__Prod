@@ -22,7 +22,7 @@ const SingleWorkSpace = async ({ params }: { params: any }) => {
     advanceAmount,
     images,
     totalBathrooms,
-    category,
+    // category,
   } = data;
 
   return (
@@ -51,10 +51,10 @@ const SingleWorkSpace = async ({ params }: { params: any }) => {
         <h1 className="text-4xl font-bold mb-4 text-center">{title}</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className=" p-4 sm:p-6 bg-white rounded-lg border border-gray-300">
-            <h2 className="text-2xl font-semibold mb-4">Shop Space Info</h2>
-            <p className="text-gray-700 mb-2">
+            <h2 className="text-2xl font-semibold mb-4">Space Info</h2>
+            {/* <p className="text-gray-700 mb-2">
               <strong>Category:</strong> {category}
-            </p>
+            </p> */}
             <p className="text-gray-700 mb-2">
               <strong>Location:</strong> {location}
             </p>
