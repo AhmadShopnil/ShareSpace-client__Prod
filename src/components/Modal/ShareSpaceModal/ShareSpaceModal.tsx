@@ -36,8 +36,8 @@ const ShareSpaceModal = ({
           <FontAwesomeIcon icon={faTimes} size="xl" color="teal" />
         </button>
 
-        <h2 className="text-lg font-bold mb-6 text-center">
-          What Do You Want To Rent ?
+        <h2 className="text-lg font-bold mb-6 text-center text-black">
+          What You Want To Rent ?
         </h2>
 
         {/* Options */}

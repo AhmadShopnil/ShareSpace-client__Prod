@@ -82,10 +82,11 @@ export const HomeSpaceForm = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-semibold mb-4">Post Your Flat</h1>
+      <h1 className="text-xl text-center font-semibold mb-4">
+        Home Space Details
+      </h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div className="border p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-2">Flat Details</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex flex-col">
               <label htmlFor="title" className="text-sm text-gray-600 mb-1">
