@@ -38,8 +38,14 @@ const MyList = () => {
 
   return (
     <div className="w-full pt-5">
+      <div className="bg-gray-200 p-4">
+        <h3 className="text-center text-teal-600">
+          ভাড়া হয়ে গেলে পোস্ট ডিলেট করে দিবেন, ধন্যবাদ।
+        </h3>
+      </div>
+
       {/* Flats Section */}
-      <div className="mb-4 md:mb-8">
+      <div className="mb-4 md:mb-8 mt-4">
         <h1 className="mb-2 md:mb-4 font-semibold">My Listed Home:</h1>
         {isLoadingFlats ? (
           <>
