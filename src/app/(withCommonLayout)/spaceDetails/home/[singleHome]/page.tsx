@@ -55,11 +55,13 @@ const SingleHome = async ({ params }: { params: any }) => {
           <div className=" p-4 sm:p-6 bg-white rounded-lg border border-gray-300">
             <h2 className="text-2xl font-semibold mb-4">Info</h2>
             <p className="text-gray-700 mb-2">
-              <strong>Category:</strong> {homeSpaceType}
+              <strong>Category:</strong> {homeSpaceType == "Family" && "Family"}
+              {homeSpaceType == "Sublet" && "Sublet / Bachelor"}
+              {homeSpaceType == "Any" && "Family / Sublet / Bachelor "}
             </p>
             {subletGender && (
               <p className="text-gray-700 mb-2">
-                <strong>For:</strong> {subletGender}
+                <strong>For:</strong> {subletGender} Gender
               </p>
             )}
             <p className="text-gray-700 mb-2">
