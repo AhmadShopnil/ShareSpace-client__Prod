@@ -25,6 +25,8 @@ export type TFlatPyload = {
   rent: number;
   isLineGas?: boolean;
   advanceAmount: number;
-  category: "Flat" | "Tin-Shade" | "Tiner-ghor";
+  category?: "Flat" | "Tin-Shade" | "Tiner-ghor";
+  homeSpaceType: "Family" | "Sublet" | "Any";
+  subletGender: "Male" | "Female" | "Any";
   images?: string[] | null;
 };

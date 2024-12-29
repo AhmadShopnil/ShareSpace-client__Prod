@@ -11,11 +11,11 @@ const FilterFlat = ({
   const [beds, setBeds] = useState("Any");
   const [baths, setBaths] = useState("Any");
   const [category, setCategory] = useState("Any");
+  const [gender, setGender] = useState("Any"); // New state for gender
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState(searchTerm);
   const [isLineGas, setIsLineGas] = useState<"Any" | "Yes" | "No">("Any");
-
-  const categories = ["Any", "Flat", "Tiner-ghor", "Tin-Shade"];
+  const categories = ["Any", "Family", "Sublet"];
 
   // For PriceRange Component
   const [minRent, setMinRent] = useState(0);
@@ -43,7 +43,8 @@ const FilterFlat = ({
 
     if (beds !== "Any") query.totalBedrooms = beds;
     if (baths !== "Any") query.totalBathrooms = baths;
-    if (category !== "Any") query.category = category;
+    if (category !== "Any") query.homeSpaceType = category;
+    if (gender !== "Any" && category === "Sublet") query.subletGender = gender; // Only add subletGender if category is "Sublet"
     if (debouncedSearchTerm) query.searchTerm = debouncedSearchTerm;
     if (isLineGas !== "Any") query.isLineGas = isLineGas;
     query.minRent = minRent;
@@ -54,6 +55,7 @@ const FilterFlat = ({
     beds,
     baths,
     category,
+    gender,
     debouncedSearchTerm,
     isLineGas,
     minRent,
@@ -110,7 +112,12 @@ const FilterFlat = ({
               {categories.map((cat) => (
                 <button
                   key={cat}
-                  onClick={() => setCategory(cat)}
+                  onClick={() => {
+                    setCategory(cat);
+                    if (cat !== "Sublet") {
+                      setGender("Any"); // Reset gender when category changes to something other than "Sublet"
+                    }
+                  }}
                   className={`p-2 rounded ${
                     category === cat ? "bg-teal-600 text-white" : "bg-gray-200"
                   }`}
@@ -120,6 +127,29 @@ const FilterFlat = ({
               ))}
             </div>
           </div>
+
+          {category === "Sublet" && (
+            <div className="">
+              <h3 className="text-md md:text-lg mb-1">
+                Gender For Sublet or Bachelor
+              </h3>
+              <div className="flex text-xs md:text-sm space-x-2">
+                {["Any", "Female", "Male"].map((option) => (
+                  <button
+                    key={option}
+                    onClick={() => setGender(option)}
+                    className={`p-2 rounded ${
+                      gender === option
+                        ? "bg-teal-600 text-white"
+                        : "bg-gray-200"
+                    }`}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Gas Line */}
           <div className="">

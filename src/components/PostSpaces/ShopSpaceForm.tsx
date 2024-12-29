@@ -48,7 +48,7 @@ export const ShopSpaceForm = () => {
         rent: data?.rent,
         advanceAmount: data?.advanceAmount,
         images: uploadImageUrls,
-        category: data?.category,
+        // category: data?.category,
       };
 
       const response = await createShopSpace({
@@ -149,7 +149,7 @@ export const ShopSpaceForm = () => {
               )}
             </div>
             {/* category input */}
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
               <label htmlFor="category" className="text-sm text-gray-600 mb-1">
                 Category
               </label>
@@ -165,7 +165,7 @@ export const ShopSpaceForm = () => {
               {errors.category && (
                 <span className="text-red-600">This field is required</span>
               )}
-            </div>
+            </div> */}
           </div>
           {/* description input */}
           <div className="flex flex-col mt-4">
