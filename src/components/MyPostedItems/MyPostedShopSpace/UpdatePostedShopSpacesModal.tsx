@@ -37,7 +37,7 @@ export default function UpdatePostedShopSpacesModal({
       location: formData?.location,
       rent: formData?.rent,
       advanceAmount: formData?.advanceAmount,
-      category: formData?.category,
+      // category: formData?.category,
       description: formData?.description,
     },
   };
@@ -127,7 +127,7 @@ export default function UpdatePostedShopSpacesModal({
                       />
                     </div>
                   </div>
-                  <div>
+                  {/* <div>
                     <label
                       htmlFor="category"
                       className="block text-sm font-medium text-gray-700"
@@ -142,7 +142,7 @@ export default function UpdatePostedShopSpacesModal({
                       onChange={handleChange}
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
                     />
-                  </div>
+                  </div> */}
 
                   <div>
                     <label
