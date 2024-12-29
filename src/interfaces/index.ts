@@ -13,7 +13,9 @@ export type TFlatDataInRes = {
   isDeleted?: boolean;
   isLineGas?: string;
   postStatus: "approved" | "rejected" | "pending";
-  category: "Flat" | "Tin-Shade" | "Tiner-ghor";
+  // category: "Flat" | "Tin-Shade" | "Tiner-ghor";
+  homeSpaceType: "Family" | "Sublet" | "Any";
+  subletGender: "Male" | "Female" | "Any";
   images?: string[] | null;
 };
 
@@ -27,7 +29,7 @@ export type TWorkSpaceInRes = {
   isDeleted?: boolean;
   isLineGas?: string;
   postStatus?: "approved" | "rejected" | "pending";
-  category: string;
+  // category: string;
   images?: string[] | null;
 };
 

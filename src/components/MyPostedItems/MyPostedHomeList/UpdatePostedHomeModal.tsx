@@ -37,7 +37,9 @@ export default function UpdatePostedHomeModal({
       location: formData?.location,
       rent: formData?.rent,
       advanceAmount: formData?.advanceAmount,
-      category: formData?.category,
+      // category: formData?.category,
+      homeSpaceType: formData?.homeSpaceType, // add the homeSpaceType here
+      subletGender: formData?.subletGender, // add subletGender here if it's a sublet
       isLineGas: formData?.isLineGas,
       totalBedrooms: formData?.totalBedrooms,
       totalBathrooms: formData?.totalBathrooms,
@@ -150,26 +152,49 @@ export default function UpdatePostedHomeModal({
                     </select>
                   </div>
 
-                  {/* category field */}
-                  <div>
+                  {/* Home Space Type */}
+                  <div className="flex flex-col">
                     <label
-                      htmlFor="category"
-                      className="block text-sm font-medium text-gray-700"
+                      htmlFor="homeSpaceType"
+                      className="text-sm text-gray-600 mb-1"
                     >
                       Category
                     </label>
                     <select
-                      id="category"
-                      name="category"
-                      value={formData.category}
+                      id="homeSpaceType"
+                      name="homeSpaceType"
+                      value={formData.homeSpaceType}
                       onChange={handleChange}
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
+                      className="w-full p-2 border rounded"
                     >
-                      <option value="Flat">Flat</option>
-                      <option value="Tin-Shade">Tin-Shade</option>
-                      <option value="Tiner-ghor">Tiner-ghor</option>
+                      <option value="Family">Family</option>
+                      <option value="Sublet">Sublet / Bachelor</option>
+                      <option value="Any">Any</option>
                     </select>
                   </div>
+
+                  {/* Sublet Gender Preference */}
+                  {formData.homeSpaceType === "Sublet" && (
+                    <div className="flex flex-col">
+                      <label
+                        htmlFor="subletGender"
+                        className="text-sm text-gray-600 mb-1"
+                      >
+                        Sublet Gender Preference
+                      </label>
+                      <select
+                        id="subletGender"
+                        name="subletGender"
+                        value={formData.subletGender}
+                        onChange={handleChange}
+                        className="w-full p-2 border rounded"
+                      >
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Any">Any</option>
+                      </select>
+                    </div>
+                  )}
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
