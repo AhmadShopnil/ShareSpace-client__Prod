@@ -13,19 +13,20 @@ const Page = () => {
 
   return (
     <div>
+      {!user && (
+        <div className=" p-4 mb-4 mt-2 bg-gray-200  flex justify-center items-center">
+          <p className="text-gray-700 text-sm font-semibold">
+            Please provide owner information to proceed.
+          </p>
+        </div>
+      )}
+
       <UserInfoForm isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <div
         className={`relative ${
           !isLoggedIn ? "blur-sm pointer-events-none" : ""
         } transition duration-300`}
       >
-        {!user && (
-          <div className="absolute inset-0 bg-gray-200 bg-opacity-25 z-10 flex justify-center items-center">
-            <p className="text-gray-700 text-sm font-semibold">
-              Please provide your user information to proceed.
-            </p>
-          </div>
-        )}
         <WorkSpaceForm />
       </div>
     </div>
