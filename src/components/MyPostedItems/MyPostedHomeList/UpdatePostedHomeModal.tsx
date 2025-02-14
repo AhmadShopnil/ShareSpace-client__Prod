@@ -2,7 +2,11 @@
 
 import { TFlatDataInRes } from "@/interfaces";
 import { useUpdateFlatMutation } from "@/redux/api/flatApi";
+import { uploadImageToCLoudinary } from "@/utils/uploadImage";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import Image from "next/image";
 
 interface UpdatePostedHomeModalProps {
   selectedItem: TFlatDataInRes;
@@ -17,6 +21,32 @@ export default function UpdatePostedHomeModal({
 }: UpdatePostedHomeModalProps) {
   const [formData, setFormData] = useState<TFlatDataInRes>(selectedItem);
   const [updateFlat, { isLoading }] = useUpdateFlatMutation(); // Hook for updating bike
+  const [images, setImages] = useState<any>(selectedItem?.images || []);
+  const [previewImages, setPreviewImages] = useState<any>(
+    selectedItem?.images || []
+  );
+  const [newImages, setNewImages] = useState<File[]>([]);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const selectedFiles = Array.from(e.target.files);
+      setNewImages([...newImages, ...selectedFiles]);
+      setPreviewImages([...previewImages, ...selectedFiles]);
+    }
+  };
+
+  const handleImageRemove = (index: number) => {
+    const updatedPreviewImages = previewImages.filter(
+      (item: any, i: number) => i !== index
+    );
+    setPreviewImages(updatedPreviewImages);
+
+    if (index < images.length) {
+      setImages(images.filter((item: any, i: number) => i !== index));
+    } else {
+      setNewImages(newImages.filter((_, i) => i !== index - images.length));
+    }
+  };
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -30,31 +60,40 @@ export default function UpdatePostedHomeModal({
     });
   };
 
-  const data = {
-    id: selectedItem?._id,
-    updatedData: {
-      title: formData?.title,
-      location: formData?.location,
-      rent: formData?.rent,
-      advanceAmount: formData?.advanceAmount,
-      // category: formData?.category,
-      homeSpaceType: formData?.homeSpaceType, // add the homeSpaceType here
-      subletGender: formData?.subletGender, // add subletGender here if it's a sublet
-      isLineGas: formData?.isLineGas,
-      totalBedrooms: formData?.totalBedrooms,
-      totalBathrooms: formData?.totalBathrooms,
-      description: formData?.description,
-    },
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      let uploadedImageUrls = images;
+      if (newImages.length > 0) {
+        const cloudinaryUrls = await uploadImageToCLoudinary({
+          images: newImages,
+        });
+        uploadedImageUrls = [...images, ...cloudinaryUrls];
+      }
+
+      const data = {
+        id: selectedItem?._id,
+        updatedData: {
+          title: formData?.title,
+          location: formData?.location,
+          rent: formData?.rent,
+          advanceAmount: formData?.advanceAmount,
+          // category: formData?.category,
+          homeSpaceType: formData?.homeSpaceType, // add the homeSpaceType here
+          subletGender: formData?.subletGender, // add subletGender here if it's a sublet
+          isLineGas: formData?.isLineGas,
+          totalBedrooms: formData?.totalBedrooms,
+          totalBathrooms: formData?.totalBathrooms,
+          description: formData?.description,
+          images: uploadedImageUrls,
+          postStatus: "pending",
+        },
+      };
+
       await updateFlat(data);
-      // console.log("from update", res);
       onClose();
     } catch (error) {
-      console.error("Failed to update profile:", error);
+      console.error("Failed to update listing:", error);
     }
   };
 
@@ -263,6 +302,62 @@ export default function UpdatePostedHomeModal({
                       onChange={handleChange}
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
                     ></textarea>
+                  </div>
+                  {/* Custom File Input */}
+                  <div>
+                    <div className="flex flex-col mt-4">
+                      <label
+                        htmlFor="images"
+                        className="text-sm text-gray-600 mb-1"
+                      >
+                        Update Images
+                      </label>
+                      <input
+                        type="file"
+                        id="images"
+                        multiple
+                        onChange={handleImageChange}
+                        className="w-full p-2 border rounded opacity-0 absolute "
+                      />
+                      <label
+                        htmlFor="images"
+                        className="cursor-pointer flex items-center gap-2 mt-2 text-sm text-gray-600 border p-2 rounded"
+                      >
+                        <FontAwesomeIcon
+                          icon={faImage}
+                          className="w-8 h-8 text-teal-500"
+                        />
+
+                        {images.length > 0
+                          ? `${images.length} file(s) selected`
+                          : "Choose Photos"}
+                      </label>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {previewImages.map((image: any, index: number) => (
+                        <div key={index} className="relative">
+                          <Image
+                            src={
+                              typeof image === "string"
+                                ? image
+                                : URL.createObjectURL(image)
+                            }
+                            width={80}
+                            height={80}
+                            alt="Preview"
+                            className="w-20 h-20 object-cover rounded-md"
+                          />
+                          <button
+                            type="button"
+                            className="absolute top-0 right-0 text-red-500"
+                            onClick={() => handleImageRemove(index)}
+                          >
+                            ✖
+                          </button>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </form>
               </div>

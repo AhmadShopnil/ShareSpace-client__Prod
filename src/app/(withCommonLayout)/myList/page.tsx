@@ -17,8 +17,8 @@ const MyList = () => {
     isLoading: isLoadingFlats,
     error: errorFlats,
   } = useGetMyAllFlatsQuery("");
-  const user: any = getUserInfo();
-  const router = useRouter();
+  // const user: any = getUserInfo();
+  // const router = useRouter();
 
   const {
     data: workSpaceData,

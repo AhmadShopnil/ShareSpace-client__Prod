@@ -5,9 +5,10 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PrimaryButton from "@/components/Buttons/PrimaryButton";
 import ImageSlider from "@/components/Ui/FlatDetails/Slider/ImageSlider";
+import CallButton from "@/components/Buttons/CallButton";
 
 const SingleWorkSpace = async ({ params }: { params: any }) => {
-  const workSpaceId = params.singleWorkSpace;
+  const workSpaceId = params?.singleWorkSpace;
   // const url = `http://localhost:5000/api/workSpaces/${workSpaceId}`;
   const url = `https://server-flate-share.vercel.app/api/workSpaces/${workSpaceId}`;
   const res = await fetch(url);
@@ -95,20 +96,13 @@ const SingleWorkSpace = async ({ params }: { params: any }) => {
                 <strong>Phone:</strong> <FontAwesomeIcon icon={faPhone} />{" "}
                 {phone}
               </p>
+              <div className="mt-3">
+                <CallButton phoneNumber={phone} buttonText="Call Owner" />
+              </div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* <div className=" p-4 sm:p-6 bg-white rounded-lg border border-gray-300 mb-6">
-        <h2 className="text-2xl font-semibold mb-4">Description</h2>
-       
-        <pre className="whitespace-pre-wrap">
-      {description}
-       </pre>
-
-        <p className="whitespace-pre-line">{description}</p>
-      </div> */}
 
       {/* Static Content Section */}
       <section className=" p-6 bg-teal-50 rounded-lg border border-gray-300">
