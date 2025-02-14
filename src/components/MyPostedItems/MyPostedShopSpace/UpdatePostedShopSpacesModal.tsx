@@ -3,7 +3,11 @@
 
 import { TFlatDataInRes, TWorkSpaceInRes } from "@/interfaces";
 import { useUpdateShopSpaceMutation } from "@/redux/api/shopSpaceApi";
+import { uploadImageToCLoudinary } from "@/utils/uploadImage";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Image from "next/image";
 import { useState } from "react";
+import { faImage } from "@fortawesome/free-solid-svg-icons";
 
 interface UpdatePostedWorkSpacesModalProps {
   selectedItem: TFlatDataInRes;
@@ -17,9 +21,12 @@ export default function UpdatePostedShopSpacesModal({
   isOpen,
 }: UpdatePostedWorkSpacesModalProps) {
   const [formData, setFormData] = useState<TWorkSpaceInRes>(selectedItem);
-  const [selectedImages, setSelectedImages] = useState<File[]>([]);
-  const [previewImages, setPreviewImages] = useState<string[]>([]);
-  const [updateShopSpace, { isLoading }] = useUpdateShopSpaceMutation();
+  const [updateShopSpace, { isLoading }] = useUpdateShopSpaceMutation(); // Hook for updating shop space
+  const [images, setImages] = useState<any>(selectedItem?.images || []);
+  const [previewImages, setPreviewImages] = useState<any>(
+    selectedItem?.images || []
+  );
+  const [newImages, setNewImages] = useState<File[]>([]); // Store new selected images
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -33,60 +40,55 @@ export default function UpdatePostedShopSpacesModal({
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      const files = Array.from(e.target.files);
-      setSelectedImages([...selectedImages, ...files]);
-      setPreviewImages([
-        ...previewImages,
-        ...files.map((file) => URL.createObjectURL(file)),
-      ]);
+      const selectedFiles = Array.from(e.target.files);
+      setNewImages([...newImages, ...selectedFiles]); // Store new images separately
+      setPreviewImages([...previewImages, ...selectedFiles]);
     }
   };
 
-  const handleRemoveImage = (index: number) => {
-    setSelectedImages(selectedImages.filter((_, i) => i !== index));
-    setPreviewImages(previewImages.filter((_, i) => i !== index));
-  };
+  const handleImageRemove = (index: number) => {
+    const updatedPreviewImages = previewImages.filter(
+      (item: any, i: any) => i !== index
+    );
+    setPreviewImages(updatedPreviewImages);
 
-  const handleRemoveExistingImage = (index: number) => {
-    setFormData({
-      ...formData,
-      images: formData.images.filter((_, i) => i !== index),
-    });
+    // Remove the image from the main images state if it was previously uploaded
+    if (index < images.length) {
+      setImages(images.filter((item: any, i: number) => i !== index));
+    } else {
+      setNewImages(newImages.filter((_, i) => i !== index - images.length));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const uploadedImages = await Promise.all(
-      selectedImages.map(async (image) => {
-        const formData = new FormData();
-        formData.append("file", image);
-        const response = await fetch("/api/upload", {
-          method: "POST",
-          body: formData,
-        });
-        const data = await response.json();
-        return data.imageUrl;
-      })
-    );
-
-    const data = {
-      id: selectedItem?._id,
-      updatedData: {
-        title: formData?.title,
-        location: formData?.location,
-        rent: formData?.rent,
-        advanceAmount: formData?.advanceAmount,
-        description: formData?.description,
-        images: [...formData.images, ...uploadedImages],
-      },
-    };
-
     try {
-      await updateShopSpace(data);
+      let uploadedImageUrls = images; // Keep existing images
+      if (newImages.length > 0) {
+        const cloudinaryUrls = await uploadImageToCLoudinary({
+          images: newImages,
+        });
+        uploadedImageUrls = [...images, ...cloudinaryUrls]; // Merge new and old images
+      }
+
+      const updatedData = {
+        id: selectedItem?._id,
+        updatedData: {
+          title: formData.title,
+          location: formData.location,
+          rent: formData.rent,
+          advanceAmount: formData.advanceAmount,
+          description: formData.description,
+          images: uploadedImageUrls,
+          postStatus: "pending",
+        },
+      };
+
+      await updateShopSpace(updatedData);
       onClose();
     } catch (error) {
-      console.log("Failed to update shop space:", error);
+      console.error("Failed to update listing:", error);
     }
   };
 
@@ -115,68 +117,145 @@ export default function UpdatePostedShopSpacesModal({
                 </h3>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Images
+                    <label
+                      htmlFor="title"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Title
                     </label>
-                    <div className="flex gap-2 flex-wrap">
-                      {formData?.images?.map((img, index) => (
+                    <input
+                      type="text"
+                      id="title"
+                      name="title"
+                      value={formData.title}
+                      onChange={handleChange}
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label
+                        htmlFor="advanceAmount"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Advance Amount
+                      </label>
+                      <input
+                        type="number"
+                        id="advanceAmount"
+                        name="advanceAmount"
+                        value={formData.advanceAmount}
+                        onChange={handleChange}
+                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
+                      />
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="rent"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Total Rent
+                      </label>
+                      <input
+                        type="number"
+                        id="rent"
+                        name="rent"
+                        value={formData.rent}
+                        onChange={handleChange}
+                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="location"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Address
+                    </label>
+                    <input
+                      type="text"
+                      id="location"
+                      name="location"
+                      value={formData.location}
+                      onChange={handleChange}
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
+                    />
+                  </div>
+
+                  <div>
+                    {/* Custom File Input */}
+                    <div className="flex flex-col mt-4">
+                      <label
+                        htmlFor="images"
+                        className="text-sm text-gray-600 mb-1"
+                      >
+                        Update Images
+                      </label>
+                      <input
+                        type="file"
+                        id="images"
+                        multiple
+                        onChange={handleImageChange}
+                        className="w-full p-2 border rounded opacity-0 absolute "
+                      />
+                      <label
+                        htmlFor="images"
+                        className="cursor-pointer flex items-center gap-2 mt-2 text-sm text-gray-600 border p-2 rounded"
+                      >
+                        <FontAwesomeIcon
+                          icon={faImage}
+                          className="w-8 h-8 text-teal-500"
+                        />
+
+                        {images.length > 0
+                          ? `${images.length} file(s) selected`
+                          : "Choose Photos"}
+                      </label>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {previewImages.map((image: any, index: number) => (
                         <div key={index} className="relative">
-                          <img
-                            src={img}
-                            alt="Shop"
-                            className="w-24 h-24 rounded-md object-cover"
-                          />
-                          <button
-                            type="button"
-                            onClick={() => handleRemoveExistingImage(index)}
-                            className="absolute top-1 right-1 bg-red-500 text-white text-xs px-1 rounded"
-                          >
-                            ✕
-                          </button>
-                        </div>
-                      ))}
-                      {previewImages.map((img, index) => (
-                        <div key={index} className="relative">
-                          <img
-                            src={img}
+                          <Image
+                            src={
+                              typeof image === "string"
+                                ? image
+                                : URL.createObjectURL(image)
+                            }
+                            width={80}
+                            height={80}
                             alt="Preview"
-                            className="w-24 h-24 rounded-md object-cover"
+                            className="w-20 h-20 object-cover rounded-md"
                           />
                           <button
                             type="button"
-                            onClick={() => handleRemoveImage(index)}
-                            className="absolute top-1 right-1 bg-red-500 text-white text-xs px-1 rounded"
+                            className="absolute top-0 right-0 text-red-500"
+                            onClick={() => handleImageRemove(index)}
                           >
-                            ✕
+                            ✖
                           </button>
                         </div>
                       ))}
                     </div>
-                    <input
-                      type="file"
-                      multiple
-                      accept="image/*"
-                      onChange={handleImageChange}
-                      className="mt-2"
-                    />
                   </div>
 
-                  <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button
-                      type="submit"
-                      className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-teal-600 text-base font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:ml-3 sm:w-auto sm:text-sm"
-                      disabled={isLoading}
-                    >
-                      {isLoading ? "Updating..." : "Update Info"}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={onClose}
-                      className="mt-3 w-full inline-flex justify-center rounded-md border shadow-sm px-4 py-2 bg-white sm:mt-0 sm:w-auto sm:text-sm"
-                    >
-                      Cancel
-                    </button>
-                  </div>
+                  <button
+                    type="submit"
+                    className="bg-teal-600 text-white py-2 px-4 rounded"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? "Updating..." : "Update Info"}
+                  </button>
+                  <button
+                    type="button"
+                    className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                    onClick={onClose}
+                  >
+                    Cancel
+                  </button>
                 </form>
               </div>
             </div>

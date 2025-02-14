@@ -155,7 +155,7 @@ export const WorkSpaceForm = () => {
             >
               <FontAwesomeIcon
                 icon={faImage}
-                className="w-5 h-5 text-gray-500"
+                className="w-8 h-8 text-teal-500"
               />
               {images.length > 0
                 ? `${images.length} file(s) selected`
@@ -164,7 +164,7 @@ export const WorkSpaceForm = () => {
           </div>
 
           {/* Image Previews */}
-          <div className="mt-4 flex gap-2">
+          <div className="flex flex-wrap gap-2 mt-4">
             {images.map((image, index) => (
               <div key={index} className="relative">
                 <Image
