@@ -74,13 +74,13 @@ export const HomeSpaceForm = () => {
         location: data.location,
         description: data.description,
         rent: data.rent,
-        isLineGas: data.isLineGas,
+        isLineGas: data.isLineGas, // include isLineGas field
         advanceAmount: data.advanceAmount,
         images: uploadImageUrls,
         totalBathrooms: data.totalBathrooms,
         category: data.category,
-        homeSpaceType: data.homeSpaceType, // add the homeSpaceType here
-        subletGender: data.subletGender, // add subletGender here if it's a sublet
+        homeSpaceType: data.homeSpaceType,
+        subletGender: data.subletGender,
       };
 
       const response = await createFlat({ flatData });
@@ -124,7 +124,6 @@ export const HomeSpaceForm = () => {
               label="Advance Amount (Optional)"
               id="advanceAmount"
               register={register}
-              type="number"
             />
             <FormInput
               label="Total Bedrooms"
@@ -140,8 +139,75 @@ export const HomeSpaceForm = () => {
               required
               type="number"
             />
+
+            {/* Line Gas Input */}
+            <div className="flex flex-col">
+              <label htmlFor="isLineGas" className="text-sm text-gray-600 mb-1">
+                Line Gas
+              </label>
+              <select
+                id="isLineGas"
+                {...register("isLineGas", { required: true })}
+                className="w-full p-2 border rounded"
+              >
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+              {errors.isLineGas && (
+                <span className="text-red-600">This field is required</span>
+              )}
+            </div>
+
+            {/* Category & Sublet */}
+            <div className="flex flex-col">
+              <label
+                htmlFor="homeSpaceType"
+                className="text-sm text-gray-600 mb-1"
+              >
+                Home Space Type
+              </label>
+              <select
+                id="homeSpaceType"
+                {...register("homeSpaceType", { required: true })}
+                value={homeSpaceType}
+                onChange={(e) => setHomeSpaceType(e.target.value)}
+                className="w-full p-2 border rounded"
+              >
+                <option value="Family">Family</option>
+                <option value="Sublet">Sublet / Bachelor</option>
+                <option value="Any">Any</option>
+              </select>
+              {errors.homeSpaceType && (
+                <span className="text-red-600">This field is required</span>
+              )}
+            </div>
+
+            {/* Sublet Gender Preference */}
+            {homeSpaceType === "Sublet" && (
+              <div className="flex flex-col">
+                <label
+                  htmlFor="subletGender"
+                  className="text-sm text-gray-600 mb-1"
+                >
+                  Sublet Gender Preference
+                </label>
+                <select
+                  id="subletGender"
+                  {...register("subletGender", { required: true })}
+                  className="w-full p-2 border rounded"
+                >
+                  <option value="Female">Female</option>
+                  <option value="Male">Male</option>
+                  <option value="Any">Any</option>
+                </select>
+                {errors.subletGender && (
+                  <span className="text-red-600">This field is required</span>
+                )}
+              </div>
+            )}
           </div>
 
+          {/* Description Input */}
           <div className="flex flex-col mt-4">
             <label htmlFor="description" className="text-sm text-gray-600 mb-1">
               Description
@@ -156,6 +222,7 @@ export const HomeSpaceForm = () => {
               <span className="text-red-600">This field is required</span>
             )}
           </div>
+
           {/* Custom File Input */}
           <div className="mt-4">
             <div className="flex flex-col">
