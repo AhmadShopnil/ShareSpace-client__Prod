@@ -156,19 +156,19 @@ export const HomeSpaceForm = () => {
               <span className="text-red-600">This field is required</span>
             )}
           </div>
-
-          <div className="flex flex-col mt-4">
-            <div className="flex flex-col mt-4">
-              <label htmlFor="images" className="text-sm text-gray-600 mb-1">
-                Images
-              </label>
+          {/* Custom File Input */}
+          <div className="mt-4">
+            <div className="flex flex-col">
               <input
                 type="file"
                 id="images"
                 multiple
                 onChange={handleImageChange}
-                className="w-full p-2 border rounded opacity-0 absolute"
+                className="w-full  border rounded opacity-0 hidden "
               />
+              <label htmlFor="images" className="text-sm text-gray-600 ">
+                Images
+              </label>
               <label
                 htmlFor="images"
                 className="cursor-pointer flex items-center gap-2 mt-2 text-sm text-gray-600 border p-2 rounded"
@@ -188,10 +188,10 @@ export const HomeSpaceForm = () => {
                 <div key={index} className="relative">
                   <Image
                     src={URL.createObjectURL(image)}
-                    width={32}
-                    height={24}
+                    width={80}
+                    height={80}
                     alt="Preview"
-                    className="w-32 h-24 object-cover rounded"
+                    className="w-20 h-20 object-cover rounded-md"
                   />
                   <button
                     type="button"
