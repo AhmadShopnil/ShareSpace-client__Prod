@@ -88,7 +88,7 @@ export const WorkSpaceForm = () => {
     }
   };
 
-  if (isLoading) {
+  if (isLoading || uploadingImage) {
     return <SkeletonPostFlat />;
   }
 
@@ -115,7 +115,7 @@ export const WorkSpaceForm = () => {
               type="number"
             />
             <FormInput
-              label="Advance Amount"
+              label="Advance Amount (Optional)"
               id="advanceAmount"
               register={register}
               type="number"

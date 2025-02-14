@@ -94,7 +94,7 @@ export const HomeSpaceForm = () => {
     }
   };
 
-  if (isLoading) {
+  if (isLoading || uploadingImage) {
     return <SkeletonPostFlat />;
   }
 
@@ -121,7 +121,7 @@ export const HomeSpaceForm = () => {
               type="number"
             />
             <FormInput
-              label="Advance Amount"
+              label="Advance Amount (Optional)"
               id="advanceAmount"
               register={register}
               type="number"

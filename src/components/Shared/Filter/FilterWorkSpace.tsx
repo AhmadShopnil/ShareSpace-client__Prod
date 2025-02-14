@@ -80,7 +80,7 @@ const FilterWorkSpace = ({
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search by location, category"
+          placeholder="Search by Location, Description and Title"
           className="w-full p-2 border rounded focus:outline-none focus:ring focus:ring-teal-500"
         />
       </div>

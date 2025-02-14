@@ -46,7 +46,7 @@ const WorkSpaceList = ({
   return (
     <div className="mt-2">
       <h1 className="mb-2 text-lg">
-        For Office, Total: {data?.workSpaces?.meta?.total}
+        Available Office, Total: {data?.workSpaces?.meta?.total}
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2 md:gap-4justify-around">
         {data?.workSpaces?.workSpaces.map((flat: TFlat, index: number) => (
