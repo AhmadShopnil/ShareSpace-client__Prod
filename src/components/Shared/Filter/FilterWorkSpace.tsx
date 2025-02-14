@@ -74,7 +74,7 @@ const FilterWorkSpace = ({
 
       <div className="mb-4">
         <h2 className="text-md md:text-lg mb-1 md:mb-2">
-          Search by Category, Location
+          Search by Location, Description and Title
         </h2>
         <input
           type="text"
