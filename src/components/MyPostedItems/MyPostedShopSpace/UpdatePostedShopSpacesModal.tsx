@@ -3,7 +3,6 @@
 
 import { TFlatDataInRes, TWorkSpaceInRes } from "@/interfaces";
 import { useUpdateShopSpaceMutation } from "@/redux/api/shopSpaceApi";
-
 import { useState } from "react";
 
 interface UpdatePostedWorkSpacesModalProps {
@@ -18,7 +17,9 @@ export default function UpdatePostedShopSpacesModal({
   isOpen,
 }: UpdatePostedWorkSpacesModalProps) {
   const [formData, setFormData] = useState<TWorkSpaceInRes>(selectedItem);
-  const [updateShopSpace, { isLoading }] = useUpdateShopSpaceMutation(); // Hook for updating bike
+  const [selectedImages, setSelectedImages] = useState<File[]>([]);
+  const [previewImages, setPreviewImages] = useState<string[]>([]);
+  const [updateShopSpace, { isLoading }] = useUpdateShopSpaceMutation();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -30,26 +31,62 @@ export default function UpdatePostedShopSpacesModal({
     });
   };
 
-  const data = {
-    id: selectedItem?._id,
-    updatedData: {
-      title: formData?.title,
-      location: formData?.location,
-      rent: formData?.rent,
-      advanceAmount: formData?.advanceAmount,
-      // category: formData?.category,
-      description: formData?.description,
-    },
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const files = Array.from(e.target.files);
+      setSelectedImages([...selectedImages, ...files]);
+      setPreviewImages([
+        ...previewImages,
+        ...files.map((file) => URL.createObjectURL(file)),
+      ]);
+    }
+  };
+
+  const handleRemoveImage = (index: number) => {
+    setSelectedImages(selectedImages.filter((_, i) => i !== index));
+    setPreviewImages(previewImages.filter((_, i) => i !== index));
+  };
+
+  const handleRemoveExistingImage = (index: number) => {
+    setFormData({
+      ...formData,
+      images: formData.images.filter((_, i) => i !== index),
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const uploadedImages = await Promise.all(
+      selectedImages.map(async (image) => {
+        const formData = new FormData();
+        formData.append("file", image);
+        const response = await fetch("/api/upload", {
+          method: "POST",
+          body: formData,
+        });
+        const data = await response.json();
+        return data.imageUrl;
+      })
+    );
+
+    const data = {
+      id: selectedItem?._id,
+      updatedData: {
+        title: formData?.title,
+        location: formData?.location,
+        rent: formData?.rent,
+        advanceAmount: formData?.advanceAmount,
+        description: formData?.description,
+        images: [...formData.images, ...uploadedImages],
+      },
+    };
+
     try {
       await updateShopSpace(data);
-      // console.log("from update", res);
       onClose();
     } catch (error) {
-      console.log("Failed to update profile:", error);
+      console.log("Failed to update shop space:", error);
     }
   };
 
@@ -78,125 +115,71 @@ export default function UpdatePostedShopSpacesModal({
                 </h3>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label
-                      htmlFor="title"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Title
+                    <label className="block text-sm font-medium text-gray-700">
+                      Images
                     </label>
-                    <input
-                      type="text"
-                      id="title"
-                      name="title"
-                      value={formData.title}
-                      onChange={handleChange}
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
-                    />
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label
-                        htmlFor="advanceAmount"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Advance Amount
-                      </label>
-                      <input
-                        type="number"
-                        id="advanceAmount"
-                        name="advanceAmount"
-                        value={formData.advanceAmount}
-                        onChange={handleChange}
-                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
-                      />
+                    <div className="flex gap-2 flex-wrap">
+                      {formData?.images?.map((img, index) => (
+                        <div key={index} className="relative">
+                          <img
+                            src={img}
+                            alt="Shop"
+                            className="w-24 h-24 rounded-md object-cover"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveExistingImage(index)}
+                            className="absolute top-1 right-1 bg-red-500 text-white text-xs px-1 rounded"
+                          >
+                            ✕
+                          </button>
+                        </div>
+                      ))}
+                      {previewImages.map((img, index) => (
+                        <div key={index} className="relative">
+                          <img
+                            src={img}
+                            alt="Preview"
+                            className="w-24 h-24 rounded-md object-cover"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveImage(index)}
+                            className="absolute top-1 right-1 bg-red-500 text-white text-xs px-1 rounded"
+                          >
+                            ✕
+                          </button>
+                        </div>
+                      ))}
                     </div>
-                    <div>
-                      <label
-                        htmlFor="rent"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Total Rent
-                      </label>
-                      <input
-                        type="number"
-                        id="rent"
-                        name="rent"
-                        value={formData.rent}
-                        onChange={handleChange}
-                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
-                      />
-                    </div>
-                  </div>
-                  {/* <div>
-                    <label
-                      htmlFor="category"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Category
-                    </label>
                     <input
-                      type="text"
-                      id="category"
-                      name="category"
-                      value={formData.category}
-                      onChange={handleChange}
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
-                    />
-                  </div> */}
-
-                  <div>
-                    <label
-                      htmlFor="location"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Address
-                    </label>
-                    <input
-                      type="text"
-                      id="location"
-                      name="location"
-                      value={formData.location}
-                      onChange={handleChange}
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
+                      type="file"
+                      multiple
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      className="mt-2"
                     />
                   </div>
 
-                  <div>
-                    <label
-                      htmlFor="description"
-                      className="block text-sm font-medium text-gray-700"
+                  <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button
+                      type="submit"
+                      className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-teal-600 text-base font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:ml-3 sm:w-auto sm:text-sm"
+                      disabled={isLoading}
                     >
-                      Description
-                    </label>
-                    <textarea
-                      id="description"
-                      name="description"
-                      rows={3}
-                      value={formData.description}
-                      onChange={handleChange}
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
-                    ></textarea>
+                      {isLoading ? "Updating..." : "Update Info"}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={onClose}
+                      className="mt-3 w-full inline-flex justify-center rounded-md border shadow-sm px-4 py-2 bg-white sm:mt-0 sm:w-auto sm:text-sm"
+                    >
+                      Cancel
+                    </button>
                   </div>
                 </form>
               </div>
             </div>
-          </div>
-          <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-            <button
-              type="submit"
-              className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-teal-600 text-base font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:ml-3 sm:w-auto sm:text-sm"
-              onClick={handleSubmit}
-              disabled={isLoading}
-            >
-              {isLoading ? "Updating..." : "Update Info"}
-            </button>
-            <button
-              type="button"
-              className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-              onClick={onClose}
-            >
-              Cancel
-            </button>
           </div>
         </div>
       </div>

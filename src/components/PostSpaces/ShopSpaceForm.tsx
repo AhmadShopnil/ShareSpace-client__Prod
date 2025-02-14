@@ -1,6 +1,5 @@
-"use client";
-
 import React, { useState } from "react";
+
 import { TUserData } from "@/interfaces";
 import { uploadImageToCLoudinary } from "@/utils/uploadImage";
 import { useRouter } from "next/navigation";
@@ -8,11 +7,43 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import SkeletonPostFlat from "@/components/Loading/SkeletonPostFlat";
 import { TFlatPyload } from "@/interfaces/flat";
 import { useCreateShopSpaceMutation } from "@/redux/api/shopSpaceApi";
+import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faImage } from "@fortawesome/free-solid-svg-icons";
+
+type FormInputProps = {
+  label: string;
+  id: string;
+  register: any; // You can replace `any` with the correct type from `react-hook-form`
+  required?: boolean;
+  type?: string;
+};
+
+const FormInput: React.FC<FormInputProps> = ({
+  label,
+  id,
+  register,
+  required = false,
+  type = "text",
+}) => (
+  <div className="flex flex-col">
+    <label htmlFor={id} className="text-sm text-gray-600 mb-1">
+      {label}
+    </label>
+    <input
+      type={type}
+      id={id}
+      {...register(id, { required })}
+      placeholder={label}
+      className="w-full p-2 border rounded"
+    />
+    {required && <span className="text-red-600">This field is required</span>}
+  </div>
+);
 
 export const ShopSpaceForm = () => {
   const router = useRouter();
   const [images, setImages] = useState<File[]>([]);
-  const [urls, setUrls] = useState<string[]>([]);
   const [uploadingImage, setUpLoadingImage] = useState(false);
   const [createShopSpace, { isLoading }] = useCreateShopSpaceMutation();
 
@@ -22,56 +53,47 @@ export const ShopSpaceForm = () => {
     formState: { errors },
   } = useForm<TFlatPyload & TUserData>();
 
-  // set image to state form input
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const images = Array.from(e.target.files);
-      setImages(images);
+    if (e.target.files) {
+      const selectedImages = Array.from(e.target.files);
+      setImages((prevImages) => [...prevImages, ...selectedImages]);
     }
   };
 
-  // handle post space submit button
+  const removeImage = (index: number) => {
+    setImages(images.filter((_, i) => i !== index));
+  };
+
   const onSubmit: SubmitHandler<TFlatPyload & TUserData> = async (data) => {
     setUpLoadingImage(true);
     try {
       let uploadImageUrls = null;
-      if (images) {
-        uploadImageUrls = await uploadImageToCLoudinary({
-          images,
-          setUrls,
-        });
+      if (images.length > 0) {
+        uploadImageUrls = await uploadImageToCLoudinary({ images });
       }
-      const shopSpaceData: any = {
-        title: data?.title,
-        location: data?.location,
+      const shopSpaceData = {
+        title: data.title,
+        location: data.location,
         description: data.description,
-        rent: data?.rent,
-        advanceAmount: data?.advanceAmount,
+        rent: data.rent,
+        advanceAmount: data.advanceAmount,
         images: uploadImageUrls,
-        // category: data?.category,
       };
 
-      const response = await createShopSpace({
-        shopSpaceData,
-      });
-
+      const response = await createShopSpace({ shopSpaceData });
       setUpLoadingImage(false);
 
-      const addedSpace = response?.data?.addedSpace;
-      if (addedSpace) {
+      if (response?.data?.addedSpace) {
         router.push("/myList");
       }
-    } catch (error: any) {
+    } catch (error) {
       setUpLoadingImage(false);
     }
   };
 
   if (isLoading) {
-    return <SkeletonPostFlat></SkeletonPostFlat>;
+    return <SkeletonPostFlat />;
   }
-  //   if (error) {
-  //     return <ErrorComponent error={error} setError={setError}></ErrorComponent>;
-  //   }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -81,93 +103,27 @@ export const ShopSpaceForm = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div className="border p-4 rounded-lg">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="flex flex-col">
-              <label htmlFor="title" className="text-sm text-gray-600 mb-1">
-                Title
-              </label>
-              <input
-                type="text"
-                id="title"
-                {...register("title", { required: true })}
-                placeholder="Title"
-                className="w-full p-2 border rounded"
-              />
-              {errors.title && (
-                <span className="text-red-600">This field is required</span>
-              )}
-            </div>
-
-            {/* location input */}
-            <div className="flex flex-col">
-              <label htmlFor="location" className="text-sm text-gray-600 mb-1">
-                Location
-              </label>
-              <input
-                type="text"
-                id="location"
-                {...register("location", { required: true })}
-                placeholder="Location"
-                className="w-full p-2 border rounded"
-              />
-              {errors.location && (
-                <span className="text-red-600">This field is required</span>
-              )}
-            </div>
-            {/* rent input */}
-            <div className="flex flex-col">
-              <label htmlFor="rent" className="text-sm text-gray-600 mb-1">
-                Rent
-              </label>
-              <input
-                type="number"
-                id="rent"
-                {...register("rent", { required: true })}
-                placeholder="Rent"
-                className="w-full p-2 border rounded"
-              />
-              {errors.rent && (
-                <span className="text-red-600">This field is required</span>
-              )}
-            </div>
-            {/* advance input */}
-            <div className="flex flex-col">
-              <label
-                htmlFor="advanceAmount"
-                className="text-sm text-gray-600 mb-1"
-              >
-                Advance Amount
-              </label>
-              <input
-                type="number"
-                id="advanceAmount"
-                {...register("advanceAmount")}
-                placeholder="Advance Amount"
-                className="w-full p-2 border rounded"
-              />
-              {errors.advanceAmount && (
-                <span className="text-red-600">This field is required</span>
-              )}
-            </div>
-            {/* category input */}
-            {/* <div className="flex flex-col">
-              <label htmlFor="category" className="text-sm text-gray-600 mb-1">
-                Category
-              </label>
-              <select
-                id="category"
-                {...register("category", { required: true })}
-                className="w-full p-2 border rounded"
-              >
-                <option value="Flat">Flat</option>
-                <option value="Tin-Shade">Tin-Shade</option>
-                <option value="Tiner-ghor">Tiner-ghor</option>
-              </select>
-              {errors.category && (
-                <span className="text-red-600">This field is required</span>
-              )}
-            </div> */}
+            <FormInput label="Title" id="title" register={register} required />
+            <FormInput
+              label="Location"
+              id="location"
+              register={register}
+              required
+            />
+            <FormInput
+              label="Rent"
+              id="rent"
+              register={register}
+              required
+              type="number"
+            />
+            <FormInput
+              label="Advance Amount"
+              id="advanceAmount"
+              register={register}
+              type="number"
+            />
           </div>
-          {/* description input */}
           <div className="flex flex-col mt-4">
             <label htmlFor="description" className="text-sm text-gray-600 mb-1">
               Description
@@ -182,7 +138,8 @@ export const ShopSpaceForm = () => {
               <span className="text-red-600">This field is required</span>
             )}
           </div>
-          {/* image upload input */}
+
+          {/* Custom File Input */}
           <div className="flex flex-col mt-4">
             <label htmlFor="images" className="text-sm text-gray-600 mb-1">
               Images
@@ -192,10 +149,45 @@ export const ShopSpaceForm = () => {
               id="images"
               multiple
               onChange={handleImageChange}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded opacity-0 absolute"
             />
+            <label
+              htmlFor="images"
+              className="cursor-pointer flex items-center gap-2 mt-2 text-sm text-gray-600 border p-2 rounded"
+            >
+              <FontAwesomeIcon
+                icon={faImage}
+                className="w-5 h-5 text-gray-500"
+              />
+
+              {images.length > 0
+                ? `${images.length} file(s) selected`
+                : "Choose Photos"}
+            </label>
+          </div>
+
+          <div className="mt-4 flex gap-2">
+            {images.map((image, index) => (
+              <div key={index} className="relative">
+                <Image
+                  src={URL.createObjectURL(image)}
+                  width={32}
+                  height={24}
+                  alt="Preview"
+                  className="w-32 h-24 object-cover rounded"
+                />
+                <button
+                  type="button"
+                  onClick={() => removeImage(index)}
+                  className="absolute top-0 right-0 bg-red-600 text-white text-xs p-1 rounded-full"
+                >
+                  X
+                </button>
+              </div>
+            ))}
           </div>
         </div>
+
         <button
           type="submit"
           className="w-full bg-teal-500 text-white p-2 rounded hover:bg-teal-600"

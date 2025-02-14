@@ -5,9 +5,10 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import ImageSlider from "@/components/Ui/FlatDetails/Slider/ImageSlider";
+import CallButton from "@/components/Buttons/CallButton";
 
 const SingleShopSpace = async ({ params }: { params: any }) => {
-  const shopSpaceId = params.singleShopSpace;
+  const shopSpaceId = params?.singleShopSpace;
   // const url = `http://localhost:5000/api/shopSpaces/${shopSpaceId}`;
   const url = `https://server-flate-share.vercel.app/api/shopSpaces/${shopSpaceId}`;
   const res = await fetch(url);
@@ -89,6 +90,9 @@ const SingleShopSpace = async ({ params }: { params: any }) => {
                 <strong>Phone:</strong> <FontAwesomeIcon icon={faPhone} />{" "}
                 {phone}
               </p>
+              <div className="mt-3">
+                <CallButton phoneNumber={phone} buttonText="Call Owner" />
+              </div>
             </div>
           </div>
         </div>

@@ -3,13 +3,13 @@ import axios from "axios";
 // Define the type for the props
 type TUploadImageProps = {
   images: File[];
-  setUrls: React.Dispatch<React.SetStateAction<string[]>>;
+  // setUrls: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
 export const uploadImageToCLoudinary = async ({
   images,
-  setUrls,
-}: TUploadImageProps) => {
+}: // setUrls,
+TUploadImageProps) => {
   const uploadPreset = "hyokj2ii";
   const cloudName = "dcw08wkw7";
   const newImagUrls: string[] = [];
@@ -27,7 +27,7 @@ export const uploadImageToCLoudinary = async ({
       newImagUrls.push(singleImageUrl);
     }
 
-    setUrls(newImagUrls);
+    // setUrls(newImagUrls);
   }
 
   return newImagUrls;
