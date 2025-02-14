@@ -42,7 +42,7 @@ const HomeList = ({
   return (
     <div className="mt-2">
       <h1 className="mb-2 text-lg">
-        For Home, Total: {data?.flats?.meta?.total}
+        Available Home, Total: {data?.flats?.meta?.total}
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2 md:gap-4 justify-around">
         {data?.flats?.flats.map((flat: TFlat, index: number) => (

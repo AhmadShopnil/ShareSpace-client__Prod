@@ -91,7 +91,7 @@ export const ShopSpaceForm = () => {
     }
   };
 
-  if (isLoading) {
+  if (isLoading || uploadingImage) {
     return <SkeletonPostFlat />;
   }
 
@@ -118,7 +118,7 @@ export const ShopSpaceForm = () => {
               type="number"
             />
             <FormInput
-              label="Advance Amount"
+              label="Advance Amount (Optional)"
               id="advanceAmount"
               register={register}
               type="number"
