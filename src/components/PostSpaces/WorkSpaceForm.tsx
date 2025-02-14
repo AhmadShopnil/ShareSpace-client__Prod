@@ -136,53 +136,53 @@ export const WorkSpaceForm = () => {
               <span className="text-red-600">This field is required</span>
             )}
           </div>
-
-          {/* Custom File Input for Image Upload */}
-          <div className="flex flex-col mt-4">
-            <label htmlFor="images" className="text-sm text-gray-600 mb-1">
-              Images
-            </label>
-            <input
-              type="file"
-              id="images"
-              multiple
-              onChange={handleImageChange}
-              className="w-full p-2 border rounded opacity-0 absolute"
-            />
-            <label
-              htmlFor="images"
-              className="cursor-pointer flex items-center gap-2 mt-2 text-sm text-gray-600 border p-2 rounded"
-            >
-              <FontAwesomeIcon
-                icon={faImage}
-                className="w-8 h-8 text-teal-500"
+          {/* Custom File Input */}
+          <div className="mt-4">
+            <div className="flex flex-col">
+              <input
+                type="file"
+                id="images"
+                multiple
+                onChange={handleImageChange}
+                className="w-full  border rounded opacity-0 hidden "
               />
-              {images.length > 0
-                ? `${images.length} file(s) selected`
-                : "Choose Photos"}
-            </label>
-          </div>
-
-          {/* Image Previews */}
-          <div className="flex flex-wrap gap-2 mt-4">
-            {images.map((image, index) => (
-              <div key={index} className="relative">
-                <Image
-                  src={URL.createObjectURL(image)}
-                  width={32}
-                  height={24}
-                  alt="Preview"
-                  className="w-32 h-24 object-cover rounded"
+              <label htmlFor="images" className="text-sm text-gray-600 ">
+                Images
+              </label>
+              <label
+                htmlFor="images"
+                className="cursor-pointer flex items-center gap-2 mt-2 text-sm text-gray-600 border p-2 rounded"
+              >
+                <FontAwesomeIcon
+                  icon={faImage}
+                  className="w-8 h-8 text-teal-500"
                 />
-                <button
-                  type="button"
-                  onClick={() => removeImage(index)}
-                  className="absolute top-0 right-0 bg-red-600 text-white text-xs p-1 rounded-full"
-                >
-                  X
-                </button>
-              </div>
-            ))}
+                {images.length > 0
+                  ? `${images.length} file(s) selected`
+                  : "Choose Photos"}
+              </label>
+            </div>
+            {/* Image Previews */}
+            <div className="flex flex-wrap gap-2 mt-2">
+              {images.map((image, index) => (
+                <div key={index} className="relative">
+                  <Image
+                    src={URL.createObjectURL(image)}
+                    width={80}
+                    height={80}
+                    alt="Preview"
+                    className="w-20 h-20 object-cover rounded-md"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeImage(index)}
+                    className="absolute top-0 right-0 bg-red-600 text-white text-xs p-1 rounded-full"
+                  >
+                    X
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
